@@ -80,7 +80,29 @@ function render(animate=false){
   switchedTimer=setTimeout(()=>{panel.classList.remove('is-switching');sources.classList.remove('is-tracing')},620);
  }
 }
-buttons.forEach(btn=>btn.addEventListener('click',()=>{purpose=btn.dataset.country;render(true)}));
+const guideStages={
+ 1:{title:'What do you need to prove?',desc:"Choose a purpose to begin. We'll show one decision at a time."},
+ 2:{title:'Which records support it?',desc:'Explore the agreement, invoice and payment. Select a record to see exactly what it establishes.'},
+ 3:{title:'What does the evidence show?',desc:'Review what can be connected, which checks are missing, and the next step.'}
+};
+let guidedStep=1;
+function setGuidedStep(step,moveFocus=false){
+ guidedStep=Math.max(1,Math.min(3,step));
+ const workspace=document.querySelector('.workspace');
+ workspace.dataset.step=String(guidedStep);
+ $('guidedCount').textContent=String(guidedStep).padStart(2,'0')+' / 03';
+ $('stepTitle').textContent=guideStages[guidedStep].title;
+ $('stepDesc').textContent=guideStages[guidedStep].desc;
+ for(const el of document.querySelectorAll('[data-step-marker]'))el.classList.toggle('is-current',Number(el.dataset.stepMarker)===guidedStep);
+ $('demoBack').hidden=guidedStep===1;
+ $('demoNext').hidden=guidedStep===1;
+ $('demoNext').innerHTML=guidedStep===2?'See what it proves <span aria-hidden="true">&rarr;</span>':'Compare another purpose <span aria-hidden="true">&rarr;</span>';
+ if(moveFocus)$('stepTitle').focus({preventScroll:true});
+}
+buttons.forEach(btn=>btn.addEventListener('click',()=>{purpose=btn.dataset.country;render(true);setGuidedStep(2,true)}));
+$('demoBack').addEventListener('click',()=>setGuidedStep(guidedStep-1,true));
+$('demoNext').addEventListener('click',()=>setGuidedStep(guidedStep===3?1:guidedStep+1,true));
+
 recordButtons.forEach(btn=>btn.addEventListener('click',()=>{
  const key=btn.dataset.record;
  recordButtons.forEach(other=>{const selected=other===btn;other.classList.toggle('is-inspected',selected);other.setAttribute('aria-pressed',String(selected))});
@@ -129,15 +151,6 @@ if(!reduce && 'IntersectionObserver' in window){
  },{rootMargin:'0px 0px -20px 0px',threshold:.06});
  for(const el of document.querySelectorAll('[data-reveal]'))observer.observe(el);
 }
-if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
- const area=document.querySelector('.hero-flight'),paper=document.querySelector('.paper-main');
- let sx=0,sy=0,x=0,y=0,raf=0;
- const step=()=>{x+=(sx-x)*.08;y+=(sy-y)*.08;paper.style.setProperty('--px',x.toFixed(1)+'px');paper.style.setProperty('--py',y.toFixed(1)+'px');raf=(Math.abs(sx-x)+Math.abs(sy-y)>.2)?requestAnimationFrame(step):0};
- function kick(){if(!raf)raf=requestAnimationFrame(step)}
- area.addEventListener('pointermove',e=>{const r=area.getBoundingClientRect();sx=((e.clientX-r.left)/r.width-.5)*17;sy=((e.clientY-r.top)/r.height-.5)*13;kick()},{passive:true});
- area.addEventListener('pointerleave',()=>{sx=0;sy=0;kick()});
-}
-
 /* Consistent per-group stagger; scroll values are purely decorative and never block content. */
 const staggerGroups=[
   ...document.querySelectorAll('.questions,.steps,.product-heading,.section-main')
@@ -177,4 +190,5 @@ if(!motionPreference.matches){
 }
 
 render();
+setGuidedStep(1);
 })();

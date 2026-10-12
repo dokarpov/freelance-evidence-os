@@ -33,3 +33,6 @@ CSS definitions live in `styles.css`. The observer/parallax runtime lives in `sc
 - **Source inspection:** paper-edge accent and restrained lift on hover. Click updates the factual inspector message without moving the record stack or obscuring text.
 - **Purpose change:** selected-tab underline and a brief review-panel transition with a subtle source-edge emphasis; all review labels, status and missing evidence update synchronously.
 - **Guardrails:** no scroll blocking, no cloned document illustrations that imply forged records, no hover-only critical information. Reduced motion disables entrance, parallax, pulse and transitions.
+
+## Guided interaction rules v2.0
+Only real buttons and links respond to hover; information-only question rows, orientation text and process steps remain visually stable. Purpose choice moves to source inspection, explicit Next moves to review, and Back remains predictable. No pointer-follow parallax on non-interactive hero art. Reduced-motion keeps all three guided stages legible and does not remove the active selection state. Interactive states must survive rapid click, keyboard, resize and refresh without geometry errors.

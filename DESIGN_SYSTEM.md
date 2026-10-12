@@ -50,3 +50,6 @@ This freeze stabilizes the system, **not** defects: accessibility, layout or fun
 - The indicator remains inside the three-tab row and tracks precisely the selected tab (100% of its own width per step, no arbitrary offsets).
 - The review must never claim that one matching payment proves continuous income, official authenticity, immigration eligibility or rental acceptance.
 - Maintain the same color/type/spacing foundations. Do not rebrand the site or replace an approved logo with a guessed one.
+
+## Guided demonstration v2.0
+The demo uses a three-step progressive flow: **Choose → Inspect → Review**. Only one decision is visible at a time, while the underlying source facts remain unchanged. Active controls must have a distinct outcome. No hover, translation, underline or pointer affordance may imply clickability on static editorial rows or explanations. Use a brighter coral accent `#ff764e` against warm paper `#fff8f2` (dark ink stays primary for small text). Product motion changes state, not merely appearance. Navigation CTAs must not duplicate destinations or publicly expose repository links.

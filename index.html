@@ -81,16 +81,15 @@
         <div><h2 class="display" id="demo-title" data-reveal>Same work. <span>Different questions.</span></h2><p data-reveal>Choose why you need to prove your work. The source records remain unchanged.</p></div>
       </div>
 
-      <div class="demo-orientation" data-reveal>
-        <p class="orientation-kicker">A TWO-MINUTE WALKTHROUGH / SYNTHETIC FREELANCE RECORDS</p>
-        <div class="orientation-grid">
-          <div><span>01 / CONNECT</span><strong>Show the work.</strong><p>One agreement, one invoice and one related payment.</p></div>
-          <div><span>02 / REUSE</span><strong>Choose the question.</strong><p>Income summary, rental application or residency preparation.</p></div>
-          <div><span>03 / EXPLAIN</span><strong>Know the gaps.</strong><p>Follow the evidence chain and see what's missing.</p></div>
-        </div>
-      </div>
-      <div class="workspace" data-reveal>
+      <p class="guided-preface" data-reveal>One work history. Three simple decisions. Choose what you need, inspect the records, then see what they can support.</p>
+      <div class="workspace" data-reveal data-step="1">
         <div class="workspace-top"><span><span class="status-dot"></span> RILATU / EVIDENCE WORKSPACE</span><span>SYNTHETIC RECORD / FE-0048</span></div>
+        <div class="guided-head" aria-label="Interactive demo progress">
+          <p class="guided-kicker"><span id="guidedCount">01 / 03</span> &middot; An example, not verified evidence</p>
+          <h3 id="stepTitle" tabindex="-1">What do you need to prove?</h3>
+          <p id="stepDesc">Choose a purpose to begin. We'll show one decision at a time.</p>
+          <div class="guided-progress" aria-hidden="true"><span data-step-marker="1" class="is-current">Choose</span><span data-step-marker="2">Inspect</span><span data-step-marker="3">Review</span></div>
+        </div>
         <div class="workspace-body">
           <div class="source-panel">
             <div class="small-label"><span>01 / CONNECTED SOURCES</span><span class="unchanged-label">UNCHANGED IN EVERY VIEW</span></div>
@@ -128,6 +127,10 @@
             <p class="export-feedback" id="exportFeedback" role="status" aria-live="polite"></p>
             <div class="evidence-trail" id="evidenceTrail" hidden><p>03 / TRACE WHAT IS KNOWN</p><ol><li><b>Agreement</b> Monthly retainer in a sample agreement</li><li><b>Invoice</b> €3,200 billed for April; SN-048</li><li><b>Payment</b> €3,200, matching reference SN-048</li><li><b>Purpose</b> <span id="trailContext">Income summary / sample</span></li><li><b>Gap</b> <span id="trailGap">Only one month of payment evidence</span></li><li><b>Status</b> Illustrative match; independent checks required</li></ol></div>
           </div>
+        </div>
+        <div class="guided-actions" aria-label="Demo navigation">
+          <button type="button" id="demoBack" class="guided-back" hidden>Back</button>
+          <button type="button" id="demoNext" class="guided-next" hidden>See the review <span aria-hidden="true">&rarr;</span></button>
         </div>
         <div class="workspace-foot"><span>LINKED DOES NOT MEAN INDEPENDENTLY VERIFIED.</span><span>NO UPLOADS / NO BACKEND</span></div>
       </div>
