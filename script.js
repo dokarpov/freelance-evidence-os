@@ -123,7 +123,7 @@ const staggerGroups=[
 ];
 for(const group of staggerGroups){
  const items=[...group.querySelectorAll(':scope > [data-reveal],:scope > .question[data-reveal],:scope > article[data-reveal]')];
- items.forEach((el,index)=>el.style.setProperty('--stagger-index',String(Math.min(index,4)));
+ items.forEach((el,index)=>{ el.style.setProperty('--stagger-index',String(Math.min(index,4))); });
 }
 const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
 if(!motionPreference.matches){
