@@ -85,7 +85,7 @@ const guideStages={
  2:{title:'Which records support it?',desc:'Explore the agreement, invoice and payment. Select a record to see exactly what it establishes.'},
  3:{title:'What does the evidence show?',desc:'Review what can be connected, which checks are missing, and the next step.'}
 };
-let guidedStep=1;
+let guidedStep=1,hasChosenPurpose=false;
 function setGuidedStep(step,moveFocus=false){
  guidedStep=Math.max(1,Math.min(3,step));
  const workspace=document.querySelector('.workspace');
@@ -97,9 +97,10 @@ function setGuidedStep(step,moveFocus=false){
  $('demoBack').hidden=guidedStep===1;
  $('demoNext').hidden=guidedStep===1;
  $('demoNext').innerHTML=guidedStep===2?'See what it proves <span aria-hidden="true">&rarr;</span>':'Compare another purpose <span aria-hidden="true">&rarr;</span>';
+ if(guidedStep===1 && !hasChosenPurpose){for(const btn of buttons){btn.classList.remove('is-active');btn.setAttribute('aria-pressed','false')}}
  if(moveFocus)$('stepTitle').focus({preventScroll:true});
 }
-buttons.forEach(btn=>btn.addEventListener('click',()=>{purpose=btn.dataset.country;render(true);setGuidedStep(2,true)}));
+buttons.forEach(btn=>btn.addEventListener('click',()=>{hasChosenPurpose=true;purpose=btn.dataset.country;render(true);setGuidedStep(2,true)}));
 $('demoBack').addEventListener('click',()=>setGuidedStep(guidedStep-1,true));
 $('demoNext').addEventListener('click',()=>setGuidedStep(guidedStep===3?1:guidedStep+1,true));
 
