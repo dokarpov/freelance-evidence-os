@@ -554,3 +554,6 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px)}
 .question{grid-template-columns:minmax(80px,140px) minmax(0,1fr)}
 .question i{display:none!important}
 @media(max-width:699px){.question{grid-template-columns:82px minmax(0,1fr)}}
+
+/* Readable word spacing for guided evidence headings, especially 320–390px. */
+.record-title,.review-dynamic h3{letter-spacing:-.025em;word-spacing:.09em}
