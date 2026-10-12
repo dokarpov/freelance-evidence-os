@@ -1,16 +1,16 @@
 /* RILATU / 2026
    Direction: warm paper, black ink, signal vermilion.
    Type: Archivo only. Motion: travel, gravity, trace. No decorative cards. */
-:root{--paper:#fff8f2;--white:#fffefa;--ink:#21201e;--soft:#706960;--faint:#d8d0c5;--red:#ff764e;--night:#211f1d;--night-text:#eee9e1;--ease:cubic-bezier(.22,1,.36,1)}
+:root{--paper:#fffaf6;--white:#fffefa;--ink:#21201e;--soft:#706960;--faint:#d8d0c5;--red:#ff8048;--night:#211f1d;--night-text:#eee9e1;--ease:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:82px}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 'Archivo',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 button,input{font:inherit}a{color:inherit;text-decoration:none}h1,h2,h3,h4,p{margin-top:0}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--red);outline-offset:4px}::selection{background:var(--red);color:#fff}[hidden]{display:none!important}
 .container{width:min(100% - 40px,1400px);margin-inline:auto}.skip{position:fixed;top:-100px;left:15px;padding:12px;background:var(--red);color:#fff;z-index:999}.skip:focus{top:12px}
 /* Header: no boxes, no colored pill controls. */
-.site-header{position:sticky;top:0;z-index:100;background:rgba(243,238,230,.94);backdrop-filter:blur(16px)}
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,250,246,.95);backdrop-filter:blur(16px)}
 .nav-inner{min-height:68px;display:flex;align-items:center;gap:20px;justify-content:space-between}
 .wordmark{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:23px;font-weight:900;letter-spacing:-.07em;line-height:1}
-.mark{width:30px;height:30px}.wordmark-dot{color:var(--red)}
+.brand-wordmark{display:block;width:clamp(116px,13vw,151px);height:auto;aspect-ratio:760/216}.wordmark{flex:none}
 .desktop-nav{display:none;align-items:center;gap:36px;margin-left:auto;margin-right:42px}
 .desktop-nav a{font-weight:600;font-size:12px;transition:color .2s}.desktop-nav a:hover{color:var(--red)}
 .nav-cta{display:flex;gap:12px;align-items:center;font-size:12px;font-weight:700}
@@ -54,7 +54,7 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px);trans
 .paper-traveler>span{font-size:8px;font-weight:800;letter-spacing:.05em}.paper-traveler i{display:block;height:1px;background:#a79e93;width:75%;margin-top:12px}.paper-traveler i:nth-of-type(2){width:55%;margin-top:8px}.paper-traveler i:nth-of-type(3){width:65%;margin-top:8px}.paper-traveler b{position:absolute;bottom:8px;left:10px;font-size:19px}
 .traveler-a{left:6%;top:7%;animation:fly-a 17s ease-in-out infinite}.traveler-b{right:3%;top:18%;background:#ffe3d8;animation:fly-b 19s ease-in-out -5s infinite}.traveler-c{left:8%;bottom:15%;animation:fly-c 20s ease-in-out -9s infinite}
 .hero-foot{display:flex;justify-content:space-between;align-items:center;gap:15px;color:#7d7368;margin:18px auto 34px;font-size:9px}.hero-scroll-signal{width:50px;height:1px;background:var(--faint);position:relative;overflow:hidden}.hero-scroll-signal>span{position:absolute;inset:0;width:25px;background:var(--red);animation:slide-dot 2s ease-in-out infinite alternate}
-.ticker{overflow:hidden;background:var(--red);color:#fff;height:53px;display:flex;align-items:center}.ticker-track{display:flex;align-items:center;width:max-content;white-space:nowrap;gap:36px;animation:marquee 30s linear infinite}.ticker-track>i{width:28px;height:2px;background:rgba(255,255,255,.55);transform:rotate(-45deg)}
+.ticker{overflow:hidden;background:var(--red);color:var(--ink);height:53px;display:flex;align-items:center}.ticker-track{display:flex;align-items:center;width:max-content;white-space:nowrap;gap:36px;animation:marquee 30s linear infinite}.ticker-track>i{width:28px;height:2px;background:rgba(255,255,255,.55);transform:rotate(-45deg)}
 /* Sections use whitespace and strokes, never cards. */
 .section-pad{padding-block:100px}.section-index{display:flex;gap:12px;align-items:baseline;color:var(--soft);padding-top:5px}
 .section-index span:first-child{color:var(--red);font-size:13px;font-weight:800}
@@ -65,7 +65,7 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px);trans
 .question:last-child{border-bottom:1px solid var(--faint)}.question>span{font-size:9px;color:var(--soft)}
 .question p{margin:0;font-size:clamp(16px,3vw,26px);line-height:1.2;font-weight:600;letter-spacing:-.035em}
 .question i{width:14px;height:14px;border-top:2px solid var(--red);border-right:2px solid var(--red);transform:rotate(45deg) translate(-4px,4px);transition:transform .35s}
-.question:hover i{transform:rotate(45deg) translate(0,0)}
+.question:hover i{transform:rotate(45deg) translate(-4px,4px)}
 /* The prototype is a single product surface, divided by whitespace and an editorial axis. */
 .product{background:var(--night);color:var(--night-text);padding-block:100px 110px;overflow:hidden}
 .product-heading .display{color:var(--night-text);max-width:16ch}
@@ -541,3 +541,7 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px)}
 @media(prefers-reduced-motion:reduce){
  .workspace[data-step="1"] .country,.guided-actions button{transition:none!important;transform:none!important}
 }
+
+/* Approved vector identity and brighter orange; do not introduce a second logo treatment. */
+.wordmark img{max-width:100%;object-fit:contain}.site-header .wordmark{min-height:44px;display:flex;align-items:center}
+@media(max-width:359px){.brand-wordmark{width:110px}}
