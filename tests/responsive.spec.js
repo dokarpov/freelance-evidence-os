@@ -62,3 +62,75 @@ test('reduced motion keeps all content visible',async({browser})=>{
  expect(opacity).toBe('1');
  await context.close();
 });
+
+
+/* Regression FE-0048: the underline must align with the selected country, not
+   escape into the next tab or off the right edge (reported at 1360x696). */
+async function expectCountryAligned(page, code) {
+  const labels={es:'ES / REVIEW 01',de:'DE / REVIEW 02',fr:'FR / REVIEW 03'};
+  await expect(page.locator('[data-country="'+code+'"]')).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('.country.is-active')).toHaveCount(1);
+  await expect(page.locator('#reviewCode')).toHaveText(labels[code]);
+  await expect.poll(async()=>{
+    return page.evaluate(country=>{
+      const chosen=document.querySelector('[data-country="'+country+'"]');
+      const bar=document.querySelector('.country-indicator i');
+      const group=document.querySelector('.countries');
+      const a=bar.getBoundingClientRect();
+      const b=chosen.getBoundingClientRect();
+      const g=group.getBoundingClientRect();
+      return {
+        aligned:Math.abs(a.left-b.left)<=2 && Math.abs(a.right-b.right)<=2,
+        contained:a.left>=g.left-2 && a.right<=g.right+2
+      };
+    },code);
+  },{timeout:3500,message:'underline must match active tab geometry'}).toEqual({aligned:true,contained:true});
+}
+test('country underline stays on the selected tab at every breakpoint',async({browser})=>{
+  for(const width of [320,375,390,768,1024,1360,1440,1920]){
+    const context=await browser.newContext({viewport:{width,height:696},reducedMotion:'reduce'});
+    const page=await context.newPage();
+    const errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(origin);
+    await page.locator('#demo').scrollIntoViewIfNeeded();
+    await expectCountryAligned(page,'es');
+    for(const code of ['de','fr','es','fr','de']){
+      await page.locator('[data-country="'+code+'"]').click();
+      await expectCountryAligned(page,code);
+    }
+    await page.locator('[data-country="fr"]').hover();
+    await expectCountryAligned(page,'de'); // France hover is not France selection.
+    await expect(page.locator('#regimeControl')).toBeHidden();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+    expect(errors,'JS errors at '+width+'px').toEqual([]);
+    await context.close();
+  }
+});
+test('country underline survives rapid switches, animation, resize, reload and keyboard',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:1360,height:696},reducedMotion:'no-preference'});
+  const page=await context.newPage();
+  await page.goto(origin);
+  await page.locator('#demo').scrollIntoViewIfNeeded();
+  await page.locator('[data-country="de"]').click();
+  await page.locator('[data-country="fr"]').hover();
+  await expectCountryAligned(page,'de');
+  for(const code of ['fr','es','de','fr','de']){
+    await page.locator('[data-country="'+code+'"]').click();
+  }
+  await expectCountryAligned(page,'de');
+  await page.setViewportSize({width:390,height:844});
+  await expectCountryAligned(page,'de');
+  await page.locator('[data-country="fr"]').focus();
+  await page.keyboard.press('Enter');
+  await expectCountryAligned(page,'fr');
+  await expect(page.locator('#regimeControl')).toBeVisible();
+  await page.locator('[data-regime="real"]').click();
+  await expect(page.locator('#interpretationSubtitle')).toContainText('RÉGIME RÉEL');
+  await expectCountryAligned(page,'fr');
+  await page.evaluate(()=>scrollTo(0,0));
+  await page.locator('#demo').scrollIntoViewIfNeeded();
+  await expectCountryAligned(page,'fr');
+  await page.reload();
+  await expectCountryAligned(page,'es');
+  await context.close();
+});
