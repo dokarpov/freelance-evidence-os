@@ -16,7 +16,7 @@
 - Added automated multi-viewport interaction and layout tests in `tests/responsive.spec.js`.
 
 ## Validation protocol
-`python3 tests/site_check.py` — structural checks. CI runs Playwright Chromium for 320/375/390/768/1024/1440 widths to check viewport overflow, hero text cropping, interactive content, country/regime switching, trail, export and reduced motion.
+`python3 tests/site_check.py` — structural checks. CI runs Playwright Chromium for 320/375/390/768/1024/1440 widths to check viewport overflow, hero text cropping, interactive content, country/regime switching, trail, export and reduced motion. A full-page PNG at each width is uploaded as a workflow artifact for manual visual comparison.
 
 **Verification status:** updates and regression suite are checked into the GitHub working tree. This document does **not** claim that a real-device screenshot comparison or a full cross-browser visual review has passed. Review the latest GitHub Actions output and confirm on Safari/iOS before marking visual QA complete.
 
