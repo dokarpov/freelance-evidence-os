@@ -1,0 +1,29 @@
+name: Public website availability
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  external-smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Test unauthenticated public access
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://dokarpov.github.io/rilatu/"
+          code=$(curl -sSL --max-time 25 --retry 2 -o /tmp/rilatu-public.html -w "%{http_code}" "$url")
+          echo "Unauthenticated HTTP status: $code"
+          echo "Page bytes: $(wc -c </tmp/rilatu-public.html)"
+          if [ "$code" != 200 ]; then
+            echo "::error::Site is not publicly accessible (HTTP $code). Private repository visibility may have disabled GitHub Pages."
+            exit 1
+          fi
+          grep -qi "rilatu" /tmp/rilatu-public.html
+          if grep -q "rilatu-logo.svg" /tmp/rilatu-public.html; then
+            echo "Published site contains the approved vector logo reference."
+          else
+            echo "::warning::Site accessible but latest approved logo is not published yet."
+          fi
