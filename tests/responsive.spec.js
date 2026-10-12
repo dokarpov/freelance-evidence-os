@@ -58,6 +58,7 @@ for(const width of widths){
   const {page,context,errors}=await openAt(browser,width);
   try{
    await step(page,1);
+   await expect(page.locator('.country.is-active')).toHaveCount(0);
    await expect(page.locator('.source-panel')).toBeHidden();
    await expect(page.locator('#reviewDynamic')).toBeHidden();
    await expect(page.locator('.countries')).toBeVisible();
