@@ -1,7 +1,6 @@
-/* Freelance Evidence OS — a self-contained, intentionally non-filing demo.
-   All classification text is editorial and conditional, never a tax determination. */
-(() => {
-  'use strict';
+/* RILATU — synthetic review, provenance and motion.
+   No uploads, tracking, backend calls or invented tax calculations. */
+(()=>{'use strict';
   const profiles = {
     es: {
       code: 'ES / REVIEW 01', subtitle: 'SPAIN / AUTÓNOMO · ILLUSTRATIVE',
@@ -46,144 +45,72 @@
       }
     }
   };
-  let country = 'es';
-  let regime = 'micro';
-  const $ = id => document.getElementById(id);
-  const buttons = Array.from(document.querySelectorAll('[data-country]'));
-  const regimeButtons = Array.from(document.querySelectorAll('[data-regime]'));
-  const plainText = html => html.replace(/<[^>]*>/g, '');
-  function current() { return country === 'fr' ? profiles.fr[regime] : profiles[country]; }
-  function render() {
-    const p = current();
-    buttons.forEach(btn => {
-      const selected = btn.dataset.country === country;
-      btn.classList.toggle('is-selected', selected);
-      btn.setAttribute('aria-pressed', String(selected));
-    });
-    regimeButtons.forEach(btn => {
-      const selected = btn.dataset.regime === regime;
-      btn.classList.toggle('is-active', selected);
-      btn.setAttribute('aria-pressed', String(selected));
-    });
-    $('regimeControl').hidden = country !== 'fr';
-    $('reviewCode').textContent = p.code;
-    $('interpretationSubtitle').textContent = p.subtitle;
-    // The title markup comes exclusively from this local, static, developer-authored object.
-    $('interpretationTitle').innerHTML = p.title;
-    $('mappingText').textContent = p.mapping;
-    $('checkText').textContent = p.check;
-    $('missingText').textContent = p.missing;
-    $('interpretationNote').textContent = p.note;
-    $('trailContext').textContent = p.context;
-    $('sourceLink').href = p.url;
-  }
-  buttons.forEach(btn => btn.addEventListener('click', () => {
-    country = btn.dataset.country;
-    render();
-  }));
-  regimeButtons.forEach(btn => btn.addEventListener('click', () => {
-    regime = btn.dataset.regime;
-    render();
-  }));
-  $('trailToggle').addEventListener('click', () => {
-    const open = $('evidenceTrail').hidden;
-    $('evidenceTrail').hidden = !open;
-    $('trailToggle').setAttribute('aria-expanded', String(open));
-    $('trailToggle').textContent = open ? 'Hide evidence trail' : 'View evidence trail';
-  });
-  $('exportButton').addEventListener('click', () => {
-    const p = current();
-    const review = {
-      kind: 'illustrative-evidence-review',
-      schema_version: '1.0',
-      demo_only: true,
-      not_tax_advice: true,
-      disclaimer: 'Synthetic record. For illustration only. Does not calculate, establish deductibility, or prepare or file taxes.',
-      source: { reference: 'FE-0048', synthetic: true, issuer: 'Studio North', invoice_number: '2026-048', date: '2026-10-08', item: 'Design software subscription', document_total_eur: 340, vat_details: null },
-      review_context: p.context,
-      review: { question: plainText(p.title), mapping: p.mapping, key_check: p.check, not_determined: p.missing, explanation: p.note, status: 'requires-qualified-review' },
-      authority_reference: p.url,
-      generated_at_utc: new Date().toISOString()
-    };
-    const blob = new Blob([JSON.stringify(review, null, 2) + '\n'], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `evidence-os-sample-${country}${country === 'fr' ? '-' + regime : ''}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1500);
-  });
-  const meter = $('scrollMeter');
-  let ticking = false;
-  function updateMeter() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    meter.style.width = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + '%';
-    ticking = false;
-  }
-  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(updateMeter); } }, {passive:true});
-  window.addEventListener('resize', updateMeter, {passive:true});
-  render(); updateMeter();
-})();
 
-
-/* Motion direction: visible energy, calm controls, no layout shift.
-   Decorative motion disabled for reduced-motion and coarse pointers. */
-(() => {
- 'use strict';
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- const hero=document.querySelector('.hero-art');
- const review=document.querySelector('.review-pane');
- const buttons=document.querySelectorAll('[data-country], [data-regime]');
- if(review){
-   const city={es:'SPAIN',de:'GERMANY',fr:'FRANCE'};
-   let switchTimer;
-   buttons.forEach(btn=>btn.addEventListener('click',()=>{
-     const active=document.querySelector('[data-country].is-selected');
-     const code=active?.dataset.country||'es';
-     review.dataset.country=code;
-     const label=document.getElementById('reviewRouteCity');
-     if(label) label.textContent=city[code];
-     review.classList.remove('review-switching');
-     // Restart only the interpretation animation, not the source document.
-     void review.offsetWidth;
-     review.classList.add('review-switching');
-     window.clearTimeout(switchTimer);
-     switchTimer=window.setTimeout(()=>review.classList.remove('review-switching'),630);
-   }));
+let country='es',regime='micro';
+const $=id=>document.getElementById(id);
+const buttons=[...document.querySelectorAll('[data-country]')];
+const regimeButtons=[...document.querySelectorAll('[data-regime]')];
+const plain=html=>html.replace(/<[^>]*>/g,'');
+const current=()=>country==='fr'?profiles.fr[regime]:profiles[country];
+let switchedTimer=null;
+function render(animate=false){
+ const p=current();
+ for(const btn of buttons){const selected=btn.dataset.country===country;btn.classList.toggle('is-active',selected);btn.setAttribute('aria-pressed',String(selected))}
+ for(const btn of regimeButtons){const selected=btn.dataset.regime===regime;btn.classList.toggle('is-active',selected);btn.setAttribute('aria-pressed',String(selected))}
+ $('regimeControl').hidden=country!=='fr';
+ $('reviewCode').textContent=p.code;
+ $('interpretationSubtitle').textContent=p.subtitle;
+ $('interpretationTitle').textContent=plain(p.title);
+ $('mappingText').textContent=p.mapping;
+ $('checkText').textContent=p.check;
+ $('missingText').textContent=p.missing;
+ $('interpretationNote').textContent=p.note;
+ $('trailContext').textContent=p.context;
+ $('sourceLink').href=p.url;
+ $('countryIndicator').style.setProperty('--route',String(['es','de','fr'].indexOf(country)));
+ if(animate && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+   const pane=$('reviewDynamic');pane.classList.remove('is-switching');void pane.offsetWidth;pane.classList.add('is-switching');
+   clearTimeout(switchedTimer);switchedTimer=setTimeout(()=>pane.classList.remove('is-switching'),600);
  }
- if(!reduced && 'IntersectionObserver' in window){
-   document.documentElement.classList.add('motion-ready');
-   const observer=new IntersectionObserver(entries=>{
-     entries.forEach(entry=>{
-       if(entry.isIntersecting){
-         entry.target.classList.add('is-visible');
-         observer.unobserve(entry.target);
-       }
-     });
-   },{threshold:.08,rootMargin:'0px 0px -25px 0px'});
-   document.querySelectorAll('[data-reveal]').forEach(el=>observer.observe(el));
- } else {
-   document.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('is-visible'));
- }
- if(hero&&!reduced&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-   let aimX=0,aimY=0,atX=0,atY=0,animating=false;
-   const ease=.065;
-   const tick=()=>{
-     atX+=(aimX-atX)*ease;atY+=(aimY-atY)*ease;
-     hero.style.setProperty('--pointer-x',atX.toFixed(2)+'px');
-     hero.style.setProperty('--pointer-y',atY.toFixed(2)+'px');
-     const drifting=Math.abs(aimX-atX)+Math.abs(aimY-atY)>.2;
-     if(drifting)requestAnimationFrame(tick);else animating=false;
-   };
-   const kick=()=>{if(!animating){animating=true;requestAnimationFrame(tick)}};
-   hero.addEventListener('pointermove',e=>{
-     const rect=hero.getBoundingClientRect();
-     aimX=((e.clientX-rect.left)/rect.width-.5)*22;
-     aimY=((e.clientY-rect.top)/rect.height-.5)*17;
-     kick();
-   },{passive:true});
-   hero.addEventListener('pointerleave',()=>{aimX=0;aimY=0;kick()});
- }
+}
+for(const btn of buttons)btn.addEventListener('click',()=>{country=btn.dataset.country;render(true)});
+for(const btn of regimeButtons)btn.addEventListener('click',()=>{regime=btn.dataset.regime;render(true)});
+$('trailToggle').addEventListener('click',()=>{
+ const open=$('evidenceTrail').hidden;
+ $('evidenceTrail').hidden=!open;
+ $('trailToggle').setAttribute('aria-expanded',String(open));
+ $('trailToggle').firstChild.textContent=open?'Hide evidence trail ':'View evidence trail ';
+});
+$('exportButton').addEventListener('click',()=>{
+ const p=current();
+ const result={
+  kind:'rilatu-synthetic-evidence-review',schema_version:'1.0',demo_only:true,not_tax_advice:true,
+  disclaimer:'This is synthetic concept data. Not an assessment, deduction determination or tax filing.',
+  source:{reference:'FE-0048',synthetic:true,issuer:'Studio North',invoice_number:'2026-048',date:'2026-10-08',description:'Design software subscription',total_eur:340,vat_information:null},
+  context:p.context,
+  review:{question:plain(p.title),potential_mapping:p.mapping,key_check:p.check,not_determined:p.missing,explanation:p.note,outcome:'requires-qualified-review'},
+  official_reference:p.url,exported_at_utc:new Date().toISOString()
+ };
+ const blob=new Blob([JSON.stringify(result,null,2)+'\n'],{type:'application/json'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='rilatu-demo-'+country+(country==='fr'?'-'+regime:'')+'.json';
+ document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(!reduce && 'IntersectionObserver' in window){
+ document.documentElement.classList.add('motion-active');
+ const observer=new IntersectionObserver(entries=>{
+  for(const entry of entries){if(entry.isIntersecting){entry.target.classList.add('revealed');observer.unobserve(entry.target)}}
+ },{rootMargin:'0px 0px -20px 0px',threshold:.06});
+ for(const el of document.querySelectorAll('[data-reveal]'))observer.observe(el);
+}
+if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
+ const area=document.querySelector('.hero-flight'),paper=document.querySelector('.paper-main');
+ let sx=0,sy=0,x=0,y=0,raf=0;
+ const step=()=>{x+=(sx-x)*.08;y+=(sy-y)*.08;paper.style.setProperty('--px',x.toFixed(1)+'px');paper.style.setProperty('--py',y.toFixed(1)+'px');raf=(Math.abs(sx-x)+Math.abs(sy-y)>.2)?requestAnimationFrame(step):0};
+ function kick(){if(!raf)raf=requestAnimationFrame(step)}
+ area.addEventListener('pointermove',e=>{const r=area.getBoundingClientRect();sx=((e.clientX-r.left)/r.width-.5)*17;sy=((e.clientY-r.top)/r.height-.5)*13;kick()},{passive:true});
+ area.addEventListener('pointerleave',()=>{sx=0;sy=0;kick()});
+}
+render();
 })();

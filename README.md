@@ -1,34 +1,42 @@
-# Freelance Evidence OS
+# Rilatu
 
-**Paperwork doesn't respect borders. Proof should travel with it.**
+**Proof should travel.**
 
-[**Live experience**](https://dokarpov.github.io/freelance-evidence-os/) · [Interactive demo](https://dokarpov.github.io/freelance-evidence-os/#demo) · [Creator](https://github.com/dokarpov)
+[**Live experience**](https://dokarpov.github.io/rilatu/) · [**Try the interactive review**](https://dokarpov.github.io/rilatu/#demo) · [Source](https://github.com/dokarpov/rilatu)
 
-An animated, interactive product concept for keeping freelance documents, country-specific questions and human review traceable.
+Rilatu explores a missing evidence layer for freelancers working across borders: **the original document stays intact while country-specific questions, assumptions and reviewer decisions become traceable.**
 
-## What to explore
+## Try it
 
-- A kinetic document journey: evidence in flight, country-agnostic source preserved.
-- Spain / Germany / France review contexts with animated route transitions.
-- French micro-BNC / real-regime comparison.
-- Decision provenance and a downloadable synthetic JSON review.
-- Responsive editorial interface with vector details, keyboard controls, and reduced-motion support.
+Switch the synthetic €340 invoice between Spain, Germany and France, compare the French income-tax regimes, open the provenance trail and export a sample JSON review.
 
-## Product boundary
+The demo shows *alternative review contexts*, not three deductions. It never invents a VAT rate.
 
-This is a **concept and synthetic demo**, not a functioning tax system. No receipt upload, account, database, tax computation, filing, or compliant storage is provided. The sample never invents a VAT deduction or treats one expense as simultaneously deductible in three countries.
+## Design and implementation
 
-## Technical notes
+A custom kinetic editorial experience, intentionally without generic UI cards, fake metrics or claims of product-market fit.
 
-Static HTML, CSS, JavaScript. No JS framework, runtime dependency, animation library or build step. Styles use two typefaces (Manrope and Instrument Serif), vector-only marks, CSS keyframe choreography, IntersectionObserver reveal, and pointer motion only for fine pointers.
+- **Type:** one family, Archivo; no decorative italics
+- **Palette:** warm paper, charcoal ink, signal vermilion; no green
+- **Visual language:** drawn route lines, flying documents, provenance labels, no emoji
+- **Motion:** staggered type entrance, continually travelling evidence, scroll reveals, country transitions and pointer responsiveness
+- **Access:** keyboard-operable controls, reduced-motion fallback, mobile-first CSS
+- **Build:** static HTML, CSS and vanilla JavaScript; no framework or build step
 
-- `index.html`: narrative, accessible controls and SEO
-- `styles.css`: responsive layout, design tokens, bespoke animation
-- `script.js`: review scenarios and downloadable synthetic evidence
-- `tests/site_check.py`: lightweight structural tests
+## Scope
 
-To run locally: `python3 -m http.server 8000`
+Research concept only. No document upload, customer data, user account, financial backend, live classification, tax calculation or filing functionality. The tax treatment of a real expense depends on facts not supplied by the synthetic invoice and requires qualified human review.
 
-[Live site](https://dokarpov.github.io/freelance-evidence-os/) · [GitHub Pages setup](https://github.com/dokarpov/freelance-evidence-os/settings/pages)
+## Files
 
-_2026 · Independent concept. No real user financial data._
+`index.html` — editorial landing page and accessible interactive prototype  
+`styles.css` — responsive design system and motion  
+`script.js` — scenario switching, provenance, JSON export and accessibility  
+`favicon.svg`, `og-cover.svg` — original vector brand assets  
+`tests/site_check.py` — structural verification
+
+Run locally: `python3 -m http.server 8000`.
+
+GitHub Pages serves the repository root at [dokarpov.github.io/rilatu](https://dokarpov.github.io/rilatu/).
+
+© 2026 · Independent product concept.

@@ -1,9 +1,9 @@
 {
-  "name": "Freelance Evidence OS",
-  "short_name": "Evidence OS",
-  "description": "An interactive evidence-first freelance paperwork concept.",
+  "name": "Rilatu",
+  "short_name": "Rilatu",
+  "description": "Evidence-first freelance review concept",
   "start_url": "./",
   "display": "browser",
-  "background_color": "#f1f0e9",
-  "theme_color": "#171e1a"
+  "background_color": "#f3eee6",
+  "theme_color": "#f3eee6"
 }
