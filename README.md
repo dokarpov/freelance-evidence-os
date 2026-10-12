@@ -4,38 +4,41 @@
 
 [Live site](https://dokarpov.github.io/rilatu/) · [Interactive demo](https://dokarpov.github.io/rilatu/#demo) · [Source](https://github.com/dokarpov/rilatu)
 
-Rilatu is an **evidence-first research concept** for freelancers working across borders. Keep an original document intact; make country-specific questions, missing information and reviewer reasoning traceable.
+Rilatu is an **evidence-first research prototype** for independent professionals. Instead of generating a black-box verdict, the interface links the supporting records, shows what they can demonstrate and exposes what is still missing.
 
-## Explore the prototype
+## The interactive story
 
-Switch one **synthetic** €340 invoice among Spain, Germany and France. Compare French micro-BNC vs régime réel, inspect the provenance trail and export a local sample JSON record.
+The demo uses **three synthetic sources** in a single freelance work record:
 
-These are *alternative review contexts*, **not three deductions**. The demo has no uploads or backend and makes no tax calculation, eligibility determination or filing.
+1. Client agreement: Studio North, €3,200 per month, April–September 2026.
+2. April invoice SN-048: €3,200 billed.
+3. Matching payment reference SN-048: €3,200 received on 6 May 2026.
 
-## Design (stable v1.0)
+Users can inspect each record, then switch between **Income**, **Rental**, and **Residency** to see how different recipients ask different questions about the *same evidence*. The provenance trail explains known facts and gaps. JSON export creates only a local synthetic sample.
 
-Archivo only · warm paper / charcoal / vermilion · editorial strokes and flight-path imagery · no green, generic cards or emoji.
+**Scope:** one matched payment does not prove a stable income history. None of the examples authenticates documents, confirms eligibility, advises on taxes or immigration, or guarantees a third party will accept the result. No uploads, backend, user data or real bank connections.
 
-- [Design system and component freeze](DESIGN_SYSTEM.md)
-- [Motion patterns and reduced-motion contract](MOTION.md)
-- [Responsive QA report and validation status](QA_REPORT.md)
+## Design and motion
 
-The site includes consistent hover states, semantic stagger, scroll-linked movement, a stacked tablet workspace and legible interactive controls.
+The existing identity system is frozen in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) and [MOTION.md](MOTION.md): Archivo, warm ivory, dark ink and vermilion; responsive editorial layout, real evidence-sheet anatomy, restrained hover/scroll motion and reduced-motion support.
+
+The previous €340 three-country tax demo was retired because it obscured the evidence OS proposition. The new UX introduces an explicit Connect → Reuse → Explain story and purpose-based review with visible next actions.
+
+**Logo asset status:** the existing SVG favicon/header mark is still a temporary arrow. The user approved logo concept #3 in an earlier design review, but its actual vector file is not present in this repository or the currently accessible working files. Do not invent a new mark or label the arrow final. Replace favicon, header mark and Open Graph identity only when the approved vector source has been recovered.
 
 ## Structure
 
-`index.html` — website and synthetic demo  
-`styles.css` — locked type/layout/component tokens, responsive styles and motion  
-`script.js` — scenario switching, source trail, sample JSON export and scroll scenes  
-`favicon.svg`, `og-cover.svg` — vector identity  
-`tests/site_check.py` — structural validation  
-`tests/responsive.spec.js` — Chromium viewport, accessibility and interaction checks
+- `index.html` — site and synthetic evidence journey
+- `styles.css` — locked typography/layout tokens, document components and animation
+- `script.js` — source inspection, purpose switching, trail, JSON export and scroll scenes
+- `favicon.svg`, `og-cover.svg` — existing vectors (logo replacement pending)
+- `tests/site_check.py` — structural checks
+- `tests/responsive.spec.js` — Chromium interactions, indicator alignment and viewport matrix (320–1920px)
+- `QA_REPORT.md` — verified tests and release gates
 
-Run locally: `python3 -m http.server 8765` then visit `http://127.0.0.1:8765/`.
+To preview locally: `python3 -m http.server 8765`, then open `http://127.0.0.1:8765/`.
 
-Run local structural checks: `python3 tests/site_check.py`.
-GitHub Actions also runs a Playwright Chromium matrix at 320, 375, 390, 768, 1024 and 1440px.
+Run structural checks: `python3 tests/site_check.py`.
+Run the Playwright suite with a running local server: `npx playwright test tests/responsive.spec.js` (Chromium dependency required).
 
-**Stage:** interactive research prototype. Not tax, legal or accounting advice. No claims of validated demand or PMF.
-
-© 2026 · Independent product concept.
+**Stage:** interactive research concept, not a production service or evidence verification engine.
