@@ -1,0 +1,11 @@
+# Connect the PRIVATE GitHub repository and publish dist/ only.
+# After the first deploy, set PUBLIC_SITE_URL to its https:// address.
+[build]
+  command = "python3 scripts/build_site.py"
+  publish = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
