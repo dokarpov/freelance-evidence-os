@@ -458,7 +458,8 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px)}
  .record-stamp{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){
- .record,.record::before{transition:none!important;transform:none!important}
+ .record{transition:none!important;transform:none!important}
+ .record::before{transition:none!important;transform:scaleY(0)!important}
  .record.is-inspected::before{transform:scaleY(1)!important}
  .record-inspector.is-updating,.record-stack.is-tracing .record.is-inspected::before{animation:none!important}
 }
