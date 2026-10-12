@@ -2,41 +2,40 @@
 
 **Proof should travel.**
 
-[**Live experience**](https://dokarpov.github.io/rilatu/) · [**Try the interactive review**](https://dokarpov.github.io/rilatu/#demo) · [Source](https://github.com/dokarpov/rilatu)
+[Live site](https://dokarpov.github.io/rilatu/) · [Interactive demo](https://dokarpov.github.io/rilatu/#demo) · [Source](https://github.com/dokarpov/rilatu)
 
-Rilatu explores a missing evidence layer for freelancers working across borders: **the original document stays intact while country-specific questions, assumptions and reviewer decisions become traceable.**
+Rilatu is an **evidence-first research concept** for freelancers working across borders. Keep an original document intact; make country-specific questions, missing information and reviewer reasoning traceable.
 
-## Try it
+## Explore the prototype
 
-Switch the synthetic €340 invoice between Spain, Germany and France, compare the French income-tax regimes, open the provenance trail and export a sample JSON review.
+Switch one **synthetic** €340 invoice among Spain, Germany and France. Compare French micro-BNC vs régime réel, inspect the provenance trail and export a local sample JSON record.
 
-The demo shows *alternative review contexts*, not three deductions. It never invents a VAT rate.
+These are *alternative review contexts*, **not three deductions**. The demo has no uploads or backend and makes no tax calculation, eligibility determination or filing.
 
-## Design and implementation
+## Design (stable v1.0)
 
-A custom kinetic editorial experience, intentionally without generic UI cards, fake metrics or claims of product-market fit.
+Archivo only · warm paper / charcoal / vermilion · editorial strokes and flight-path imagery · no green, generic cards or emoji.
 
-- **Type:** one family, Archivo; no decorative italics
-- **Palette:** warm paper, charcoal ink, signal vermilion; no green
-- **Visual language:** drawn route lines, flying documents, provenance labels, no emoji
-- **Motion:** staggered type entrance, continually travelling evidence, scroll reveals, country transitions and pointer responsiveness
-- **Access:** keyboard-operable controls, reduced-motion fallback, mobile-first CSS
-- **Build:** static HTML, CSS and vanilla JavaScript; no framework or build step
+- [Design system and component freeze](DESIGN_SYSTEM.md)
+- [Motion patterns and reduced-motion contract](MOTION.md)
+- [Responsive QA report and validation status](QA_REPORT.md)
 
-## Scope
+The site includes consistent hover states, semantic stagger, scroll-linked movement, a stacked tablet workspace and legible interactive controls.
 
-Research concept only. No document upload, customer data, user account, financial backend, live classification, tax calculation or filing functionality. The tax treatment of a real expense depends on facts not supplied by the synthetic invoice and requires qualified human review.
+## Structure
 
-## Files
+`index.html` — website and synthetic demo  
+`styles.css` — locked type/layout/component tokens, responsive styles and motion  
+`script.js` — scenario switching, source trail, sample JSON export and scroll scenes  
+`favicon.svg`, `og-cover.svg` — vector identity  
+`tests/site_check.py` — structural validation  
+`tests/responsive.spec.js` — Chromium viewport, accessibility and interaction checks
 
-`index.html` — editorial landing page and accessible interactive prototype  
-`styles.css` — responsive design system and motion  
-`script.js` — scenario switching, provenance, JSON export and accessibility  
-`favicon.svg`, `og-cover.svg` — original vector brand assets  
-`tests/site_check.py` — structural verification
+Run locally: `python3 -m http.server 8765` then visit `http://127.0.0.1:8765/`.
 
-Run locally: `python3 -m http.server 8000`.
+Run local structural checks: `python3 tests/site_check.py`.
+GitHub Actions also runs a Playwright Chromium matrix at 320, 375, 390, 768, 1024 and 1440px.
 
-GitHub Pages serves the repository root at [dokarpov.github.io/rilatu](https://dokarpov.github.io/rilatu/).
+**Stage:** interactive research prototype. Not tax, legal or accounting advice. No claims of validated demand or PMF.
 
 © 2026 · Independent product concept.
