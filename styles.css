@@ -462,3 +462,6 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px)}
  .record.is-inspected::before{transform:scaleY(1)!important}
  .record-inspector.is-updating,.record-stack.is-tracing .record.is-inspected::before{animation:none!important}
 }
+
+/* Tiny-screen typography: keep the method action together, without shrinking the shared display scale. */
+@media(max-width:359px){.method .display span{display:inline-block;white-space:nowrap}}
