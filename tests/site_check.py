@@ -21,3 +21,12 @@ print('PASS: Rilatu assets, mobile-first breakpoints, scenarios, evidence export
 
 assert 'id="exportFeedback"' in h and 'aria-live="polite"' in h
 assert 'Download requested' in js and 'var(--route,0) * 300%' in css
+
+assert 'COMPONENT SYSTEM v1.0' in css and '--type-body' in css
+assert 'max-width:1079px' in css and 'min-width:1080px' in css
+assert '--tap-target:44px' in css and '--motion-slow' in css
+assert 'Consistent per-group stagger' in js and 'paintScroll' in js
+assert 'motionPreference' in js
+for doc in ['DESIGN_SYSTEM.md','MOTION.md','QA_REPORT.md','tests/responsive.spec.js']:
+    assert (p/doc).exists(), doc
+print('PASS: design tokens, component freeze, tablet layout and scroll animation contract')
