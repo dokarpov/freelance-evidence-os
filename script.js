@@ -89,7 +89,7 @@
     const open = $('evidenceTrail').hidden;
     $('evidenceTrail').hidden = !open;
     $('trailToggle').setAttribute('aria-expanded', String(open));
-    $('trailToggle').innerHTML = open ? 'Hide evidence trail <span aria-hidden="true">↗</span>' : 'View evidence trail <span aria-hidden="true">↗</span>';
+    $('trailToggle').textContent = open ? 'Hide evidence trail' : 'View evidence trail';
   });
   $('exportButton').addEventListener('click', () => {
     const p = current();

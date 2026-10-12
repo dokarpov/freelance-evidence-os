@@ -273,3 +273,27 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline-offset:4px}
  .review-route-progress{transition:none!important}
  .hero-art{transform:none}
 }
+
+/* Follow-up QA: no mobile tab collisions, consistent drawn affordance. */
+.trail-toggle{display:inline-flex;align-items:center;gap:10px}
+.trail-toggle:after{content:"";display:inline-block;width:8px;height:8px;
+ border-top:1.6px solid currentColor;border-right:1.6px solid currentColor;
+ transform:rotate(45deg);transition:transform .35s var(--motion-ease)}
+.trail-toggle[aria-expanded="true"]:after{transform:rotate(135deg)}
+.country{min-width:0}
+@media(max-width:550px){
+ .jurisdiction-switch{gap:5px}
+ .country{min-width:0;justify-content:center;gap:5px;font-size:11px;
+  padding:13px 4px;white-space:nowrap;letter-spacing:-.025em}
+ .country span.mono{display:none}
+ .review-pane{min-width:0}
+ .review-route-city{min-width:43px}
+ .review-cell{grid-template-columns:108px minmax(0,1fr);gap:10px}
+ .review-cell strong{overflow-wrap:anywhere}
+ .trail-toggle{font-size:12px}
+}
+@media(max-width:360px){
+ .country{font-size:10px;gap:3px}
+ .jurisdiction-switch{gap:3px}
+ .review-pane{padding-inline:14px}
+}

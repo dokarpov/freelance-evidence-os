@@ -18,3 +18,13 @@ assert "prefers-reduced-motion" in css
 assert "<meta name=\"description\"" in html
 assert "not a live tax service" in html.lower()
 print(f"PASS: {len(ids)} unique IDs; assets, responsive states, review and export present")
+
+# Design-system regressions
+assert "Manrope" in html and "Instrument+Serif" in html, "Expected exactly two web-font families"
+assert "Space+Mono" not in html and "DM+Sans" not in html
+assert not any(symbol in html for symbol in ("✳", "✓", "＋", "●")), "Use vector marks rather than emoji-like glyphs"
+assert not any(symbol in js for symbol in ("✳", "✓", "＋", "●")), "Do not inject pictograms at runtime"
+assert "flight-field" in html and "paper-flight-a" in css
+assert "IntersectionObserver" in js and "prefers-reduced-motion" in css
+assert "@media(max-width:550px)" in css and ".country span.mono{display:none}" in css
+print("PASS: motion system, vector iconography, and mobile country switcher")
