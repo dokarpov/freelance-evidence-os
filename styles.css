@@ -413,3 +413,52 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px)}
  .source-page.fact-trace .source-line-attention{animation:none!important}
  .orientation-grid>div,.orientation-grid>div::after{transition:none!important}
 }
+
+/* LINKED EVIDENCE v1.2 — the same paper/ink identity, with real record anatomy. */
+.record-stack{display:grid;gap:13px;position:relative;margin:26px 0 17px}
+.record{appearance:none;border:1px solid #ded5c9;background:#f9f5ee;color:#21201e;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:7px;text-align:left;padding:18px 20px 20px;cursor:pointer;min-width:0;min-height:138px;transition:border-color var(--motion-mid),background var(--motion-mid),box-shadow var(--motion-mid),transform var(--motion-mid) var(--motion-ease)}
+.record::before{content:"";position:absolute;left:-1px;top:-1px;bottom:-1px;width:3px;background:#eb593b;transform:scaleY(0);transform-origin:top;transition:transform var(--motion-mid) var(--motion-ease)}
+.record.is-inspected{background:#fffefa;border-color:#f09f89;box-shadow:0 9px 18px rgba(0,0,0,.10)}
+.record.is-inspected::before{transform:scaleY(1)}
+.record-index{grid-column:1/-1;display:block;color:#9f5142;font-size:var(--type-xs);font-weight:800;letter-spacing:.06em;line-height:1.2}
+.record-title{grid-column:1/-1;font-size:clamp(17px,1.55vw,22px);line-height:1.14;font-weight:800;letter-spacing:-.045em}
+.record-meta{font-size:var(--type-sm);color:#6e665e;line-height:1.5;align-self:end;min-width:0}
+.record>strong{font-size:clamp(17px,1.8vw,24px);letter-spacing:-.055em;line-height:1.1;justify-self:end;white-space:nowrap;align-self:end}
+.record-stamp{position:absolute;right:19px;top:18px;font-size:10px;letter-spacing:.09em;color:#8c8176;font-weight:700}
+.record-inspector{min-height:92px;border-top:1px solid #66594d;padding:16px 2px 7px;color:#d9d0c5}
+.record-inspector>span{font-size:var(--type-xs);font-weight:800;letter-spacing:.07em;color:#ff977f}
+.record-inspector p{font-size:var(--type-sm);max-width:48ch;line-height:1.55;margin:7px 0 0}
+.record-inspector.is-updating{animation:review-slide .45s var(--motion-ease)}
+.record-stack.is-tracing .record.is-inspected::before{animation:source-pulse .62s ease-out}
+.source-panel>.source-assurance{line-height:1.55;justify-content:flex-start;font-size:var(--type-sm);margin-top:14px}
+.review-dynamic h3{max-width:15ch}
+.review-results dt{line-height:1.5}
+@keyframes source-pulse{0%{opacity:.35;transform:scaleY(.1)}50%{opacity:1;transform:scaleY(1)}100%{transform:scaleY(1)}}
+@media(hover:hover) and (pointer:fine){
+ .record:not(.is-inspected):hover{background:#fffefa;transform:translate(3px,-2px);box-shadow:0 8px 16px rgba(0,0,0,.07)}
+ .record:hover .record-title{color:#9f5142}
+}
+@media(min-width:1080px){
+ .source-panel>.record-stack{margin:24px 0 17px}
+ .record{min-height:139px}
+ .source-panel>.record-inspector{margin-top:0}
+}
+@media(max-width:699px){
+ .record{padding:15px 14px 16px;min-height:122px}
+ .record-meta{font-size:13px}
+ .record>strong{font-size:clamp(16px,4.5vw,20px)}
+ .record-title{font-size:18px}
+ .record-stamp{right:12px;top:14px}
+ .record-stack{margin-top:20px}
+ .record-inspector{min-height:107px}
+}
+@media(max-width:359px){
+ .record{grid-template-columns:1fr;gap:5px}
+ .record>strong{justify-self:start}
+ .record-stamp{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .record,.record::before{transition:none!important;transform:none!important}
+ .record.is-inspected::before{transform:scaleY(1)!important}
+ .record-inspector.is-updating,.record-stack.is-tracing .record.is-inspected::before{animation:none!important}
+}
