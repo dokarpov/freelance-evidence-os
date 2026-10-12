@@ -1,96 +1,93 @@
-/* RILATU — synthetic review, provenance and motion.
-   No uploads, tracking, backend calls or invented tax calculations. */
+/* RILATU — synthetic freelance evidence record, purpose-specific review and motion.
+   Links are illustrative; no uploads, formal verification, backend or tax calculations. */
 (()=>{'use strict';
-  const profiles = {
-    es: {
-      code: 'ES / REVIEW 01', subtitle: 'SPAIN / AUTÓNOMO · ILLUSTRATIVE',
-      title: 'A business expense? <em>Show the link.</em>',
-      mapping: 'Potential professional service expense',
-      check: 'Business use, valid invoice, and VAT entitlement',
-      missing: 'Supplier details and actual business use',
-      next: 'Confirm that the subscription was for the business and request complete supplier invoice details.',
-      note: 'Deductibility depends on business purpose and documentation. Input VAT has separate conditions; this sample does not establish any VAT rate or refund.',
-      context: 'Spain / autónomo (specific tax regime not established)',
-      url: 'https://sede.agenciatributaria.gob.es/Sede/iva/que-iva-soportado-puedo-deducir/que-puedo-deducir.html'
-    },
-    de: {
-      code: 'DE / REVIEW 02', subtitle: 'GERMANY / SELF-EMPLOYED · ILLUSTRATIVE',
-      title: 'An expense on record. <em>What qualifies?</em>',
-      mapping: 'Potential Betriebsausgabe / EÜR record',
-      check: 'Business purpose, invoice evidence, VAT regime',
-      missing: 'Supplier VAT details and Kleinunternehmer status',
-      next: 'Check supplier invoice details and confirm the business and VAT circumstances with a German adviser.',
-      note: 'Business-expense recognition and input VAT deduction are separate checks. A small-business VAT exemption can affect input VAT eligibility.',
-      context: 'Germany / self-employed; VAT regime unconfirmed',
-      url: 'https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerarten/Umsatzsteuer/Umsatzsteuer_Anwendungserlass/umsatzsteuer_anwendungserlass.html'
-    },
-    fr: {
-      micro: {
-        code: 'FR / REVIEW 03', subtitle: 'FRANCE / MICRO-BNC · ILLUSTRATIVE',
-        title: 'Keep the proof. <em>Not a real-cost deduction.</em>',
-        mapping: 'Document retained; actual expense not deducted under micro-BNC',
-        check: 'Confirm micro-BNC status and separate VAT regime',
-        missing: 'Taxpayer regime and supplier VAT details',
-        next: 'Confirm that micro-BNC applies; keep the invoice as evidence rather than claiming an actual-cost income-tax deduction.',
-        note: 'Under micro-BNC, taxable profit uses a standard allowance rather than deducting each actual cost. VAT treatment depends on a separate VAT regime.',
-        context: 'France / micro-BNC; VAT regime unconfirmed',
-        url: 'https://www.impots.gouv.fr/professionnel/questions/je-suis-micro-entrepreneur-puis-je-deduire-des-charges'
-      },
-      real: {
-        code: 'FR / REVIEW 03', subtitle: 'FRANCE / RÉGIME RÉEL · ILLUSTRATIVE',
-        title: 'A possible cost. <em>Evidence first.</em>',
-        mapping: 'Potential charge professionnelle, subject to evidence',
-        check: 'Business relevance, recordkeeping, tax/VAT regime',
-        missing: 'Invoice validity, actual use, and VAT status',
-        next: 'Verify business use, invoice validity and the actual income-tax and VAT regimes before any treatment is decided.',
-        note: 'Under a real-cost income-tax regime, substantiated business expenses may be deductible. Input VAT is a separate determination; nothing is calculated automatically.',
-        context: 'France / régime réel; VAT regime unconfirmed',
-        url: 'https://www.impots.gouv.fr/professionnel/questions/que-puis-je-deduire-de-mes-resultats-professionnels'
-      }
-    }
-  };
-
-let country='es',regime='micro';
+const profiles={
+ income:{
+  code:'01 / INCOME',subtitle:'PURPOSE / INCOME SUMMARY · ILLUSTRATIVE',
+  title:'Three records. One traceable payment.',
+  mapping:'Agreement, April invoice and matching payment for €3,200',
+  check:'Identity, reference, amount and source authenticity',
+  missing:'Additional months and independent validation',
+  next:'Match further months and validate the underlying documents before describing regular income.',
+  note:'The example connects one billed month to one payment. It cannot establish recurring income.',
+  context:'Income summary / one month of linked source records',
+  gap:'Only one payment month; income continuity not established'
+ },
+ rental:{
+  code:'02 / RENTAL',subtitle:'PURPOSE / RENTAL APPLICATION · ILLUSTRATIVE',
+  title:'A landlord asks: how reliable is the income?',
+  mapping:'Client agreement, €3,200 invoice and one corresponding payment',
+  check:'Recent income history and the landlord’s actual requirements',
+  missing:'Further months, identity checks and recipient criteria',
+  next:'Add more recent payment periods, then prepare a tailored summary for the recipient to review.',
+  note:'A rental provider may request other documents. This sample cannot guarantee acceptance.',
+  context:'Rental application / supporting income documentation',
+  gap:'Insufficient historical payment evidence to demonstrate regularity'
+ },
+ residency:{
+  code:'03 / RESIDENCY',subtitle:'PURPOSE / RESIDENCY PREPARATION · ILLUSTRATIVE',
+  title:'Can your professional activity be documented?',
+  mapping:'A contract, one issued invoice and a related transfer',
+  check:'Applicable immigration route and official document checklist',
+  missing:'Ongoing activity evidence, eligibility and country-specific requirements',
+  next:'Confirm the applicable official checklist, then collect the missing periods and supporting records.',
+  note:'This is not immigration advice or a visa eligibility assessment. The requirements depend on the jurisdiction.',
+  context:'Residency preparation / work-history evidence',
+  gap:'Official requirements and continued activity remain unverified'
+ }
+};
+const records={
+ contract:{label:'AGREEMENT / FACT',text:'The synthetic agreement states a €3,200 monthly retainer for April–September. It does not establish that every month was paid.'},
+ invoice:{label:'INVOICE / FACT',text:'Invoice SN-048 records €3,200 billed for April. The invoice alone is not evidence that money was received.'},
+ payment:{label:'PAYMENT / FACT',text:'The synthetic transfer shows €3,200 with reference SN-048 on 06 May. The amount and reference match the invoice, but authenticity has not been checked.'}
+};
 const $=id=>document.getElementById(id);
 const buttons=[...document.querySelectorAll('[data-country]')];
-const regimeButtons=[...document.querySelectorAll('[data-regime]')];
-const plain=html=>html.replace(/<[^>]*>/g,'');
-const current=()=>country==='fr'?profiles.fr[regime]:profiles[country];
-let switchedTimer=null;
-let reviewedTrail=false;
+const recordButtons=[...document.querySelectorAll('[data-record]')];
+let purpose='income',reviewedTrail=false,switchedTimer=null;
 function updateNudge(){
- const nudge=$('journeyNudge');
- if(!nudge)return;
- const detail=$('evidenceTrail').hidden;
- nudge.innerHTML='<span>YOUR NEXT STEP</span> '+(detail?(reviewedTrail?'Compare another country or export the synthetic review as JSON.':'Open the evidence trail to see the source, missing facts and reasoning.'):'You can now trace the reasoning. Compare another country or export the synthetic example.');
+ const el=$('journeyNudge');
+ const instruction=$('evidenceTrail').hidden?
+ (reviewedTrail?'Compare another purpose or export the synthetic review as JSON.':'Open the evidence trail to see exactly which records support this review.'):
+ 'You can now see the source-to-claim chain. Compare another purpose or export the sample.';
+ el.innerHTML='<span>YOUR NEXT STEP</span> '+instruction;
 }
 function render(animate=false){
- const p=current();
- for(const btn of buttons){const selected=btn.dataset.country===country;btn.classList.toggle('is-active',selected);btn.setAttribute('aria-pressed',String(selected))}
- for(const btn of regimeButtons){const selected=btn.dataset.regime===regime;btn.classList.toggle('is-active',selected);btn.setAttribute('aria-pressed',String(selected))}
- $('regimeControl').hidden=country!=='fr';
+ const p=profiles[purpose];
+ buttons.forEach(btn=>{
+  const selected=btn.dataset.country===purpose;
+  btn.classList.toggle('is-active',selected);
+  btn.setAttribute('aria-pressed',String(selected));
+ });
  $('reviewCode').textContent=p.code;
  $('interpretationSubtitle').textContent=p.subtitle;
- $('interpretationTitle').textContent=plain(p.title);
+ $('interpretationTitle').textContent=p.title;
  $('mappingText').textContent=p.mapping;
  $('checkText').textContent=p.check;
  $('missingText').textContent=p.missing;
- $('interpretationNote').textContent=p.note;
  $('nextAction').textContent=p.next;
- updateNudge();
+ $('interpretationNote').textContent=p.note;
  $('trailContext').textContent=p.context;
- $('sourceLink').href=p.url;
- $('countryIndicator').style.setProperty('--route',String(['es','de','fr'].indexOf(country)));
- // Context-dependent attention belongs on the review, not the immutable source values.
- $('sourceUnknown').classList.toggle('is-referenced',true);
- if(animate){const source=$('sourceSheet');source.classList.remove('fact-trace');void source.offsetWidth;source.classList.add('fact-trace');}
- if(animate && !matchMedia('(prefers-reduced-motion:reduce)').matches){
-   const pane=$('reviewDynamic');pane.classList.remove('is-switching');void pane.offsetWidth;pane.classList.add('is-switching');
-   clearTimeout(switchedTimer);switchedTimer=setTimeout(()=>{pane.classList.remove('is-switching');$('sourceSheet').classList.remove('fact-trace')},600);
+ $('trailGap').textContent=p.gap;
+ $('countryIndicator').style.setProperty('--route',String(['income','rental','residency'].indexOf(purpose)));
+ updateNudge();
+ if(animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const panel=$('reviewDynamic'),sources=$('sourceSheet');
+  panel.classList.remove('is-switching');sources.classList.remove('is-tracing');
+  void panel.offsetWidth;
+  panel.classList.add('is-switching');sources.classList.add('is-tracing');
+  clearTimeout(switchedTimer);
+  switchedTimer=setTimeout(()=>{panel.classList.remove('is-switching');sources.classList.remove('is-tracing')},620);
  }
 }
-for(const btn of buttons)btn.addEventListener('click',()=>{country=btn.dataset.country;render(true)});
-for(const btn of regimeButtons)btn.addEventListener('click',()=>{regime=btn.dataset.regime;render(true)});
+buttons.forEach(btn=>btn.addEventListener('click',()=>{purpose=btn.dataset.country;render(true)}));
+recordButtons.forEach(btn=>btn.addEventListener('click',()=>{
+ const key=btn.dataset.record;
+ recordButtons.forEach(other=>{const selected=other===btn;other.classList.toggle('is-inspected',selected);other.setAttribute('aria-pressed',String(selected))});
+ $('recordInspectLabel').textContent=records[key].label;
+ $('recordInspectText').textContent=records[key].text;
+ const inspector=$('recordInspector');inspector.classList.remove('is-updating');void inspector.offsetWidth;inspector.classList.add('is-updating');
+}));
 $('trailToggle').addEventListener('click',()=>{
  const open=$('evidenceTrail').hidden;
  $('evidenceTrail').hidden=!open;
@@ -100,23 +97,28 @@ $('trailToggle').addEventListener('click',()=>{
  updateNudge();
 });
 $('exportButton').addEventListener('click',()=>{
- const p=current();
+ const p=profiles[purpose];
  const result={
-  kind:'rilatu-synthetic-evidence-review',schema_version:'1.0',demo_only:true,not_tax_advice:true,
-  disclaimer:'This is synthetic concept data. Not an assessment, deduction determination or tax filing.',
-  source:{reference:'FE-0048',synthetic:true,issuer:'Studio North',invoice_number:'2026-048',date:'2026-10-08',description:'Design software subscription',total_eur:340,vat_information:null},
-  context:p.context,
-  review:{question:plain(p.title),potential_mapping:p.mapping,key_check:p.check,not_determined:p.missing,explanation:p.note,outcome:'requires-qualified-review'},
-  official_reference:p.url,exported_at_utc:new Date().toISOString()
+  kind:'rilatu-synthetic-work-evidence',schema_version:'2.0',
+  demo_only:true,independently_verified:false,
+  disclaimer:'Synthetic concept data, not a verified proof-of-income, eligibility or tax determination.',
+  sources:[
+   {id:'contract',kind:'agreement',counterparty:'Studio North',retainer_eur:3200,term:'2026-04 to 2026-09',synthetic:true},
+   {id:'invoice',kind:'invoice',reference:'SN-048',period:'2026-04',amount_eur:3200,synthetic:true},
+   {id:'payment',kind:'transfer',reference:'SN-048',date:'2026-05-06',amount_eur:3200,synthetic:true}
+  ],
+  links:[{from:'invoice',to:'payment',method:'same-reference-and-amount',status:'illustrative-match'}],
+  selected_purpose:purpose,
+  review:{known:p.mapping,key_check:p.check,missing:p.missing,next_step:p.next,explanation:p.note,outcome:'requires-independent-review'},
+  exported_at_utc:new Date().toISOString()
  };
  const blob=new Blob([JSON.stringify(result,null,2)+'\n'],{type:'application/json'});
- const url=URL.createObjectURL(blob),a=document.createElement('a');
- a.href=url;a.download='rilatu-demo-'+country+(country==='fr'?'-'+regime:'')+'.json';
- document.body.appendChild(a);a.click();a.remove();
- const status=$('exportFeedback');
- status.textContent='Download requested — check your browser downloads. This is illustrative data, not a verified report.';
- reviewedTrail=true;updateNudge();
+ const url=URL.createObjectURL(blob),anchor=document.createElement('a');
+ anchor.href=url;anchor.download='rilatu-sample-'+purpose+'.json';
+ document.body.appendChild(anchor);anchor.click();anchor.remove();
+ $('exportFeedback').textContent='Sample JSON download requested. These are synthetic, not verified, records.';
  $('exportButton').setAttribute('aria-describedby','exportFeedback');
+ reviewedTrail=true;updateNudge();
  setTimeout(()=>URL.revokeObjectURL(url),1500);
 });
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
