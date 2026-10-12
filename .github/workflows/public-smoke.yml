@@ -1,8 +1,11 @@
 name: Public website availability
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      public_url:
+        description: "Public HTTPS site to test after deployment"
+        required: true
+        default: "https://dokarpov.github.io/rilatu/"
 jobs:
   external-smoke:
     runs-on: ubuntu-latest
@@ -13,12 +16,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          url="https://dokarpov.github.io/rilatu/"
+          url="${{ inputs.public_url }}"
           code=$(curl -sSL --max-time 25 --retry 2 -o /tmp/rilatu-public.html -w "%{http_code}" "$url")
           echo "Unauthenticated HTTP status: $code"
           echo "Page bytes: $(wc -c </tmp/rilatu-public.html)"
           if [ "$code" != 200 ]; then
-            echo "::error::Site is not publicly accessible (HTTP $code). Private repository visibility may have disabled GitHub Pages."
+            echo "::error::Site is not publicly accessible (HTTP $code). Public host is unavailable. Keep release blocked until a new host returns HTTP 200."
             exit 1
           fi
           grep -qi "rilatu" /tmp/rilatu-public.html
