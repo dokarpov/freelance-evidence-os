@@ -23,7 +23,7 @@ A live-browser spot-check of the **intermediate former tax demo** verified the u
 
 `tests/site_check.py` checks source structure, documented design/motion tokens, scenario markup and synthetic data restrictions.
 
-**Verification status:** source changes and tests have been pushed to the GitHub main branch. The new end-to-end Chromium suite has **not been independently run to completion in this session**. No claim is made that all mobile and cross-browser viewports pass. The full matrix, Safari/iOS and screenshots are release gates.
+**Verification status:** GitHub Actions [Site checks #41](https://github.com/dokarpov/rilatu/actions/runs/38248616570) **passed** for commit `7f842f0`: structural validation, JavaScript syntax, Chromium responsive/interaction suite and screenshot-artifact upload all reported success. This includes the 320/375/390/768/1024/1360/1440/1920px tests. A separate live desktop-browser check of the deployed linked-evidence demo also passed source selection, purpose switching, the underline, trail open/close and visible overflow inspection. **Not yet verified:** real iOS/Safari devices, cross-browser visuals and manual inspection of all generated screenshots. Subsequent changes since the tested commit updated copy/documentation, not the interactive code.
 
 ## Logo
 The selected **logo #3** source/vector has not been recovered from the available repository or conversation working directory. The old header/fav SVG remains, and cannot truthfully be presented as the approved final vector. Replacement is pending receipt or recovery of that exact asset; do not improvise a new identity.
