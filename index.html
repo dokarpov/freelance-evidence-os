@@ -18,9 +18,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=vector-1">
+<link rel="stylesheet" href="styles.css?v=vector-1"><link rel="stylesheet" href="film.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Rilatu","url":"https://dokarpov.github.io/rilatu/","inLanguage":"en","description":"Interactive synthetic example of connected freelance work evidence."}</script>
-<script src="script.js?v=vector-1" defer></script>
+<script src="script.js?v=vector-1" defer></script><script src="film.js" defer></script>
 <title>Rilatu — Proof should travel.</title>
 </head>
 <body>
@@ -78,9 +78,21 @@
     <div class="container">
       <div class="product-heading">
         <div class="section-index inverse" data-reveal><span>02</span><span>INTERACTIVE PROTOTYPE</span></div>
-        <div><h2 class="display" id="demo-title" data-reveal>Same work. <span>Different questions.</span></h2><p data-reveal>Choose a purpose, inspect the records, and see what the evidence can support.</p></div>
+        <div><h2 class="display" id="demo-title" data-reveal>From scattered records to <span>a clear handover.</span></h2><p data-reveal>Watch Rilatu turn scattered freelance records into a clear, reviewable evidence package—automatically.</p></div>
       </div>
 
+      <div class="rilatu-film" aria-label="Automatically animated product demonstration">
+      <div class="rilatu-film-top"><span class="rilatu-live"><i></i> PRODUCT IN MOTION</span><span>SYNTHETIC DATA · NO INPUT REQUIRED</span></div>
+      <div class="rilatu-film-grid"><div class="rilatu-film-copy"><span class="rilatu-overline" id="filmCounter">01 / 04</span><h3 id="filmHeading">One request. Scattered proof.</h3><p id="filmNarrative">A freelancer needs to show income history for an apartment application.</p><div class="rilatu-film-progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="rilatu-film-caption" id="filmCaption">Rilatu prepares a reviewable package instead of sending loose documents.</p></div>
+      <div class="rilatu-device"><div class="rilatu-device-bar"><b>rilatu<span>.</span></b><span id="filmScreen">REQUEST / RENTAL</span><i></i></div><div class="rilatu-device-body">
+      <div class="rilatu-device-intro"><span id="filmKicker">YOUR TASK</span><strong id="filmTitle">Prepare income evidence</strong><p id="filmSub">For a rental application</p></div>
+      <div class="rilatu-film-docs">
+      <div class="rilatu-film-doc" data-doc="agreement"><span class="rilatu-doc-symbol">A</span><div><strong>Client agreement</strong><small>€3,200/month · April–Sept</small></div><em>·</em></div>
+      <div class="rilatu-film-doc" data-doc="invoice"><span class="rilatu-doc-symbol">B</span><div><strong>April invoice</strong><small>SN-048 · €3,200</small></div><em>·</em></div>
+      <div class="rilatu-film-doc" data-doc="payment"><span class="rilatu-doc-symbol">C</span><div><strong>Matched payment</strong><small>6 May · reference SN-048</small></div><em>·</em></div></div>
+      <div class="rilatu-film-outcome"><span id="filmResultKicker">APPLICATION READINESS</span><strong id="filmResultTitle">Checking your records…</strong><p id="filmResultText">Rilatu connects the available sources and highlights what still needs attention.</p></div><div class="rilatu-device-footer"><span>DEMO / SYNTHETIC</span><span id="filmDeviceStep">01 — 04</span></div></div></div></div>
+      <div class="rilatu-film-bottom"><span>Illustrative automation only. No real documents, verification or eligibility decision.</span><span>REPLAYS AUTOMATICALLY ↻</span></div></div>
+      <div class="rilatu-film-legacy" hidden>
       <div class="workspace" data-reveal data-step="1">
         <div class="workspace-top"><span><span class="status-dot"></span> RILATU / EVIDENCE WORKSPACE</span><span>SYNTHETIC RECORD / FE-0048</span></div>
         <div class="guided-head" aria-label="Interactive demo progress">
@@ -132,6 +144,7 @@
           <button type="button" id="demoNext" class="guided-next" hidden>See the review <span aria-hidden="true">&rarr;</span></button>
         </div>
         <div class="workspace-foot"><span>LINKED DOES NOT MEAN INDEPENDENTLY VERIFIED.</span><span>NO UPLOADS / NO BACKEND</span></div>
+      </div>
       </div>
       <p class="demo-caveat" data-reveal>This walkthrough connects one synthetic agreement, invoice and payment. Matching records is not the same as verifying them, establishing stable income or guaranteeing a recipient will accept them.</p>
     </div>
