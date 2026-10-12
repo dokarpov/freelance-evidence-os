@@ -545,3 +545,7 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px)}
 /* Approved vector identity and brighter orange; do not introduce a second logo treatment. */
 .wordmark img{max-width:100%;object-fit:contain}.site-header .wordmark{min-height:44px;display:flex;align-items:center}
 @media(max-width:359px){.brand-wordmark{width:110px}}
+
+/* Guided heading: preserve visible word boundaries across small screens. */
+.guided-head h3{letter-spacing:-.035em;word-spacing:.075em}
+@media(max-width:359px){.guided-head h3{font-size:29px;line-height:1.13}}
