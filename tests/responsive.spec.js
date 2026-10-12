@@ -1,107 +1,139 @@
 const {test,expect}=require('@playwright/test');
+const fs=require('node:fs/promises');
 const origin='http://127.0.0.1:8765/';
 const widths=[320,375,390,768,1024,1360,1440,1920];
-async function aligned(page,key){
- const codes={income:'01 / INCOME',rental:'02 / RENTAL',residency:'03 / RESIDENCY'};
- await expect(page.locator('[data-country="'+key+'"]')).toHaveAttribute('aria-pressed','true');
+const purposes=['income','rental','residency'];
+const headers={income:'01 / INCOME',rental:'02 / RENTAL',residency:'03 / RESIDENCY'};
+const recordKeys=['contract','invoice','payment'];
+
+async function pageAt(browser,width,reducedMotion='reduce'){
+ const context=await browser.newContext({viewport:{width,height:width===1360?696:900},reducedMotion,acceptDownloads:true});
+ const page=await context.newPage(),errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(origin,{waitUntil:'domcontentloaded'});
+ return {page,context,errors};
+}
+async function assertAligned(page,purpose){
+ await expect(page.locator('[data-country="'+purpose+'"]')).toHaveAttribute('aria-pressed','true');
  await expect(page.locator('.country.is-active')).toHaveCount(1);
- await expect(page.locator('#reviewCode')).toHaveText(codes[key]);
- await expect.poll(()=>page.evaluate(key=>{
-   const i=document.querySelector('#countryIndicator').getBoundingClientRect();
-   const t=document.querySelector('[data-country="'+key+'"]').getBoundingClientRect();
-   const g=document.querySelector('.countries').getBoundingClientRect();
-   return Math.abs(i.left-t.left)<2 && Math.abs(i.right-t.right)<2 && i.left>=g.left-2 && i.right<=g.right+2;
- },key),{timeout:3500,message:'indicator must align with selected purpose and stay inside its row'}).toBe(true);
+ await expect(page.locator('#reviewCode')).toHaveText(headers[purpose]);
+ await expect.poll(async()=>page.evaluate(p=>{
+  const active=document.querySelector('[data-country="'+p+'"]').getBoundingClientRect();
+  const indicator=document.querySelector('.country-indicator i').getBoundingClientRect();
+  const parent=document.querySelector('.countries').getBoundingClientRect();
+  return Math.abs(active.left-indicator.left)<2 &&
+   Math.abs(active.right-indicator.right)<2 &&
+   indicator.left>=parent.left-2 && indicator.right<=parent.right+2;
+ },purpose),{timeout:3500,message:'active underline must coincide with selected purpose tab'}).toBe(true);
+}
+async function inspectLayout(page){
+ return page.evaluate(()=>{
+  const width=window.innerWidth,problems=[];
+  const selectors=[
+   '.site-header','.hero h1','.hero-actions','.workspace',
+   '.source-panel','.record-stack','.review-panel','.countries',
+   '.review-buttons','.orientation-grid','.closing h2'
+  ];
+  for(const selector of selectors){
+   const el=document.querySelector(selector);
+   if(!el) {problems.push('Missing '+selector);continue}
+   const b=el.getBoundingClientRect();
+   if(b.width>0&&(b.left< -3||b.right>width+3))problems.push(selector+': '+Math.round(b.left)+'…'+Math.round(b.right));
+  }
+  for(const el of document.querySelectorAll('.hero-line')){
+   if(el.scrollWidth>el.clientWidth+3)problems.push('cropped heading: '+el.textContent.trim());
+  }
+  if(document.documentElement.scrollWidth>width+2)problems.push('page horizontal overflow');
+  const size=s=>parseFloat(getComputedStyle(document.querySelector(s)).fontSize);
+  const height=s=>document.querySelector(s).getBoundingClientRect().height;
+  return {problems,type:{country:size('.country'),review:size('.review-results dd'),action:size('.review-button')},
+   targets:{country:height('.country'),record:height('.record'),cta:height('.nav-cta')}};
+ });
 }
 for(const width of widths){
- test('linked evidence and responsive layout at '+width+'px',async({browser})=>{
-   const ctx=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
-   const page=await ctx.newPage(),errors=[];
-   page.on('pageerror',e=>errors.push(e.message));
-   await page.goto(origin,{waitUntil:'domcontentloaded'});
+ test('layout, evidence actions, and indicator at '+width+'px',async({browser})=>{
+  const {page,context,errors}=await pageAt(browser,width);
+  try{
    await expect(page.locator('.hero h1')).toBeVisible();
-   await page.screenshot({path:'test-results/rilatu-'+width+'.png',fullPage:true,animations:'disabled'});
-   const geometry=await page.evaluate(()=>{
-     const offscreen=[],vw=innerWidth;
-     for(const sel of ['.site-header','.hero h1','.workspace','.record-stack','.review-panel','.countries','.review-buttons','.closing h2']){
-       const el=document.querySelector(sel);if(!el)continue;const r=el.getBoundingClientRect();
-       if(r.width>0&&(r.left<-3||r.right>vw+3))offscreen.push(sel+' '+r.left+'..'+r.right);
-     }
-     for(const el of document.querySelectorAll('.hero-line'))if(el.scrollWidth>el.clientWidth+3)offscreen.push('clipped hero '+el.textContent);
-     return {
-       offscreen,
-       horizontal:document.documentElement.scrollWidth>vw+1,
-       countryFont:parseFloat(getComputedStyle(document.querySelector('.country')).fontSize),
-       recordFont:parseFloat(getComputedStyle(document.querySelector('.record-meta')).fontSize),
-       countryHeight:document.querySelector('.country').getBoundingClientRect().height,
-       recordHeight:document.querySelector('.record').getBoundingClientRect().height
-     };
-   });
-   expect(geometry.offscreen).toEqual([]);
-   expect(geometry.horizontal).toBe(false);
-   expect(geometry.countryFont).toBeGreaterThanOrEqual(11.9);
-   expect(geometry.recordFont).toBeGreaterThanOrEqual(12.9);
-   expect(geometry.countryHeight).toBeGreaterThanOrEqual(43);
-   expect(geometry.recordHeight).toBeGreaterThanOrEqual(44);
-   await expect(page.locator('.orientation-grid>div')).toHaveCount(3);
    await expect(page.locator('.record')).toHaveCount(3);
-   const unchanged=await page.locator('#sourceSheet').innerText();
-   await aligned(page,'income');
-   for(const key of ['rental','residency','income']){
-     await page.locator('[data-country="'+key+'"]').click();
-     await aligned(page,key);
-     expect(await page.locator('#sourceSheet').innerText()).toBe(unchanged);
-     await expect(page.locator('.review-outcome')).toContainText('Linked, not certified');
-     await expect(page.locator('#nextAction')).not.toBeEmpty();
+   const layout=await inspectLayout(page);
+   expect(layout.problems,'layout problems at '+width+'px').toEqual([]);
+   expect(layout.type.country).toBeGreaterThanOrEqual(11.9);
+   expect(layout.type.review).toBeGreaterThanOrEqual(12.9);
+   expect(layout.type.action).toBeGreaterThanOrEqual(12.9);
+   for(const [name,height] of Object.entries(layout.targets))expect(height,name+' touch target').toBeGreaterThanOrEqual(43);
+   await page.screenshot({path:'test-results/rilatu-'+width+'.png',fullPage:true,animations:'disabled'});
+   const sourceText=await page.locator('#sourceSheet').innerText();
+   await assertAligned(page,'income');
+   for(const purpose of ['rental','residency','income','residency','rental']){
+    await page.locator('[data-country="'+purpose+'"]').click();
+    await assertAligned(page,purpose);
+    expect(await page.locator('#sourceSheet').innerText()).toBe(sourceText);
+    await expect(page.locator('#reviewOutcome')).toContainText('Linked, not certified');
    }
-   await page.locator('[data-record="invoice"]').click();
-   await expect(page.locator('[data-record="invoice"]')).toHaveAttribute('aria-pressed','true');
-   await expect(page.locator('#recordInspectText')).toContainText('Invoice SN-048');
-   await page.locator('[data-record="payment"]').click();
-   await expect(page.locator('#recordInspectText')).toContainText('reference SN-048');
+   await page.locator('[data-country="residency"]').hover();
+   await assertAligned(page,'rental');
+   for(const record of recordKeys){
+    await page.locator('[data-record="'+record+'"]').click();
+    await expect(page.locator('[data-record="'+record+'"]')).toHaveAttribute('aria-pressed','true');
+    await expect(page.locator('.record.is-inspected')).toHaveCount(1);
+    await expect(page.locator('#recordInspectLabel')).not.toBeEmpty();
+   }
    await page.locator('#trailToggle').click();
    await expect(page.locator('#evidenceTrail')).toBeVisible();
-   await page.locator('[data-country="rental"]').click();
-   await expect(page.locator('#trailContext')).toContainText('Rental application');
-   await expect(page.locator('#trailGap')).toContainText('Insufficient historical');
+   await expect(page.locator('#trailContext')).toContainText('Rental');
+   await page.locator('[data-country="income"]').click();
+   await expect(page.locator('#trailContext')).toContainText('Income');
    await page.locator('#trailToggle').click();
    await expect(page.locator('#evidenceTrail')).toBeHidden();
    expect(errors).toEqual([]);
-   await ctx.close();
+  }finally{await context.close()}
  });
 }
-test('rapid purpose switching, hover, resize and keyboard selection',async({browser})=>{
- const ctx=await browser.newContext({viewport:{width:1360,height:696},reducedMotion:'no-preference'});
- const page=await ctx.newPage();await page.goto(origin);
- await page.locator('#demo').scrollIntoViewIfNeeded();
- for(const key of ['residency','income','rental','residency','rental']){
-   await page.locator('[data-country="'+key+'"]').click();
- }
- await aligned(page,'rental');
- await page.locator('[data-country="residency"]').hover();
- await aligned(page,'rental'); // Hover must never move the selected indicator.
- await page.setViewportSize({width:390,height:844});await aligned(page,'rental');
- await page.locator('[data-country="residency"]').focus();
- await page.keyboard.press('Enter');await aligned(page,'residency');
- await page.evaluate(()=>scrollTo(0,0));
- await page.locator('#demo').scrollIntoViewIfNeeded();
- await aligned(page,'residency');
- await page.reload();await aligned(page,'income');
- await ctx.close();
+test('proof export contains matching source links, current purpose, and explicit limits',async({browser})=>{
+ const {page,context}=await pageAt(browser,1360);
+ try{
+  await page.locator('[data-country="residency"]').click();
+  const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#exportButton').click()]);
+  expect(download.suggestedFilename()).toBe('rilatu-sample-residency.json');
+  const payload=JSON.parse(await fs.readFile(await download.path(),'utf8'));
+  expect(payload.selected_purpose).toBe('residency');
+  expect(payload.sources).toHaveLength(3);
+  expect(payload.links).toContainEqual(expect.objectContaining({from:'invoice',to:'payment',status:'illustrative-match'}));
+  expect(payload.demo_only).toBe(true);
+  expect(payload.independently_verified).toBe(false);
+  await expect(page.locator('#exportFeedback')).toContainText('synthetic');
+ }finally{await context.close()}
 });
-test('export includes source links and purpose without making verified claims',async({page})=>{
- await page.goto(origin);
- await page.locator('[data-country="rental"]').click();
- const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#exportButton').click()]);
- expect(download.suggestedFilename()).toBe('rilatu-sample-rental.json');
- await expect(page.locator('#exportFeedback')).toContainText('synthetic');
+test('keyboard, animated rapid switching, resizing and refresh preserve consistent state',async({browser})=>{
+ const {page,context,errors}=await pageAt(browser,1360,'no-preference');
+ try{
+  for(const p of ['rental','residency','income','rental','residency']){
+   await page.locator('[data-country="'+p+'"]').click();
+  }
+  await assertAligned(page,'residency');
+  await page.setViewportSize({width:390,height:844});
+  await assertAligned(page,'residency');
+  await page.locator('[data-country="income"]').focus();
+  await page.keyboard.press('Enter');
+  await assertAligned(page,'income');
+  await page.locator('[data-record="payment"]').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#recordInspectLabel')).toContainText('PAYMENT');
+  await page.evaluate(()=>scrollTo(0,0));
+  await page.locator('#demo').scrollIntoViewIfNeeded();
+  await assertAligned(page,'income');
+  await page.reload();
+  await assertAligned(page,'income');
+  expect(errors).toEqual([]);
+ }finally{await context.close()}
 });
-test('reduced motion leaves all content and linked evidence visible',async({browser})=>{
- const ctx=await browser.newContext({viewport:{width:375,height:800},reducedMotion:'reduce'});
- const page=await ctx.newPage();await page.goto(origin);
- await page.locator('#demo').scrollIntoViewIfNeeded();
- await expect(page.locator('.record').first()).toBeVisible();
- const opacity=await page.locator('.orientation-grid>div').first().evaluate(el=>getComputedStyle(el).opacity);
- expect(opacity).toBe('1');
- await ctx.close();
+test('reduced motion keeps explanatory sections visible',async({browser})=>{
+ const {page,context}=await pageAt(browser,375,'reduce');
+ try{
+  for(const selector of ['#problem-title','#demo-title','.demo-orientation','#method']){
+   const el=page.locator(selector);await el.scrollIntoViewIfNeeded();await expect(el).toBeVisible();
+   expect(await el.evaluate(node=>getComputedStyle(node).opacity)).toBe('1');
+  }
+ }finally{await context.close()}
 });
