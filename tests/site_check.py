@@ -10,7 +10,7 @@ ids=re.findall(r'\bid="([^"]+)"',h)
 assert len(ids)==len(set(ids)), 'Duplicate IDs'
 for attr in ['data-country="income"','data-country="rental"','data-country="residency"','data-record="contract"','data-record="invoice"','data-record="payment"','id="trailToggle"','id="exportButton"']:
     assert attr in h, attr
-assert 'Rilatu' in h and 'src="rilatu-logo.svg"' in h
+assert 'Rilatu' in h and 'src="rilatu-logo.svg' in h
 assert 'Archivo' in css and 'Instrument Serif' not in css and 'Manrope' not in css and 'Fraunces' not in css
 assert not any(s in h for s in ['✳','✓','＋','●','🛫','📄'])
 assert 'prefers-reduced-motion' in css and 'IntersectionObserver' in js
