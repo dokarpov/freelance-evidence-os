@@ -40,8 +40,8 @@
         <p class="eyebrow"><span class="dash"></span> EVIDENCE, WITHOUT BORDERS / CONCEPT 001</p>
         <h1 id="hero-title"><span class="hero-line"><span>Work crosses</span></span><span class="hero-line"><span>borders.</span></span><span class="hero-line tone"><span>Proof follows.</span></span></h1>
         <div class="hero-deck">
-          <p>A single document can raise very different questions.</p>
-          <p>Rilatu keeps the original, the context and every review decision in one traceable journey.</p>
+          <p>Contracts, invoices and payments often tell one story.</p>
+          <p>Rilatu links the source records, the questions and the gaps in one traceable journey.</p>
         </div>
         <div class="hero-actions"><a class="solid-link" href="#demo">See it in motion <span class="arrow-icon" aria-hidden="true"></span></a><a class="under-link" href="#problem">The idea <span class="arrow-icon" aria-hidden="true"></span></a></div>
         <p class="concept-note">INTERACTIVE RESEARCH CONCEPT / NOT A LIVE TAX SERVICE</p>
@@ -64,12 +64,12 @@
   <section class="problem section-pad container" id="problem" aria-labelledby="problem-title">
     <div class="section-index" data-reveal><span>01</span><span>THE PROBLEM</span></div>
     <div class="section-main">
-      <h2 class="display" id="problem-title" data-reveal>Collecting receipts is easy. <span>Explaining them isn't.</span></h2>
-      <p class="problem-lead" data-reveal>Accounting tools store transactions. Tax forms capture outcomes. But what about the unanswered questions between them?</p>
+      <h2 class="display" id="problem-title" data-reveal>Collecting documents is easy. <span>Connecting them isn't.</span></h2>
+      <p class="problem-lead" data-reveal>Agreements, invoices and bank entries live in separate places. Who can follow the connections between them?</p>
       <div class="questions">
         <div class="question" data-reveal><span>01 / ORIGIN</span><p>Where did it come from?</p><i></i></div>
-        <div class="question" data-reveal><span>02 / EVIDENCE</span><p>Does it prove the expense?</p><i></i></div>
-        <div class="question" data-reveal><span>03 / CONTEXT</span><p>Which rules apply here?</p><i></i></div>
+        <div class="question" data-reveal><span>02 / EVIDENCE</span><p>Can the records be connected?</p><i></i></div>
+        <div class="question" data-reveal><span>03 / CONTEXT</span><p>What is still missing?</p><i></i></div>
       </div>
     </div>
   </section>
@@ -78,60 +78,58 @@
     <div class="container">
       <div class="product-heading">
         <div class="section-index inverse" data-reveal><span>02</span><span>INTERACTIVE PROTOTYPE</span></div>
-        <div><h2 class="display" id="demo-title" data-reveal>Same document. <span>Different questions.</span></h2><p data-reveal>Choose a jurisdiction. See the review change while the original evidence remains untouched.</p></div>
+        <div><h2 class="display" id="demo-title" data-reveal>Same work. <span>Different questions.</span></h2><p data-reveal>Choose why you need to prove your work. The source records remain unchanged.</p></div>
       </div>
+
       <div class="demo-orientation" data-reveal>
-        <p class="orientation-kicker">A TWO-MINUTE WALKTHROUGH / ONE SYNTHETIC INVOICE</p>
+        <p class="orientation-kicker">A TWO-MINUTE WALKTHROUGH / SYNTHETIC FREELANCE RECORDS</p>
         <div class="orientation-grid">
-          <div><span>01 / KEEP</span><strong>One original.</strong><p>€340 software invoice. Its contents never change.</p></div>
-          <div><span>02 / COMPARE</span><strong>Different questions.</strong><p>Switch countries to reveal what a reviewer would need to check.</p></div>
-          <div><span>03 / EXPLAIN</span><strong>A traceable next step.</strong><p>Open the evidence trail to see the known facts and unresolved details.</p></div>
+          <div><span>01 / CONNECT</span><strong>Show the work.</strong><p>One agreement, one invoice and one related payment.</p></div>
+          <div><span>02 / REUSE</span><strong>Choose the question.</strong><p>Income summary, rental application or residency preparation.</p></div>
+          <div><span>03 / EXPLAIN</span><strong>Know the gaps.</strong><p>Follow the evidence chain and see what's missing.</p></div>
         </div>
       </div>
       <div class="workspace" data-reveal>
-        <div class="workspace-top"><span><span class="status-dot"></span> RILATU / REVIEW WORKSPACE</span><span>DEMO DATA / FE-0048</span></div>
+        <div class="workspace-top"><span><span class="status-dot"></span> RILATU / EVIDENCE WORKSPACE</span><span>SYNTHETIC RECORD / FE-0048</span></div>
         <div class="workspace-body">
           <div class="source-panel">
-            <div class="small-label"><span>01 / ORIGINAL DOCUMENT</span><span class="unchanged-label">UNCHANGED IN EVERY VIEW</span></div>
-            <p class="panel-explainer">The facts stay fixed. Only the questions asked about them change.</p>
-            <div class="source-page" id="sourceSheet">
-              <div class="source-head"><b>STUDIO NORTH</b><span>INVOICE<br>2026-048</span></div>
-              <h3>Invoice.</h3><p class="source-desc">Design software subscription</p>
-              <div class="source-line"><span>Issued</span><b>08 October 2026</b></div>
-              <div class="source-line source-line-attention" id="sourceUnknown"><span>VAT information</span><b>Not supplied</b></div>
-              <div class="source-total"><span>Document total</span><b>€340.00</b></div>
-              <div class="source-end">SYNTHETIC EXAMPLE / NO REAL CLIENT DATA</div>
+            <div class="small-label"><span>01 / CONNECTED SOURCES</span><span class="unchanged-label">UNCHANGED IN EVERY VIEW</span></div>
+            <p class="panel-explainer">Three records tell one work story. Select any record to inspect its role.</p>
+            <div class="record-stack" id="sourceSheet" aria-label="Three source records connected in a sample evidence chain">
+              <button type="button" class="record is-inspected" data-record="contract" aria-pressed="true"><span class="record-index">01 / AGREEMENT</span><span class="record-title">Client retainer</span><span class="record-meta">Studio North · April–September 2026</span><strong>€3,200 / month</strong><span class="record-stamp">SOURCE A</span></button>
+              <button type="button" class="record" data-record="invoice" aria-pressed="false"><span class="record-index">02 / INVOICE</span><span class="record-title">Work billed</span><span class="record-meta">SN-048 · April 2026</span><strong>€3,200</strong><span class="record-stamp">SOURCE B</span></button>
+              <button type="button" class="record" data-record="payment" aria-pressed="false"><span class="record-index">03 / PAYMENT</span><span class="record-title">Transfer recorded</span><span class="record-meta">Reference SN-048 · 06 May 2026</span><strong>€3,200</strong><span class="record-stamp">SOURCE C</span></button>
             </div>
-            <p class="source-assurance"><span class="assurance-symbol" aria-hidden="true"></span>Same source in all three examples.</p>
+            <div class="record-inspector" id="recordInspector" aria-live="polite"><span id="recordInspectLabel">AGREEMENT / FACT</span><p id="recordInspectText">A sample agreement states a monthly retainer. It does not prove every month was paid.</p></div>
+            <p class="source-assurance"><span class="assurance-symbol" aria-hidden="true"></span>Amount and reference match in this sample; authenticity is not verified.</p>
           </div>
           <div class="review-panel">
-            <div class="small-label"><span>02 / CONTEXTUAL REVIEW</span><span id="reviewCode">ES / REVIEW 01</span></div>
-            <p class="panel-explainer review-instruction">Choose one possible review context. These are alternatives, not three claims.</p>
-            <div class="countries" role="group" aria-label="Choose jurisdiction">
-              <button type="button" class="country is-active" data-country="es" aria-pressed="true"><small>01</small>Spain</button>
-              <button type="button" class="country" data-country="de" aria-pressed="false"><small>02</small>Germany</button>
-              <button type="button" class="country" data-country="fr" aria-pressed="false"><small>03</small>France</button>
+            <div class="small-label"><span>02 / CHOOSE THE PURPOSE</span><span id="reviewCode">01 / INCOME</span></div>
+            <p class="panel-explainer review-instruction">The sources stay the same. A different purpose requires a different explanation.</p>
+            <div class="countries" role="group" aria-label="Choose evidence purpose">
+              <button type="button" class="country is-active" data-country="income" aria-pressed="true"><small>01</small>Income</button>
+              <button type="button" class="country" data-country="rental" aria-pressed="false"><small>02</small>Rental</button>
+              <button type="button" class="country" data-country="residency" aria-pressed="false"><small>03</small>Residency</button>
               <div class="country-indicator" aria-hidden="true"><i id="countryIndicator"></i></div>
             </div>
             <div class="review-dynamic" id="reviewDynamic" aria-live="polite" aria-atomic="true">
-              <p class="context-label" id="interpretationSubtitle">SPAIN / AUTÓNOMO / ILLUSTRATIVE</p>
-              <h3 id="interpretationTitle">A business expense? Show the link.</h3>
-              <div class="regime-control" id="regimeControl" hidden><p>FRENCH INCOME-TAX REGIME</p><div class="regime-buttons" role="group" aria-label="Choose French regime"><button type="button" class="is-active" data-regime="micro" aria-pressed="true">Micro-BNC</button><button type="button" data-regime="real" aria-pressed="false">Régime réel</button></div></div>
+              <p class="context-label" id="interpretationSubtitle">PURPOSE / INCOME SUMMARY · ILLUSTRATIVE</p>
+              <h3 id="interpretationTitle">Three records. One traceable payment.</h3>
               <dl class="review-results">
-                <div><dt>Record mapping</dt><dd id="mappingText">Potential professional service expense</dd></div>
-                <div><dt>Key check</dt><dd id="checkText">Business use and invoice evidence</dd></div>
-                <div><dt>Not determined</dt><dd id="missingText">Supplier details and business use</dd></div>
+                <div><dt>What we know</dt><dd id="mappingText">An agreement, an April invoice and one linked payment of €3,200</dd></div>
+                <div><dt>What to check</dt><dd id="checkText">Identity, source authenticity and consistency</dd></div>
+                <div><dt>What's missing</dt><dd id="missingText">Additional periods and independent verification</dd></div>
               </dl>
-              <div class="review-outcome" id="reviewOutcome"><span class="outcome-mark" aria-hidden="true"></span><div><span>REVIEW STATUS</span><strong>Needs a qualified review</strong><p id="nextAction">Confirm business use, invoice details and the applicable regime.</p></div></div>
-              <p class="interpretation-note" id="interpretationNote">This is a review context, not a tax assessment.</p>
+              <div class="review-outcome" id="reviewOutcome"><span class="outcome-mark" aria-hidden="true"></span><div><span>CURRENT STATUS</span><strong>Linked, not certified</strong><p id="nextAction">Match additional months and check authenticity before claiming regular income.</p></div></div>
+              <p class="interpretation-note" id="interpretationNote">An illustrative link, not a verified income report.</p>
             </div>
-            <p class="journey-nudge" id="journeyNudge" role="status" aria-live="polite"><span>YOUR NEXT STEP</span> Open the evidence trail to see how this conclusion links back to the source.</p>
+            <p class="journey-nudge" id="journeyNudge" role="status" aria-live="polite"><span>YOUR NEXT STEP</span> Open the evidence trail to see which records support this review.</p>
             <div class="review-buttons"><button type="button" class="review-button" id="trailToggle" aria-expanded="false" aria-controls="evidenceTrail">View evidence trail <span class="line-chevron" aria-hidden="true"></span></button><button type="button" class="review-button strong-button" id="exportButton">Export sample JSON <span class="arrow-icon" aria-hidden="true"></span></button></div>
             <p class="export-feedback" id="exportFeedback" role="status" aria-live="polite"></p>
-            <div class="evidence-trail" id="evidenceTrail" hidden><p>03 / WHY THIS REVIEW IS STILL OPEN</p><ol><li><b>Source</b> Synthetic invoice FE-0048, unchanged</li><li><b>Fact</b> €340 on the invoice; VAT unknown</li><li><b>Context</b> <span id="trailContext">Spain / autónomo</span></li><li><b>Reference</b> <a id="sourceLink" href="https://sede.agenciatributaria.gob.es/Sede/iva/que-iva-soportado-puedo-deducir/que-puedo-deducir.html" target="_blank" rel="noopener noreferrer">Official guidance <span class="arrow-icon" aria-hidden="true"></span></a></li><li><b>Outcome</b> Requires qualified human review</li></ol></div>
+            <div class="evidence-trail" id="evidenceTrail" hidden><p>03 / TRACE WHAT IS KNOWN</p><ol><li><b>Agreement</b> Monthly retainer in a sample agreement</li><li><b>Invoice</b> €3,200 billed for April; SN-048</li><li><b>Payment</b> €3,200, matching reference SN-048</li><li><b>Purpose</b> <span id="trailContext">Income summary / sample</span></li><li><b>Gap</b> <span id="trailGap">Only one month of payment evidence</span></li><li><b>Status</b> Illustrative match; independent checks required</li></ol></div>
           </div>
         </div>
-        <div class="workspace-foot"><span>THE SOURCE IS A FACT. TAX TREATMENT IS A QUESTION.</span><span>NO UPLOADS / NO BACKEND</span></div>
+        <div class="workspace-foot"><span>LINKED DOES NOT MEAN INDEPENDENTLY VERIFIED.</span><span>NO UPLOADS / NO BACKEND</span></div>
       </div>
       <p class="demo-caveat" data-reveal>This sample shows one fixed invoice under three hypothetical review contexts. It does not decide where anyone owes tax, whether an expense is deductible, or what a real adviser would conclude.</p>
     </div>
@@ -140,7 +138,7 @@
   <section class="method section-pad container" id="method" aria-labelledby="method-title">
     <div class="section-index" data-reveal><span>03</span><span>THE METHOD</span></div>
     <div class="section-main">
-      <h2 class="display" id="method-title" data-reveal>Capture. Question. <span>Hand over.</span></h2>
+      <h2 class="display" id="method-title" data-reveal>Connect. Explain. <span>Hand over.</span></h2>
       <div class="handoff" aria-hidden="true"><svg viewBox="0 0 1120 270" preserveAspectRatio="none"><path class="handoff-quiet" d="M-40 195C254-18 312 275 570 130S915 85 1150 185"/><path class="handoff-live" d="M-40 195C254-18 312 275 570 130S915 85 1150 185"/></svg><div class="handoff-doc hd-one"><span>ORIGIN</span><i></i><i></i></div><div class="handoff-doc hd-two"><span>REVIEW</span><i></i><i></i></div><div class="handoff-doc hd-three"><span>TRACE</span><i></i><i></i></div></div>
       <div class="steps"><article data-reveal><span>01</span><h3>Keep the original.</h3><p>Preserve what the document actually says, where it came from and what is missing.</p></article><article data-reveal><span>02</span><h3>Expose the assumptions.</h3><p>Separate facts from possible interpretations, country-specific questions and uncertainty.</p></article><article data-reveal><span>03</span><h3>Pass on the reasoning.</h3><p>Give a qualified reviewer the trail behind a decision, not an unexplained folder of files.</p></article></div>
     </div>
@@ -148,7 +146,7 @@
 
   <section class="statement"><div class="container statement-inner"><div class="section-index inverse"><span>04</span><span>THE PRINCIPLE</span></div><div><p class="statement-pre">NOT EVERY UNKNOWN NEEDS AN AUTOMATIC ANSWER</p><h2 data-reveal>Sometimes the best answer is <span>not yet.</span></h2><p>Evidence-first by design. Human-reviewed by default. Country-aware without claiming a universal tax engine.</p></div></div><div class="statement-curve" aria-hidden="true"></div></section>
 
-  <section class="faq section-pad container" id="faq" aria-labelledby="faq-title"><div class="section-index"><span>05</span><span>GOOD TO KNOW</span></div><div class="section-main"><h2 class="display" id="faq-title" data-reveal>Before you <span>trust a prototype.</span></h2><div class="faq-items"><details><summary>Does this calculate or file taxes?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. This is an interactive research concept. It does not process real documents, calculate taxes or prepare filings.</p></details><details><summary>Can an expense be deducted in three countries?<span class="faq-plus" aria-hidden="true"></span></summary><p>Not automatically. The three country views illustrate different possible review contexts, not three simultaneous deductions. Actual treatment depends on the taxpayer and transaction.</p></details><details><summary>Can I upload my own documents?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. Everything on this page uses synthetic examples in your browser; there is no backend or personal document storage.</p></details><details><summary>What is the product stage?<span class="faq-plus" aria-hidden="true"></span></summary><p>Interactive research concept. The next milestone is validating workflows with freelancers and qualified accountants before building live document processing.</p></details></div></div></section>
+  <section class="faq section-pad container" id="faq" aria-labelledby="faq-title"><div class="section-index"><span>05</span><span>GOOD TO KNOW</span></div><div class="section-main"><h2 class="display" id="faq-title" data-reveal>Before you <span>trust a prototype.</span></h2><div class="faq-items"><details><summary>Does this certify or verify income?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. This demonstration only links synthetic records. It does not authenticate files, certify income or guarantee acceptance.</p></details><details><summary>Does one payment prove stable income?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. One matched payment is evidence for one period, not proof of income continuity. More history and independent verification would be needed.</p></details><details><summary>Can I upload my own documents?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. Everything on this page uses synthetic examples in your browser; there is no backend or personal document storage.</p></details><details><summary>What is the product stage?<span class="faq-plus" aria-hidden="true"></span></summary><p>Interactive research concept. The next milestone is validating workflows with freelancers and qualified accountants before building live document processing.</p></details></div></div></section>
 
   <section class="closing" id="contact"><div class="container closing-inner"><p>FOLLOW THE EVIDENCE / NOT THE GUESS</p><h2 data-reveal>Make the proof <span>move.</span></h2><div class="closing-actions"><a href="#demo" class="closing-primary">Explore the prototype <span class="arrow-icon" aria-hidden="true"></span></a><a href="https://github.com/dokarpov/rilatu" target="_blank" rel="noopener noreferrer">View the source <span class="arrow-icon" aria-hidden="true"></span></a></div></div></section>
 </main>
