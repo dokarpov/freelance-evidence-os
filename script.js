@@ -116,5 +116,44 @@ if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
  area.addEventListener('pointermove',e=>{const r=area.getBoundingClientRect();sx=((e.clientX-r.left)/r.width-.5)*17;sy=((e.clientY-r.top)/r.height-.5)*13;kick()},{passive:true});
  area.addEventListener('pointerleave',()=>{sx=0;sy=0;kick()});
 }
+
+/* Consistent per-group stagger; scroll values are purely decorative and never block content. */
+const staggerGroups=[
+  ...document.querySelectorAll('.questions,.steps,.product-heading,.section-main')
+];
+for(const group of staggerGroups){
+ const items=[...group.querySelectorAll(':scope > [data-reveal],:scope > .question[data-reveal],:scope > article[data-reveal]')];
+ items.forEach((el,index)=>el.style.setProperty('--stagger-index',String(Math.min(index,4)));
+}
+const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
+if(!motionPreference.matches){
+ const scenes=[
+  ['.hero',(el,p)=>{el.style.setProperty('--hero-shift',(-12*p).toFixed(2)+'px');el.style.setProperty('--flight-x',(p*24).toFixed(2)+'px');el.style.setProperty('--flight-y',(-18*p).toFixed(2)+'px')}],
+  ['.method',(el,p)=>el.style.setProperty('--handoff-x',((p-.5)*32).toFixed(2)+'px')],
+  ['.statement',(el,p)=>{el.style.setProperty('--curve-x',((p-.5)*36).toFixed(2)+'px');el.style.setProperty('--curve-y',(p*45).toFixed(2)+'px')}],
+  ['.closing',(el,p)=>el.style.setProperty('--closing-shift',(-10*p).toFixed(2)+'px')]
+ ].map(([selector,paint])=>({el:document.querySelector(selector),paint})).filter(x=>x.el);
+ let pending=false;
+ const paintScroll=()=>{
+  pending=false;
+  const vh=Math.max(1,window.innerHeight);
+  for(const scene of scenes){
+   const r=scene.el.getBoundingClientRect();
+   if(r.bottom<0||r.top>vh)continue;
+   const progress=Math.min(1,Math.max(0,(vh-r.top)/(vh+r.height)));
+   scene.paint(scene.el,progress);
+  }
+ };
+ const requestPaint=()=>{if(!pending){pending=true;requestAnimationFrame(paintScroll)}};
+ addEventListener('scroll',requestPaint,{passive:true});
+ addEventListener('resize',requestPaint,{passive:true});
+ requestPaint();
+ motionPreference.addEventListener?.('change',()=>{
+  if(motionPreference.matches){
+   for(const s of scenes){for(const key of ['--hero-shift','--flight-x','--flight-y','--handoff-x','--curve-x','--curve-y','--closing-shift'])s.el.style.removeProperty(key)}
+  }else requestPaint();
+ });
+}
+
 render();
 })();
