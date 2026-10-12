@@ -167,3 +167,184 @@ a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px);trans
 /* Clear feedback for browser-initiated exports, including browsers that suppress the download UI. */
 .export-feedback{min-height:1em;margin:4px 0 0;color:#ff977f;font-size:11px;font-weight:600;line-height:1.5}
 @media(max-width:365px){.review-buttons{flex-direction:column;align-items:flex-start;gap:0}.country{font-size:10px}.review-results>div{grid-template-columns:80px 1fr}}
+
+
+/* ==========================================================================
+   RILATU COMPONENT SYSTEM v1.0 — LOCKED
+   Preserves approved Archivo / paper / ink / vermilion identity.
+   Keep all future UI additions on these tokens. Motion contract: MOTION.md.
+   ========================================================================== */
+:root{
+  --font-ui:'Archivo',Arial,sans-serif;
+  --type-xs:clamp(.6875rem,.18vw + .65rem,.75rem);
+  --type-sm:clamp(.8125rem,.22vw + .77rem,.875rem);
+  --type-body:clamp(.9375rem,.3vw + .87rem,1.0625rem);
+  --type-lead:clamp(1.125rem,.55vw + 1rem,1.375rem);
+  --space-1:.5rem;--space-2:.75rem;--space-3:1rem;--space-4:1.5rem;
+  --space-5:2rem;--space-6:3rem;--space-7:4.5rem;--space-8:7rem;
+  --motion-fast:180ms;--motion-mid:380ms;--motion-slow:760ms;
+  --motion-ease:cubic-bezier(.22,1,.36,1);
+  --motion-entrance:cubic-bezier(.16,1,.3,1);
+  --tap-target:44px;
+}
+html{scroll-padding-top:88px}
+body{font-family:var(--font-ui);font-size:var(--type-body)}
+body,main,section,.workspace,.workspace-body{min-width:0}
+a,button,summary{-webkit-tap-highlight-color:transparent}
+.arrow-icon{transition:transform var(--motion-mid) var(--motion-ease)}
+a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translate(3px,-3px)}
+/* Typography, legibility and rhythm */
+.hero h1{font-size:clamp(3.12rem,10.3vw,6.85rem);letter-spacing:-.075em;line-height:.99}
+.display{font-size:clamp(2.65rem,8.5vw,6.5rem);letter-spacing:-.068em;line-height:1.03;overflow-wrap:normal}
+.statement h2{font-size:clamp(3.15rem,9vw,8rem);letter-spacing:-.075em;line-height:1.01}
+.closing h2{font-size:clamp(3.5rem,11.7vw,10rem);letter-spacing:-.078em;line-height:.99}
+.eyebrow,.concept-note,.hero-foot,.flight-coord,.flight-label,
+.section-index,.question>span,.workspace-top,.small-label,.context-label,
+.review-results dt,.regime-control>p,.workspace-foot,.source-assurance,
+.evidence-trail>p,.steps article>span,.statement-pre,.closing-inner>p,
+.footer-inner{font-size:var(--type-xs);letter-spacing:.065em}
+.hero-deck,.problem-lead,.product-heading p{font-size:var(--type-lead);line-height:1.55}
+.hero-deck p:first-child{font-size:clamp(1.125rem,.5vw + 1rem,1.375rem)}
+.eyebrow{line-height:1.45}
+.section-index{line-height:1.35}
+.question>span{font-size:var(--type-xs)}
+.question p{font-size:clamp(1.1rem,2.2vw,1.75rem);line-height:1.25}
+.steps h3{font-size:clamp(1.25rem,1.7vw,1.6rem)}
+.steps p,.faq details p,.statement-inner>div:last-child>p:last-child{font-size:var(--type-body)}
+.faq summary{font-size:clamp(1rem,1.2vw,1.1875rem);line-height:1.35;min-height:var(--tap-target)}
+/* Interactive prototype: body and controls never fall to 9–11 px */
+.small-label,.workspace-top,.workspace-foot,.context-label{font-size:var(--type-xs);line-height:1.55}
+.workspace-top,.workspace-foot{flex-wrap:wrap;row-gap:.45rem}
+.source-assurance,.source-desc,.source-line,.source-total span,.source-head{font-size:var(--type-sm)}
+.source-head span{font-size:var(--type-xs)}
+.source-line b{font-size:var(--type-sm)}
+.source-total b{font-size:clamp(1.5rem,2.6vw,1.875rem)}
+.source-end{font-size:.625rem}
+.country{font-size:var(--type-sm);min-height:var(--tap-target);padding:13px 5px 16px;transition:color var(--motion-fast),background var(--motion-fast)}
+.country small{font-size:var(--type-xs)}
+.review-dynamic h3{font-size:clamp(1.75rem,3.15vw,2.75rem);line-height:1.14;letter-spacing:-.055em}
+.review-results>div{grid-template-columns:minmax(90px,31%) minmax(0,1fr);gap:12px}
+.review-results dt{font-size:var(--type-xs);line-height:1.55}
+.review-results dd,.interpretation-note,.regime-buttons button,
+.review-button,.evidence-trail li,.evidence-trail b{font-size:var(--type-sm);line-height:1.55}
+.review-results dd{overflow-wrap:break-word}
+.regime-buttons button,.review-button{min-height:var(--tap-target)}
+.review-buttons{column-gap:20px}
+.evidence-trail li{grid-template-columns:minmax(70px,26%) minmax(0,1fr)}
+.evidence-trail a{overflow-wrap:anywhere}
+.export-feedback,.demo-caveat{font-size:var(--type-sm)}
+.nav-cta,.desktop-nav a,.solid-link,.under-link,.closing-actions a{font-size:var(--type-sm)}
+.nav-cta,.solid-link,.under-link,.closing-actions a{min-height:var(--tap-target)}
+/* Pointer affordance is layered on existing editorial elements, not generic cards */
+@media(hover:hover) and (pointer:fine){
+  .solid-link,.closing-primary{transition:transform var(--motion-mid) var(--motion-ease),background var(--motion-mid),box-shadow var(--motion-mid)}
+  .solid-link:hover,.closing-primary:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(31,27,24,.13)}
+  .under-link,.nav-cta,.footer-inner a{transition:color var(--motion-fast),transform var(--motion-mid) var(--motion-ease)}
+  .under-link:hover,.nav-cta:hover,.footer-inner a:hover{color:var(--red)}
+  .question{transition:padding-left var(--motion-mid) var(--motion-ease),border-color var(--motion-mid)}
+  .question:hover{padding-left:12px;border-color:var(--red)}
+  .question:hover p{color:var(--red)}
+  .question p{transition:color var(--motion-mid)}
+  .source-page{transition:rotate var(--motion-slow) var(--motion-ease),scale var(--motion-slow) var(--motion-ease),box-shadow var(--motion-slow)}
+  .source-panel:hover .source-page{rotate:2deg;scale:1.035;box-shadow:15px 24px 38px rgba(0,0,0,.19)}
+  .country:hover{background:rgba(255,255,255,.05)}
+  .review-button,.regime-buttons button{transition:color var(--motion-fast),translate var(--motion-mid) var(--motion-ease)}
+  .review-button:hover,.regime-buttons button:hover{color:#fff;translate:0 -2px}
+  .steps article{transition:translate var(--motion-slow) var(--motion-ease),border-color var(--motion-mid)}
+  .steps article:hover{translate:0 -7px;border-color:var(--red)}
+  .steps article h3{transition:color var(--motion-mid)}
+  .steps article:hover h3{color:var(--red)}
+  .faq summary{transition:padding-inline var(--motion-mid) var(--motion-ease),color var(--motion-mid)}
+  .faq summary:hover{padding-inline:10px;color:var(--red)}
+}
+/* Scroll-linked scenes: gentle depth, small ranges, never obscure content */
+.hero-flight{translate:0 var(--hero-shift,0px)}
+.flight-vector{translate:var(--flight-x,0px) var(--flight-y,0px)}
+.handoff svg{translate:var(--handoff-x,0px) 0}
+.statement-curve{translate:var(--curve-x,0px) var(--curve-y,0px)}
+.closing-inner h2{translate:0 var(--closing-shift,0px)}
+.hero-flight,.flight-vector,.handoff svg,.statement-curve,.closing-inner h2{will-change:auto}
+.motion-active [data-reveal]{
+  opacity:0;transform:translate3d(0,24px,0);
+  transition:opacity var(--motion-slow) ease,transform 900ms var(--motion-entrance);
+  transition-delay:calc(var(--stagger-index,0) * 85ms);
+}
+.motion-active [data-reveal].revealed{opacity:1;transform:translate3d(0,0,0)}
+/* Breakpoints: 320–699 phones, 700–1079 tablet, 1080+ side-by-side */
+@media(max-width:699px){
+ .container{width:calc(100% - 36px)}
+ .hero-copy{padding-top:48px}
+ .hero h1{font-size:clamp(2.7rem,11.6vw,4.3rem)}
+ .hero-flight{height:clamp(340px,102vw,465px);margin-inline:-18px}
+ .hero-inner{gap:24px}
+ .hero-foot{font-size:var(--type-xs)}
+ .section-pad{padding-block:clamp(76px,14vw,108px)}
+ .display,.product-heading .display{font-size:clamp(2.4rem,10.3vw,4.6rem)}
+ .statement h2{font-size:clamp(2.75rem,11vw,5rem)}
+ .closing h2{font-size:clamp(3.1rem,13.1vw,6rem)}
+ .problem-lead,.product-heading p{font-size:var(--type-body)}
+ .questions{margin-top:36px}
+ .question{grid-template-columns:82px minmax(0,1fr) 16px;gap:10px}
+ .question p{font-size:clamp(1rem,4.4vw,1.25rem)}
+ .workspace{margin-inline:-18px}
+ .source-panel,.review-panel{padding:26px 18px 30px}
+ .source-page{width:min(100% - 12px,310px)}
+ .countries{gap:2px}
+ .country{font-size:.8125rem;gap:5px}
+ .review-results>div{grid-template-columns:minmax(82px,30%) minmax(0,1fr)}
+ .review-results dt,.review-results dd{font-size:.8125rem}
+ .review-dynamic{padding-top:24px}
+ .review-dynamic h3{font-size:clamp(1.65rem,7vw,2.25rem)}
+ .workspace-top,.workspace-foot{padding:16px 18px}
+ .workspace-foot>span,.workspace-top>span:last-child{font-size:.6875rem}
+ .handoff{height:170px}
+ .closing-inner{padding-block:90px}
+ .footer-inner{font-size:var(--type-xs);line-height:1.5}
+}
+@media(min-width:700px) and (max-width:1079px){
+ .container{width:calc(100% - 64px)}
+ .desktop-nav{display:none}
+ .hero-inner{grid-template-columns:1fr;gap:12px;min-height:unset}
+ .hero-copy{padding:64px 0 0}
+ .hero h1{font-size:clamp(4.6rem,8.5vw,6.8rem)}
+ .hero-flight{height:clamp(465px,64vw,620px)}
+ .problem,.method,.faq,.product-heading,.statement-inner{grid-template-columns:1fr;gap:16px}
+ .section-index{margin-bottom:20px}
+ .section-pad{padding-block:clamp(90px,12vw,135px)}
+ .display,.product-heading .display{font-size:clamp(3.7rem,7.8vw,6rem)}
+ .workspace-body{grid-template-columns:1fr}
+ .source-panel{border-right:0;border-bottom:1px solid rgba(255,255,255,.13)}
+ .source-panel,.review-panel{padding:32px clamp(32px,6vw,64px)}
+ .source-page{margin:34px auto 28px}
+ .review-dynamic{min-height:0}
+ .workspace-top,.workspace-foot{padding:20px 32px}
+ .statement-inner{display:block}
+ .steps{gap:22px}
+ .closing h2{font-size:clamp(5.5rem,10vw,8rem)}
+}
+@media(min-width:1080px){
+ .hero h1{font-size:clamp(4.5rem,6.5vw,7.35rem)}
+ .hero-inner{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+ .display,.product-heading .display{font-size:clamp(4.25rem,6.2vw,7rem)}
+ .workspace-body{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+ .source-panel,.review-panel{padding:clamp(32px,3.3vw,53px)}
+ .review-dynamic{min-height:360px}
+}
+/* Tiny phones require a deliberate composition, not hidden overflow. */
+@media(max-width:359px){
+ .container{width:calc(100% - 28px)}
+ .hero h1{font-size:clamp(2.5rem,11.3vw,3.2rem)}
+ .hero-flight{margin-inline:-14px}
+ .workspace{margin-inline:-14px}
+ .source-panel,.review-panel{padding-inline:14px}
+ .review-results>div{grid-template-columns:78px minmax(0,1fr);gap:10px}
+ .small-label{font-size:.625rem;letter-spacing:.025em}
+ .country{font-size:.75rem;padding-inline:2px}
+ .country small{font-size:.625rem}
+ .review-buttons{gap:6px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-flight,.flight-vector,.handoff svg,.statement-curve,.closing-inner h2{translate:none!important}
+ .motion-active [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+ .source-page,.steps article,.question,.faq summary,.solid-link,.closing-primary{scale:1!important;translate:none!important}
+}
