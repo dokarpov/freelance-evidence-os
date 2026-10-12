@@ -27,9 +27,9 @@ Small printed text on decorative *mock documents* is allowed; functional control
 - **Hero**: 3-line statement and SVG/document flight artwork; existing tone, no generic screenshots.
 - **Section index**: numeral + descriptor, consistent letter-spacing and color.
 - **Question rows**: rules, labels, accessible text, lightweight hover slide.
-- **Workspace**: source document and contextual review. Mobile/tablet = one column; full desktop = two.
-- **Country selector**: 3 real buttons with `aria-pressed`, 44px minimum target, animated underline.
-- **Evidence trail / regime selector / export**: preserve keyboard operation, hidden state, status announcements, official reference links.
+- **Workspace**: three connected synthetic source sheets and a purpose-specific evidence review. Mobile/tablet = one column; full desktop = two. Source values are immutable as purpose changes.
+- **Purpose selector**: three real buttons (Income / Rental / Residency), `aria-pressed`, 44px minimum target, synchronized review content and animated underline.
+- **Record inspector / evidence trail / export**: preserve keyboard operation, selected state, readable provenance, clear limits of verification and status announcements. Do not introduce a tax regime selector or claim official acceptance.
 - **Steps and FAQ**: editorial rules; FAQ uses native details/summary.
 - **Closing CTA**: original vermilion section; do not replace with new palette.
 
@@ -42,3 +42,11 @@ Small printed text on decorative *mock documents* is allowed; functional control
 6. Claims, tax interpretations and demo boundaries must stay factual and explicitly labelled synthetic.
 
 This freeze stabilizes the system, **not** defects: accessibility, layout or functionality fixes are still permitted.
+
+## Evidence interaction v1.2
+- A narrative sequence opens the workspace: Connect → Reuse → Explain. These are clear reading cues, not autonomous scrolling controls.
+- Each selected record shows a visible paper-edge accent; the inspector explains the record's exact contribution and limits.
+- Each selected purpose updates the review label, headline, facts, checks, missing evidence and next action as a single coherent state.
+- The indicator remains inside the three-tab row and tracks precisely the selected tab (100% of its own width per step, no arbitrary offsets).
+- The review must never claim that one matching payment proves continuous income, official authenticity, immigration eligibility or rental acceptance.
+- Maintain the same color/type/spacing foundations. Do not rebrand the site or replace an approved logo with a guessed one.
