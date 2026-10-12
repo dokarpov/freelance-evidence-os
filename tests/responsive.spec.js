@@ -134,3 +134,39 @@ test('country underline survives rapid switches, animation, resize, reload and k
   await expectCountryAligned(page,'es');
   await context.close();
 });
+
+test('walkthrough keeps immutable evidence while explaining changing context',async({browser})=>{
+ for(const width of [375,768,1360]){
+  const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
+  const page=await context.newPage();
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(origin);
+  await expect(page.locator('.orientation-grid>div')).toHaveCount(3);
+  await expect(page.locator('.orientation-grid')).toContainText('One original.');
+  await expect(page.locator('.orientation-grid')).toContainText('Different questions.');
+  await expect(page.locator('.orientation-grid')).toContainText('A traceable next step.');
+  const source=await page.locator('#sourceSheet').innerText();
+  await expect(page.locator('#journeyNudge')).toContainText('Open the evidence trail');
+  const actions=[];
+  for(const code of ['es','de','fr']){
+   await page.locator('[data-country="'+code+'"]').click();
+   await expectCountryAligned(page,code);
+   expect(await page.locator('#sourceSheet').innerText()).toBe(source);
+   await expect(page.locator('.review-outcome')).toContainText('Needs a qualified review');
+   const action=await page.locator('#nextAction').innerText();
+   expect(action.length).toBeGreaterThan(28);
+   actions.push(action);
+  }
+  expect(new Set(actions).size).toBe(3);
+  await page.locator('#trailToggle').click();
+  await expect(page.locator('#evidenceTrail')).toBeVisible();
+  await expect(page.locator('#journeyNudge')).toContainText('You can now trace the reasoning');
+  await page.locator('[data-country="de"]').click();
+  await expect(page.locator('#trailContext')).toContainText('Germany');
+  await expect(page.locator('.evidence-trail')).toContainText('Requires qualified human review');
+  await expect(page.locator('#regimeControl')).toBeHidden();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+  expect(errors).toEqual([]);
+  await context.close();
+ }
+});
