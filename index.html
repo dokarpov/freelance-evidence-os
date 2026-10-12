@@ -18,9 +18,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=vector-1"><link rel="stylesheet" href="proof-preview.css">
+<link rel="stylesheet" href="styles.css?v=vector-1">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Rilatu","url":"https://dokarpov.github.io/rilatu/","inLanguage":"en","description":"Interactive synthetic example of connected freelance work evidence."}</script>
-
+<script src="script.js?v=vector-1" defer></script>
 <title>Rilatu — Proof should travel.</title>
 </head>
 <body>
@@ -28,7 +28,7 @@
 <header class="site-header" id="top">
   <div class="container nav-inner">
     <a class="wordmark" href="#top" aria-label="Rilatu home"><img class="brand-wordmark" src="rilatu-logo.svg?v=geometric-2" width="152" height="43" alt="rilatu." decoding="async"></a>
-    <nav class="desktop-nav" aria-label="Main navigation"><a href="#problem">The problem</a><a href="demo.html">Try the demo</a><a href="#method">The system</a></nav>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#problem">The problem</a><a href="#demo">The prototype</a><a href="#method">The system</a></nav>
     <a class="nav-cta" href="#method">How it works <span class="arrow-icon" aria-hidden="true"></span></a>
   </div>
 </header>
@@ -43,7 +43,7 @@
           <p>Contracts, invoices and payments often tell one story.</p>
           <p>Rilatu links the source records, the questions and the gaps in one traceable journey.</p>
         </div>
-        <div class="hero-actions"><a class="solid-link" href="demo.html">Try the product <span class="arrow-icon" aria-hidden="true"></span></a><a class="under-link" href="#problem">The idea <span class="arrow-icon" aria-hidden="true"></span></a></div>
+        <div class="hero-actions"><a class="solid-link" href="#demo">See it in motion <span class="arrow-icon" aria-hidden="true"></span></a><a class="under-link" href="#problem">The idea <span class="arrow-icon" aria-hidden="true"></span></a></div>
         <p class="concept-note">INTERACTIVE RESEARCH CONCEPT / NOT A DOCUMENT VERIFICATION SERVICE</p>
       </div>
       <div class="hero-flight" aria-label="Illustration of agreement, invoice and payment records linked along a route">
@@ -74,7 +74,69 @@
     </div>
   </section>
 
-  <section class="product" id="demo" aria-labelledby="demo-title"><div class="container"><div class="product-heading"><div class="section-index inverse"><span>02</span><span>INTERACTIVE PRODUCT DEMO</span></div><div><h2 class="display" id="demo-title">Proof that <span>stays accountable.</span></h2><p>One linked payment. One claim shared with a landlord. See what happens when the underlying evidence changes.</p></div></div><div class="proof-story"><div><span>01 / CONNECT</span><strong>Inspect the sources</strong><p>Agreement, invoice and payment each support a specific fact.</p></div><div><span>02 / ISSUE</span><strong>Share less</strong><p>Prepare a recipient-specific claim instead of sending original files.</p></div><div><span>03 / VERIFY</span><strong>Catch the change</strong><p>Reverse the payment and recheck the dependent claim.</p></div></div><div class="proof-launch"><p>3-minute synthetic walkthrough. No live bank connection, real signature or backend.</p><a class="proof-cta" href="demo.html">Try the interactive scenario ↗</a></div></div></section>
+  <section class="product" id="demo" aria-labelledby="demo-title">
+    <div class="container">
+      <div class="product-heading">
+        <div class="section-index inverse" data-reveal><span>02</span><span>INTERACTIVE PROTOTYPE</span></div>
+        <div><h2 class="display" id="demo-title" data-reveal>Same work. <span>Different questions.</span></h2><p data-reveal>Choose a purpose, inspect the records, and see what the evidence can support.</p></div>
+      </div>
+
+      <div class="workspace" data-reveal data-step="1">
+        <div class="workspace-top"><span><span class="status-dot"></span> RILATU / EVIDENCE WORKSPACE</span><span>SYNTHETIC RECORD / FE-0048</span></div>
+        <div class="guided-head" aria-label="Interactive demo progress">
+          <p class="guided-kicker"><span id="guidedCount">01 / 03</span> &middot; An example, not verified evidence</p>
+          <h3 id="stepTitle" tabindex="-1">What do you need to prove?</h3>
+          <p id="stepDesc">Choose a purpose to begin. We'll show one decision at a time.</p>
+          <div class="guided-progress" aria-hidden="true"><span data-step-marker="1" class="is-current">Choose</span><span data-step-marker="2">Inspect</span><span data-step-marker="3">Review</span></div>
+        </div>
+        <div class="workspace-body">
+          <div class="source-panel">
+            <div class="small-label"><span>01 / CONNECTED SOURCES</span><span class="unchanged-label">UNCHANGED IN EVERY VIEW</span></div>
+            <p class="panel-explainer">Three records tell one work story. Select any record to inspect its role.</p>
+            <div class="record-stack" id="sourceSheet" aria-label="Three source records connected in a sample evidence chain">
+              <button type="button" class="record is-inspected" data-record="contract" aria-pressed="true"><span class="record-index">01 / AGREEMENT</span><span class="record-title">Client retainer</span><span class="record-meta">Studio North · April–September 2026</span><strong>€3,200 / month</strong><span class="record-stamp">SOURCE A</span></button>
+              <button type="button" class="record" data-record="invoice" aria-pressed="false"><span class="record-index">02 / INVOICE</span><span class="record-title">Work billed</span><span class="record-meta">SN-048 · April 2026</span><strong>€3,200</strong><span class="record-stamp">SOURCE B</span></button>
+              <button type="button" class="record" data-record="payment" aria-pressed="false"><span class="record-index">03 / PAYMENT</span><span class="record-title">Transfer recorded</span><span class="record-meta">Reference SN-048 · 06 May 2026</span><strong>€3,200</strong><span class="record-stamp">SOURCE C</span></button>
+            </div>
+            <div class="record-inspector" id="recordInspector" aria-live="polite"><span id="recordInspectLabel">AGREEMENT / FACT</span><p id="recordInspectText">A sample agreement states a monthly retainer. It does not prove every month was paid.</p></div>
+            <p class="source-assurance"><span class="assurance-symbol" aria-hidden="true"></span>Amount and reference match in this sample; authenticity is not verified.</p>
+          </div>
+          <div class="review-panel">
+            <div class="small-label"><span>02 / CHOOSE THE PURPOSE</span><span id="reviewCode">01 / INCOME</span></div>
+            <p class="panel-explainer review-instruction">The sources stay the same. A different purpose requires a different explanation.</p>
+            <div class="countries" role="group" aria-label="Choose evidence purpose">
+              <button type="button" class="country is-active" data-country="income" aria-pressed="true"><small>01</small>Income</button>
+              <button type="button" class="country" data-country="rental" aria-pressed="false"><small>02</small>Rental</button>
+              <button type="button" class="country" data-country="residency" aria-pressed="false"><small>03</small>Residency</button>
+              <div class="country-indicator" aria-hidden="true"><i id="countryIndicator"></i></div>
+            </div>
+            <div class="review-dynamic" id="reviewDynamic" aria-live="polite" aria-atomic="true">
+              <p class="context-label" id="interpretationSubtitle">PURPOSE / INCOME SUMMARY · ILLUSTRATIVE</p>
+              <h3 id="interpretationTitle">Three records. One traceable payment.</h3>
+              <dl class="review-results">
+                <div><dt>What we know</dt><dd id="mappingText">An agreement, an April invoice and one linked payment of €3,200</dd></div>
+                <div><dt>What to check</dt><dd id="checkText">Identity, source authenticity and consistency</dd></div>
+                <div><dt>What's missing</dt><dd id="missingText">Additional periods and independent verification</dd></div>
+              </dl>
+              <div class="review-outcome" id="reviewOutcome"><span class="outcome-mark" aria-hidden="true"></span><div><span>CURRENT STATUS</span><strong>Linked, not certified</strong><p id="nextAction">Match additional months and check authenticity before claiming regular income.</p></div></div>
+              <p class="interpretation-note" id="interpretationNote">An illustrative link, not a verified income report.</p>
+            </div>
+            <p class="journey-nudge" id="journeyNudge" role="status" aria-live="polite"><span>YOUR NEXT STEP</span> Open the evidence trail to see which records support this review.</p>
+            <div class="review-buttons"><button type="button" class="review-button" id="trailToggle" aria-expanded="false" aria-controls="evidenceTrail">View evidence trail <span class="line-chevron" aria-hidden="true"></span></button><button type="button" class="review-button strong-button" id="exportButton">Export sample JSON <span class="arrow-icon" aria-hidden="true"></span></button></div>
+            <p class="export-feedback" id="exportFeedback" role="status" aria-live="polite"></p>
+            <div class="evidence-trail" id="evidenceTrail" hidden><p>03 / TRACE WHAT IS KNOWN</p><ol><li><b>Agreement</b> Monthly retainer in a sample agreement</li><li><b>Invoice</b> €3,200 billed for April; SN-048</li><li><b>Payment</b> €3,200, matching reference SN-048</li><li><b>Purpose</b> <span id="trailContext">Income summary / sample</span></li><li><b>Gap</b> <span id="trailGap">Only one month of payment evidence</span></li><li><b>Status</b> Illustrative match; independent checks required</li></ol></div>
+          </div>
+        </div>
+        <div class="guided-actions" aria-label="Demo navigation">
+          <button type="button" id="demoBack" class="guided-back" hidden>Back</button>
+          <button type="button" id="demoNext" class="guided-next" hidden>See the review <span aria-hidden="true">&rarr;</span></button>
+        </div>
+        <div class="workspace-foot"><span>LINKED DOES NOT MEAN INDEPENDENTLY VERIFIED.</span><span>NO UPLOADS / NO BACKEND</span></div>
+      </div>
+      <p class="demo-caveat" data-reveal>This walkthrough connects one synthetic agreement, invoice and payment. Matching records is not the same as verifying them, establishing stable income or guaranteeing a recipient will accept them.</p>
+    </div>
+  </section>
+
   <section class="method section-pad container" id="method" aria-labelledby="method-title">
     <div class="section-index" data-reveal><span>03</span><span>THE METHOD</span></div>
     <div class="section-main">
@@ -88,7 +150,7 @@
 
   <section class="faq section-pad container" id="faq" aria-labelledby="faq-title"><div class="section-index"><span>05</span><span>GOOD TO KNOW</span></div><div class="section-main"><h2 class="display" id="faq-title" data-reveal>Before you <span>trust a prototype.</span></h2><div class="faq-items"><details><summary>Does this certify or verify income?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. This demonstration only links synthetic records. It does not authenticate files, certify income or guarantee acceptance.</p></details><details><summary>Does one payment prove stable income?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. One matched payment is evidence for one period, not proof of income continuity. More history and independent verification would be needed.</p></details><details><summary>Can I upload my own documents?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. Everything on this page uses synthetic examples in your browser; there is no backend or personal document storage.</p></details><details><summary>What is the product stage?<span class="faq-plus" aria-hidden="true"></span></summary><p>Interactive research concept. The next milestone is validating source-linking and evidence-review workflows with freelancers and the people receiving their documents.</p></details></div></div></section>
 
-  <section class="closing" id="contact"><div class="container closing-inner"><p>FOLLOW THE EVIDENCE / NOT THE GUESS</p><h2 data-reveal>Make the proof <span>move.</span></h2><div class="closing-actions"><a href="demo.html" class="closing-primary">Explore the prototype <span class="arrow-icon" aria-hidden="true"></span></a><a href="#method">How it works <span class="arrow-icon" aria-hidden="true"></span></a></div></div></section>
+  <section class="closing" id="contact"><div class="container closing-inner"><p>FOLLOW THE EVIDENCE / NOT THE GUESS</p><h2 data-reveal>Make the proof <span>move.</span></h2><div class="closing-actions"><a href="#demo" class="closing-primary">Explore the prototype <span class="arrow-icon" aria-hidden="true"></span></a><a href="#method">How it works <span class="arrow-icon" aria-hidden="true"></span></a></div></div></section>
 </main>
 <footer class="footer"><div class="container footer-inner"><span>RILATU / 2026</span><span>Independent concept. Not tax, legal or accounting advice.</span><a href="#top">Back to top</a></div></footer>
 </body>

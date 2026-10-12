@@ -33,13 +33,13 @@ jobs:
       - name: Responsive and interaction checks
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/rilatu-server.log 2>&1 &
-          npx playwright test tests/proof-lifecycle.spec.js --reporter=line --workers=2
+          npx playwright test tests/responsive.spec.js --reporter=line --workers=2
       - name: Upload viewport screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: rilatu-responsive-screenshots
-          path: test-results/proof-*.png
+          path: test-results/rilatu-*.png
           if-no-files-found: ignore
       - name: Upload website files for private-source hosting
         if: success()
