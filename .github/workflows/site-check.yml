@@ -12,6 +12,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Structural and motion checks
         run: python3 tests/site_check.py
+      - name: Build public-only deployment directory
+        run: |
+          python3 scripts/build_site.py
+          test -f dist/rilatu-logo.svg
+          test -f dist/index.html
+          test ! -e dist/.github
+          test ! -e dist/tests
+          ! grep -q "github.com/dokarpov/rilatu" dist/index.html
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
