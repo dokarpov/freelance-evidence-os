@@ -20,7 +20,9 @@ assert 'not a live tax service' in h.lower()
 print('PASS: Rilatu assets, mobile-first breakpoints, scenarios, evidence export, vector branding and reduced motion')
 
 assert 'id="exportFeedback"' in h and 'aria-live="polite"' in h
-assert 'Download requested' in js and 'var(--route,0) * 300%' in css
+assert 'Download requested' in js
+assert 'var(--route,0) * 100%' in css, 'country underline must move one tab width per index'
+assert 'var(--route,0) * 300%' not in css, 'out-of-bounds country underline regression'
 
 assert 'COMPONENT SYSTEM v1.0' in css and '--type-body' in css
 assert 'max-width:1079px' in css and 'min-width:1080px' in css
