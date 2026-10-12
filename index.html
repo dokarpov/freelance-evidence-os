@@ -80,23 +80,33 @@
         <div class="section-index inverse" data-reveal><span>02</span><span>INTERACTIVE PROTOTYPE</span></div>
         <div><h2 class="display" id="demo-title" data-reveal>Same document. <span>Different questions.</span></h2><p data-reveal>Choose a jurisdiction. See the review change while the original evidence remains untouched.</p></div>
       </div>
+      <div class="demo-orientation" data-reveal>
+        <p class="orientation-kicker">A TWO-MINUTE WALKTHROUGH / ONE SYNTHETIC INVOICE</p>
+        <div class="orientation-grid">
+          <div><span>01 / KEEP</span><strong>One original.</strong><p>€340 software invoice. Its contents never change.</p></div>
+          <div><span>02 / COMPARE</span><strong>Different questions.</strong><p>Switch countries to reveal what a reviewer would need to check.</p></div>
+          <div><span>03 / EXPLAIN</span><strong>A traceable next step.</strong><p>Open the evidence trail to see the known facts and unresolved details.</p></div>
+        </div>
+      </div>
       <div class="workspace" data-reveal>
         <div class="workspace-top"><span><span class="status-dot"></span> RILATU / REVIEW WORKSPACE</span><span>DEMO DATA / FE-0048</span></div>
         <div class="workspace-body">
           <div class="source-panel">
-            <div class="small-label"><span>01 / ORIGINAL DOCUMENT</span><span>UNCHANGED</span></div>
+            <div class="small-label"><span>01 / ORIGINAL DOCUMENT</span><span class="unchanged-label">UNCHANGED IN EVERY VIEW</span></div>
+            <p class="panel-explainer">The facts stay fixed. Only the questions asked about them change.</p>
             <div class="source-page" id="sourceSheet">
               <div class="source-head"><b>STUDIO NORTH</b><span>INVOICE<br>2026-048</span></div>
               <h3>Invoice.</h3><p class="source-desc">Design software subscription</p>
               <div class="source-line"><span>Issued</span><b>08 October 2026</b></div>
-              <div class="source-line"><span>VAT information</span><b>Not supplied</b></div>
+              <div class="source-line source-line-attention" id="sourceUnknown"><span>VAT information</span><b>Not supplied</b></div>
               <div class="source-total"><span>Document total</span><b>€340.00</b></div>
               <div class="source-end">SYNTHETIC EXAMPLE / NO REAL CLIENT DATA</div>
             </div>
-            <p class="source-assurance"><span class="assurance-symbol" aria-hidden="true"></span>One record. No silent edits.</p>
+            <p class="source-assurance"><span class="assurance-symbol" aria-hidden="true"></span>Same source in all three examples.</p>
           </div>
           <div class="review-panel">
             <div class="small-label"><span>02 / CONTEXTUAL REVIEW</span><span id="reviewCode">ES / REVIEW 01</span></div>
+            <p class="panel-explainer review-instruction">Choose one possible review context. These are alternatives, not three claims.</p>
             <div class="countries" role="group" aria-label="Choose jurisdiction">
               <button type="button" class="country is-active" data-country="es" aria-pressed="true"><small>01</small>Spain</button>
               <button type="button" class="country" data-country="de" aria-pressed="false"><small>02</small>Germany</button>
@@ -112,16 +122,18 @@
                 <div><dt>Key check</dt><dd id="checkText">Business use and invoice evidence</dd></div>
                 <div><dt>Not determined</dt><dd id="missingText">Supplier details and business use</dd></div>
               </dl>
+              <div class="review-outcome" id="reviewOutcome"><span class="outcome-mark" aria-hidden="true"></span><div><span>REVIEW STATUS</span><strong>Needs a qualified review</strong><p id="nextAction">Confirm business use, invoice details and the applicable regime.</p></div></div>
               <p class="interpretation-note" id="interpretationNote">This is a review context, not a tax assessment.</p>
             </div>
+            <p class="journey-nudge" id="journeyNudge" role="status" aria-live="polite"><span>YOUR NEXT STEP</span> Open the evidence trail to see how this conclusion links back to the source.</p>
             <div class="review-buttons"><button type="button" class="review-button" id="trailToggle" aria-expanded="false" aria-controls="evidenceTrail">View evidence trail <span class="line-chevron" aria-hidden="true"></span></button><button type="button" class="review-button strong-button" id="exportButton">Export sample JSON <span class="arrow-icon" aria-hidden="true"></span></button></div>
             <p class="export-feedback" id="exportFeedback" role="status" aria-live="polite"></p>
-            <div class="evidence-trail" id="evidenceTrail" hidden><p>DECISION PROVENANCE / FE-0048</p><ol><li><b>Source</b> Synthetic invoice FE-0048, unchanged</li><li><b>Fact</b> €340 on the invoice; VAT unknown</li><li><b>Context</b> <span id="trailContext">Spain / autónomo</span></li><li><b>Reference</b> <a id="sourceLink" href="https://sede.agenciatributaria.gob.es/Sede/iva/que-iva-soportado-puedo-deducir/que-puedo-deducir.html" target="_blank" rel="noopener noreferrer">Official guidance <span class="arrow-icon" aria-hidden="true"></span></a></li><li><b>Outcome</b> Requires qualified human review</li></ol></div>
+            <div class="evidence-trail" id="evidenceTrail" hidden><p>03 / WHY THIS REVIEW IS STILL OPEN</p><ol><li><b>Source</b> Synthetic invoice FE-0048, unchanged</li><li><b>Fact</b> €340 on the invoice; VAT unknown</li><li><b>Context</b> <span id="trailContext">Spain / autónomo</span></li><li><b>Reference</b> <a id="sourceLink" href="https://sede.agenciatributaria.gob.es/Sede/iva/que-iva-soportado-puedo-deducir/que-puedo-deducir.html" target="_blank" rel="noopener noreferrer">Official guidance <span class="arrow-icon" aria-hidden="true"></span></a></li><li><b>Outcome</b> Requires qualified human review</li></ol></div>
           </div>
         </div>
         <div class="workspace-foot"><span>THE SOURCE IS A FACT. TAX TREATMENT IS A QUESTION.</span><span>NO UPLOADS / NO BACKEND</span></div>
       </div>
-      <p class="demo-caveat" data-reveal>The three views illustrate alternative review contexts, not three deductions. No VAT rate or refund is inferred from the document.</p>
+      <p class="demo-caveat" data-reveal>This sample shows one fixed invoice under three hypothetical review contexts. It does not decide where anyone owes tax, whether an expense is deductible, or what a real adviser would conclude.</p>
     </div>
   </section>
 
