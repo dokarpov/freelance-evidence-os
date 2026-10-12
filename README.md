@@ -4,6 +4,12 @@
 
 Rilatu is a **private-source** research prototype for freelancers who need a traceable work history. It connects original agreements, invoices and payments, explains what the records can support, and makes the gaps explicit. The demonstration uses synthetic data only.
 
+## Repository boundary
+
+This public repository contains only the presentation website, synthetic interactive demo, visual system and website tests. Product research, pilot operations, client workflows and future application code belong in the separate private `dokarpov/rilatu-product` repository.
+
+Do not commit real client records, internal validation material or identifiable evidence here.
+
 ## Guided example
 
 **Choose → Inspect → Review.** Choose Income, Rental or Residency; inspect three connected illustrative source records; review what is evidenced, what is missing and the next action. Users can open the evidence trail and export synthetic JSON. There is no file upload, actual document verification, legal opinion, eligibility decision, or backend.
