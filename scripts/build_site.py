@@ -12,7 +12,7 @@ import shutil
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 FILES = (
-    "index.html", "styles.css", "script.js", "demo.html", "demo.css", "demo.js", "rilatu-logo.svg",
+    "index.html", "styles.css", "script.js", "demo.html", "demo.css", "demo.js", "proof-preview.css", "rilatu-logo.svg",
     "favicon.svg", "og-cover.svg", "site.webmanifest", "robots.txt",
 )
 if DIST.exists():
