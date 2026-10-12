@@ -16,13 +16,13 @@ assert not any(s in h for s in ['✳','✓','＋','●','🛫','📄'])
 assert 'prefers-reduced-motion' in css and 'IntersectionObserver' in js
 assert 'URL.createObjectURL' in js and 'rilatu-sample-' in js
 assert 'min-width:700px' in css and 'max-width:699px' in css
-assert 'not a live tax service' in h.lower()
-print('PASS: Rilatu assets, mobile-first breakpoints, scenarios, evidence export, vector branding and reduced motion')
+assert 'not a document verification service' in h.lower()
+print('PASS: Rilatu assets, purpose-based evidence scenarios, export and reduced motion')
 
 assert 'id="exportFeedback"' in h and 'aria-live="polite"' in h
 assert 'Sample JSON download requested' in js
-assert 'var(--route,0) * 100%' in css, 'country underline must move one tab width per index'
-assert 'var(--route,0) * 300%' not in css, 'out-of-bounds country underline regression'
+assert 'var(--route,0) * 100%' in css, 'selector underline must move one item per index'
+assert 'var(--route,0) * 300%' not in css, 'out-of-bounds selector underline regression'
 
 assert 'COMPONENT SYSTEM v1.0' in css and '--type-body' in css
 assert 'max-width:1079px' in css and 'min-width:1080px' in css
@@ -32,3 +32,10 @@ assert 'motionPreference' in js
 for doc in ['DESIGN_SYSTEM.md','MOTION.md','QA_REPORT.md','tests/responsive.spec.js']:
     assert (p/doc).exists(), doc
 print('PASS: design tokens, component freeze, tablet layout and scroll animation contract')
+
+assert 'id="recordInspector"' in h and 'id="trailGap"' in h
+assert 'A TWO-MINUTE WALKTHROUGH' in h
+assert 'LINKED EVIDENCE v1.2' in css
+assert 'requires-independent-review' in js and 'independently_verified:false' in js
+assert 'country\u2014tax' not in h
+print('PASS: connected-source reviewer journey, simulated rather than certified outputs')
