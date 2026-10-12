@@ -18,3 +18,6 @@ assert 'URL.createObjectURL' in js and 'rilatu-demo-' in js
 assert 'min-width:700px' in css and 'max-width:699px' in css
 assert 'not a live tax service' in h.lower()
 print('PASS: Rilatu assets, mobile-first breakpoints, scenarios, evidence export, vector branding and reduced motion')
+
+assert 'id="exportFeedback"' in h and 'aria-live="polite"' in h
+assert 'Download requested' in js and 'var(--route,0) * 300%' in css

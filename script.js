@@ -94,7 +94,11 @@ $('exportButton').addEventListener('click',()=>{
  const blob=new Blob([JSON.stringify(result,null,2)+'\n'],{type:'application/json'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download='rilatu-demo-'+country+(country==='fr'?'-'+regime:'')+'.json';
- document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+ document.body.appendChild(a);a.click();a.remove();
+ const status=$('exportFeedback');
+ status.textContent='Download requested — check your browser downloads.';
+ $('exportButton').setAttribute('aria-describedby','exportFeedback');
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
 });
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 if(!reduce && 'IntersectionObserver' in window){
