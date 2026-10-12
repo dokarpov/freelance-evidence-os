@@ -69,6 +69,7 @@ for(const width of widths){
    await choose(page,'rental');
    await expect(page.locator('.source-panel')).toBeVisible();
    await expect(page.locator('.review-panel')).toBeHidden();
+   if([320,375,768,1360,1920].includes(width)) await page.screenshot({path:'test-results/rilatu-'+width+'-inspect.png',fullPage:true,animations:'disabled'});
    const original=await page.locator('#sourceSheet').textContent();
    for(const record of records) await inspect(page,record);
    expect(await page.locator('#sourceSheet').textContent()).toBe(original);
@@ -76,6 +77,7 @@ for(const width of widths){
    await seeReview(page,'rental');
    await expect(page.locator('#reviewDynamic')).toBeVisible();
    await expect(page.locator('.source-panel')).toBeHidden();
+   if([320,375,768,1360,1920].includes(width)) await page.screenshot({path:'test-results/rilatu-'+width+'-review.png',fullPage:true,animations:'disabled'});
    await page.locator('#trailToggle').click();
    await expect(page.locator('#evidenceTrail')).toBeVisible();
    await expect(page.locator('#trailContext')).toContainText('Rental');
