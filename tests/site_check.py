@@ -46,3 +46,9 @@ logo=(p/'rilatu-logo.svg').read_text()
 assert 'fill-rule="evenodd"' in logo and 'viewBox="0 0 760 216"' in logo, 'approved wordmark must use vector outlines'
 assert 'scripts/build_site.py' and (p/'scripts/build_site.py').exists()
 print('PASS: approved vector wordmark, no public repository link, private-to-public build script')
+
+# Exact path simplicity contract for the approved geometric wordmark.
+assert (p/'rilatu-logo.svg').read_text().count('<path') == 8, 'wordmark uses exactly eight shape paths'
+assert len((p/'rilatu-logo.svg').read_text()) < 1800, 'wordmark contains unnecessary traced contour points'
+assert ' C' in (p/'rilatu-logo.svg').read_text(), 'logo must use cubic Bezier curves'
+print('PASS: minimal geometric Bezier identity')

@@ -56,3 +56,6 @@ The demo uses a three-step progressive flow: **Choose → Inspect → Review**. 
 
 ## Approved identity (2026-10-12)
 The user's supplied raster was traced into a real vector-outline `rilatu-logo.svg` (no embedded bitmap and no font dependency). The header, `favicon.svg` and `og-cover.svg` share this lettering. Do not resurrect the old arrow SVG. Public source links are forbidden on the website. A private GitHub repository and public compiled site have separate access rules.
+
+## Geometric vector simplification
+The approved `rilatu.` identity uses **8 glyph/subglyph outline paths** composed from deliberate straight segments and cubic Bézier curves; no traced pixel-staircase contours or font dependencies. `favicon.svg` shares the exact `r` outline; `og-cover.svg` uses the same glyph paths. Keep the original width, silhouette, and geometric rhythm at mobile header size.
