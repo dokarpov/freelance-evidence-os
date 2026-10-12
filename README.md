@@ -2,43 +2,32 @@
 
 **Proof should travel.**
 
-[Live site](https://dokarpov.github.io/rilatu/) · [Interactive demo](https://dokarpov.github.io/rilatu/#demo) · [Source](https://github.com/dokarpov/rilatu)
+Rilatu is a **private-source** research prototype for freelancers who need a traceable work history. It connects original agreements, invoices and payments, explains what the records can support, and makes the gaps explicit. The demonstration uses synthetic data only.
 
-Rilatu is an **evidence-first research prototype** for independent professionals. Instead of generating a black-box verdict, the interface links the supporting records, shows what they can demonstrate and exposes what is still missing.
+## Guided example
 
-## The interactive story
+**Choose → Inspect → Review.** Choose Income, Rental or Residency; inspect three connected illustrative source records; review what is evidenced, what is missing and the next action. Users can open the evidence trail and export synthetic JSON. There is no file upload, actual document verification, legal opinion, eligibility decision, or backend.
 
-The demo uses **three synthetic sources** in a single freelance work record:
+The approved **rilatu.** logo is stored as path-based [SVG wordmark](rilatu-logo.svg), with a matching letter-derived [favicon](favicon.svg) and [Open Graph preview](og-cover.svg). No placeholder arrow remains in the public header.
 
-1. Client agreement: Studio North, €3,200 per month, April–September 2026.
-2. April invoice SN-048: €3,200 billed.
-3. Matching payment reference SN-048: €3,200 received on 6 May 2026.
+## Publication and privacy
 
-Users can inspect each record, then switch between **Income**, **Rental**, and **Residency** to see how different recipients ask different questions about the *same evidence*. The provenance trail explains known facts and gaps. JSON export creates only a local synthetic sample.
+**Repository: private. Public website: currently offline.** An unauthenticated GitHub Actions HTTP check returned **404** for the former GitHub Pages address after visibility changed. A passing application test does not mean that a website is published.
 
-**Scope:** one matched payment does not prove a stable income history. None of the examples authenticates documents, confirms eligibility, advises on taxes or immigration, or guarantees a third party will accept the result. No uploads, backend, user data or real bank connections.
+To host the website while keeping this repository private, connect the private repository to **Netlify** (configuration in [netlify.toml](netlify.toml)), or to Cloudflare Pages using `python3 scripts/build_site.py` and output directory `dist`. The build copies **only allowlisted public assets**, excluding tests, internal Markdown, repository history and workflows. Set `PUBLIC_SITE_URL` to your new HTTPS URL for correct sharing metadata.
 
-## Design and motion
+Any published frontend HTML/CSS/JavaScript remains publicly inspectable in visitors' browsers. A private GitHub repository protects the repository and history, not the shipped frontend. Do not publish a second public code repository.
 
-The existing identity system is frozen in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) and [MOTION.md](MOTION.md): Archivo, warm ivory, dark ink and vermilion; responsive editorial layout, real evidence-sheet anatomy, restrained hover/scroll motion and reduced-motion support.
+## Development and quality
 
-The previous €340 three-country tax demo was retired because it obscured the evidence OS proposition. The new UX introduces an explicit Connect → Reuse → Explain story and purpose-based review with visible next actions.
+- `index.html`, `styles.css`, `script.js`: static product narrative and three-stage guided prototype.
+- `rilatu-logo.svg`, `favicon.svg`, `og-cover.svg`: approved identity assets.
+- [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) and [MOTION.md](MOTION.md): controlled visual and animation decisions.
+- [QA_REPORT.md](QA_REPORT.md): actual CI results, public accessibility and remaining release gates.
+- `tests/site_check.py` and `tests/responsive.spec.js`: structural and Chromium tests at 320–1920px.
 
-**Logo asset status:** the existing SVG favicon/header mark is still a temporary arrow. The user approved logo concept #3 in an earlier design review, but its actual vector file is not present in this repository or the currently accessible working files. Do not invent a new mark or label the arrow final. Replace favicon, header mark and Open Graph identity only when the approved vector source has been recovered.
+Local preview: `python3 -m http.server 8765`, then open `http://127.0.0.1:8765/`.
 
-## Structure
+Local checks: `python3 tests/site_check.py`. For automated browser testing, install Playwright, serve the root on 8765 and run `npx playwright test tests/responsive.spec.js`.
 
-- `index.html` — site and synthetic evidence journey
-- `styles.css` — locked typography/layout tokens, document components and animation
-- `script.js` — source inspection, purpose switching, trail, JSON export and scroll scenes
-- `favicon.svg`, `og-cover.svg` — existing vectors (logo replacement pending)
-- `tests/site_check.py` — structural checks
-- `tests/responsive.spec.js` — Chromium interactions, indicator alignment and viewport matrix (320–1920px)
-- `QA_REPORT.md` — verified tests and release gates
-
-To preview locally: `python3 -m http.server 8765`, then open `http://127.0.0.1:8765/`.
-
-Run structural checks: `python3 tests/site_check.py`.
-Run the Playwright suite with a running local server: `npx playwright test tests/responsive.spec.js` (Chromium dependency required).
-
-**Stage:** interactive research concept, not a production service or evidence verification engine.
+**Stage:** research concept. Neither product-market fit nor independent proof-of-income verification has been established.
