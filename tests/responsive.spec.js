@@ -4,6 +4,12 @@ const origin='http://127.0.0.1:8765/';
 const widths=[320,375,390,768,1024,1360,1440,1920];
 const purposes=['income','rental','residency'];
 const records=['contract','invoice','payment'];
+async function screenshotFromTop(page,path){
+ await page.evaluate(()=>{if(document.activeElement instanceof HTMLElement)document.activeElement.blur();document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,0)});
+ await expect.poll(()=>page.evaluate(()=>Math.round(window.scrollY))).toBe(0);
+ await page.screenshot({path,fullPage:true,animations:'disabled'});
+}
+
 
 async function openAt(browser,width,reducedMotion='reduce'){
  const context=await browser.newContext({viewport:{width,height:width===1360?696:900},reducedMotion,acceptDownloads:true});
@@ -65,11 +71,11 @@ for(const width of widths){
    await expect(page.locator('#demoNext')).toBeHidden();
    await expect(page.locator('[data-country]')).toHaveCount(3);
    expect(await measure(page)).toEqual([]);
-   await page.screenshot({path:'test-results/rilatu-'+width+'.png',fullPage:true,animations:'disabled'});
+   await screenshotFromTop(page,'test-results/rilatu-'+width+'.png');
    await choose(page,'rental');
    await expect(page.locator('.source-panel')).toBeVisible();
    await expect(page.locator('.review-panel')).toBeHidden();
-   if([320,375,768,1360,1920].includes(width)) await page.screenshot({path:'test-results/rilatu-'+width+'-inspect.png',fullPage:true,animations:'disabled'});
+   if([320,375,768,1360,1920].includes(width)) await screenshotFromTop(page,'test-results/rilatu-'+width+'-inspect.png');
    const original=await page.locator('#sourceSheet').textContent();
    for(const record of records) await inspect(page,record);
    expect(await page.locator('#sourceSheet').textContent()).toBe(original);
@@ -77,7 +83,7 @@ for(const width of widths){
    await seeReview(page,'rental');
    await expect(page.locator('#reviewDynamic')).toBeVisible();
    await expect(page.locator('.source-panel')).toBeHidden();
-   if([320,375,768,1360,1920].includes(width)) await page.screenshot({path:'test-results/rilatu-'+width+'-review.png',fullPage:true,animations:'disabled'});
+   if([320,375,768,1360,1920].includes(width)) await screenshotFromTop(page,'test-results/rilatu-'+width+'-review.png');
    await page.locator('#trailToggle').click();
    await expect(page.locator('#evidenceTrail')).toBeVisible();
    await expect(page.locator('#trailContext')).toContainText('Rental');
