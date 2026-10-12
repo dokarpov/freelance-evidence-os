@@ -40,3 +40,10 @@ jobs:
           name: rilatu-responsive-screenshots
           path: test-results/rilatu-*.png
           if-no-files-found: ignore
+      - name: Upload website files for private-source hosting
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rilatu-public-dist
+          path: dist/
+          if-no-files-found: error
