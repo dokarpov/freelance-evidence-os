@@ -34,7 +34,7 @@ for doc in ['DESIGN_SYSTEM.md','MOTION.md','QA_REPORT.md','tests/responsive.spec
 print('PASS: design tokens, component freeze, tablet layout and scroll animation contract')
 
 assert 'id="recordInspector"' in h and 'id="trailGap"' in h
-assert 'id="stepTitle"' in h and 'id="demoNext"' in h and 'guided-preface' in h
+assert 'id="stepTitle"' in h and 'id="demoNext"' in h and 'class="guided-progress"' in h
 assert 'LINKED EVIDENCE v1.2' in css
 assert 'requires-independent-review' in js and 'independently_verified:false' in js
 assert 'country\u2014tax' not in h
