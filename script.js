@@ -126,3 +126,64 @@
   window.addEventListener('resize', updateMeter, {passive:true});
   render(); updateMeter();
 })();
+
+
+/* Motion direction: visible energy, calm controls, no layout shift.
+   Decorative motion disabled for reduced-motion and coarse pointers. */
+(() => {
+ 'use strict';
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const hero=document.querySelector('.hero-art');
+ const review=document.querySelector('.review-pane');
+ const buttons=document.querySelectorAll('[data-country], [data-regime]');
+ if(review){
+   const city={es:'SPAIN',de:'GERMANY',fr:'FRANCE'};
+   let switchTimer;
+   buttons.forEach(btn=>btn.addEventListener('click',()=>{
+     const active=document.querySelector('[data-country].is-selected');
+     const code=active?.dataset.country||'es';
+     review.dataset.country=code;
+     const label=document.getElementById('reviewRouteCity');
+     if(label) label.textContent=city[code];
+     review.classList.remove('review-switching');
+     // Restart only the interpretation animation, not the source document.
+     void review.offsetWidth;
+     review.classList.add('review-switching');
+     window.clearTimeout(switchTimer);
+     switchTimer=window.setTimeout(()=>review.classList.remove('review-switching'),630);
+   }));
+ }
+ if(!reduced && 'IntersectionObserver' in window){
+   document.documentElement.classList.add('motion-ready');
+   const observer=new IntersectionObserver(entries=>{
+     entries.forEach(entry=>{
+       if(entry.isIntersecting){
+         entry.target.classList.add('is-visible');
+         observer.unobserve(entry.target);
+       }
+     });
+   },{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+   document.querySelectorAll('[data-reveal]').forEach(el=>observer.observe(el));
+ } else {
+   document.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('is-visible'));
+ }
+ if(hero&&!reduced&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+   let aimX=0,aimY=0,atX=0,atY=0,animating=false;
+   const ease=.065;
+   const tick=()=>{
+     atX+=(aimX-atX)*ease;atY+=(aimY-atY)*ease;
+     hero.style.setProperty('--pointer-x',atX.toFixed(2)+'px');
+     hero.style.setProperty('--pointer-y',atY.toFixed(2)+'px');
+     const drifting=Math.abs(aimX-atX)+Math.abs(aimY-atY)>.2;
+     if(drifting)requestAnimationFrame(tick);else animating=false;
+   };
+   const kick=()=>{if(!animating){animating=true;requestAnimationFrame(tick)}};
+   hero.addEventListener('pointermove',e=>{
+     const rect=hero.getBoundingClientRect();
+     aimX=((e.clientX-rect.left)/rect.width-.5)*22;
+     aimY=((e.clientY-rect.top)/rect.height-.5)*17;
+     kick();
+   },{passive:true});
+   hero.addEventListener('pointerleave',()=>{aimX=0;aimY=0;kick()});
+ }
+})();

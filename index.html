@@ -17,7 +17,7 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Freelance Evidence OS","description":"Concept preview for a provenance-first freelance expense-evidence workspace; not a tax filing service.","inLanguage":"en"}</script>
@@ -38,7 +38,7 @@
         <a href="#demo">Live concept</a>
         <a href="#workflow">How it works</a>
       </nav>
-      <a class="nav-cta" href="#demo"><span class="pulse-dot" aria-hidden="true"></span> Explore prototype <span aria-hidden="true">↗</span></a>
+      <a class="nav-cta" href="#demo"><span class="pulse-dot" aria-hidden="true"></span> Explore prototype <span aria-hidden="true"><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span></a>
     </div>
   </header>
 
@@ -46,18 +46,33 @@
     <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-topline mono"><span><span class="tiny-square"></span> CONCEPT / 001</span><span>FOR PEOPLE WHO WORK EVERYWHERE</span></div>
       <div class="hero-grid">
-        <div class="hero-copy">
+        <div class="hero-copy" data-reveal>
           <h1 id="hero-title">Paperwork<br>doesn't respect<br><em>borders<span class="end-dot">.</span></em></h1>
           <p class="hero-desc">Your receipts live in five places. Your work spans countries. Your accountant still needs proof. <strong>Keep the evidence together, and the decisions explainable.</strong></p>
           <div class="hero-actions">
-            <a href="#demo" class="button button-dark">Explore the live concept <span aria-hidden="true">↗</span></a>
-            <a href="#workflow" class="text-link">See the approach <span aria-hidden="true">↓</span></a>
+            <a href="#demo" class="button button-dark">Explore the live concept <span aria-hidden="true"><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span></a>
+            <a href="#workflow" class="text-link">See the approach <span aria-hidden="true"><svg class="vector-icon vector-arrow-down" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M10 3v14m-6-6 6 6 6-6"/></svg></span></a>
           </div>
           <div class="hero-footnote mono"><span class="status-ping"></span> AN INTERACTIVE PRODUCT CONCEPT — NOT A LIVE TAX SERVICE</div>
         </div>
         <div class="hero-art" aria-label="Illustration of one invoice becoming a traceable evidence record">
           <div class="art-grid" aria-hidden="true"></div>
-          <div class="art-top mono"><span>DOCUMENT / IN MOTION</span><span>FIG. 01 — 03</span></div>
+          <div class="flight-field" aria-hidden="true">
+            <svg class="flight-lines" viewBox="0 0 620 720" preserveAspectRatio="xMidYMid slice">
+              <path class="flight-guide flight-guide-a" d="M-70 578 C 100 410, 120 115, 320 84 S 620 200, 690 40"/>
+              <path class="flight-guide flight-guide-b" d="M-70 225 C 105 100, 174 400, 310 540 S 545 700, 682 550"/>
+              <path class="flight-guide flight-guide-c" d="M40 760 C 125 450, 350 320, 670 335"/>
+              <path class="flight-moving flight-moving-a" d="M-70 578 C 100 410, 120 115, 320 84 S 620 200, 690 40"/>
+              <path class="flight-moving flight-moving-b" d="M-70 225 C 105 100, 174 400, 310 540 S 545 700, 682 550"/>
+              <circle class="flight-node flight-node-a" cx="137" cy="267" r="5"/>
+              <circle class="flight-node flight-node-b" cx="467" cy="636" r="5"/>
+            </svg>
+            <div class="flight-document flight-document-a"><span>01 / CAPTURE</span><i></i><i></i><i></i><strong>PDF</strong></div>
+            <div class="flight-document flight-document-b"><span>02 / REVIEW</span><i></i><i></i><i></i><strong>ES</strong></div>
+            <div class="flight-document flight-document-c"><span>03 / TRACE</span><i></i><i></i><i></i><strong>OK</strong></div>
+            <div class="flight-cross flight-cross-one"></div><div class="flight-cross flight-cross-two"></div>
+          </div>
+          <div class="art-top mono"><span>EVIDENCE / IN FLIGHT</span><span>FIG. 01 — 03</span></div>
           <div class="art-orbit art-orbit-a" aria-hidden="true"></div><div class="art-orbit art-orbit-b" aria-hidden="true"></div>
           <div class="document-stack" aria-hidden="true">
             <div class="stack-paper stack-paper-back"></div><div class="stack-paper stack-paper-mid"></div>
@@ -71,25 +86,25 @@
               <div class="paper-barcode"></div>
               <div class="paper-bottom mono">SAMPLE RECORD / NOT A TAX ASSESSMENT</div>
             </div>
-            <div class="hero-verification"><span class="verify-glyph">↗</span><div><span class="mono">LINKED TO</span><strong>Evidence trail</strong></div><span class="verify-tick">✓</span></div>
+            <div class="hero-verification"><span class="verify-glyph"><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span><div><span class="mono">LINKED TO</span><strong>Evidence trail</strong></div><span class="verify-tick"><svg class="vector-icon vector-check" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="m3 10 5 5 9-10"/></svg></span></div>
           </div>
           <div class="art-coordinate art-coordinate-a mono">41°23′N<br>2°10′E</div>
           <div class="art-coordinate art-coordinate-b mono">ONE SOURCE<br>MANY QUESTIONS</div>
-          <div class="art-bottom mono"><span>ES / DE / FR</span><span>SCROLL TO EXPLORE ↓</span></div>
+          <div class="art-bottom mono"><span>ES / DE / FR</span><span>SCROLL TO EXPLORE <svg class="vector-icon vector-arrow-down" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M10 3v14m-6-6 6 6 6-6"/></svg></span></div>
         </div>
       </div>
     </section>
 
     <div class="ticker" aria-label="From scattered files to traceable decisions">
       <div class="ticker-track" aria-hidden="true">
-        <span>ONE SOURCE</span><b>✳</b><span>EVERY ASSUMPTION VISIBLE</span><b>✳</b><span>NOT ANOTHER TAX GUESS</span><b>✳</b><span>ONE SOURCE</span><b>✳</b><span>EVERY ASSUMPTION VISIBLE</span><b>✳</b><span>NOT ANOTHER TAX GUESS</span><b>✳</b>
+        <span>ONE SOURCE</span><b><span class="vector-spark" aria-hidden="true"></span></b><span>EVERY ASSUMPTION VISIBLE</span><b><span class="vector-spark" aria-hidden="true"></span></b><span>NOT ANOTHER TAX GUESS</span><b><span class="vector-spark" aria-hidden="true"></span></b><span>ONE SOURCE</span><b><span class="vector-spark" aria-hidden="true"></span></b><span>EVERY ASSUMPTION VISIBLE</span><b><span class="vector-spark" aria-hidden="true"></span></b><span>NOT ANOTHER TAX GUESS</span><b><span class="vector-spark" aria-hidden="true"></span></b>
       </div>
     </div>
 
     <section class="problem section-pad" id="problem" aria-labelledby="problem-title">
       <div class="shell problem-grid">
         <div class="section-overline mono">01 / THE ACTUAL PROBLEM</div>
-        <div class="problem-copy">
+        <div class="problem-copy" data-reveal>
           <h2 id="problem-title">An invoice<br>is <em>not</em> an answer.</h2>
           <div class="problem-details"><p>Accounting tools store transactions. Filing tools generate forms. But the uncomfortable questions often happen <em>between</em> them.</p>
           <div class="problem-questions">
@@ -105,13 +120,13 @@
 
     <section class="demo-section section-pad" id="demo" aria-labelledby="demo-title">
       <div class="shell">
-        <div class="section-heading">
+        <div class="section-heading" data-reveal>
           <div><div class="section-overline mono"><span class="live-dot"></span> 02 / INTERACTIVE PROTOTYPE</div>
           <h2 id="demo-title">Same document.<br><em>Different questions.</em></h2></div>
           <p>Select a country. Watch the review change while the original evidence stays put. This is a simulated workflow, not a tax calculation.</p>
         </div>
-        <div class="demo-console" id="console">
-          <div class="console-header mono"><span><i></i><i></i><i></i><b> EVIDENCE WORKSPACE</b></span><span>DEMO MODE <span class="header-green">●</span></span></div>
+        <div class="demo-console" id="console" data-reveal>
+          <div class="console-header mono"><span><i></i><i></i><i></i><b> EVIDENCE WORKSPACE</b></span><span>DEMO MODE <span class="header-green"><span class="vector-led" aria-hidden="true"></span></span></span></div>
           <div class="console-main">
             <div class="source-pane">
               <div class="pane-label mono"><span>01 / IMMUTABLE SOURCE</span><span>REF. FE-0048</span></div>
@@ -125,11 +140,12 @@
                   <div class="sheet-total"><span>TOTAL ON DOCUMENT</span><strong>€340.00</strong></div></div>
                 <div class="sheet-bottom mono">SYNTHETIC EXAMPLE · NO REAL CLIENT DATA</div>
               </div>
-              <div class="source-footer"><span class="green-signal" aria-hidden="true">✓</span><div><strong>One record. No silent edits.</strong><p>Source fields remain the same across every view.</p></div></div>
+              <div class="source-footer"><span class="green-signal" aria-hidden="true"><svg class="vector-icon vector-check" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="m3 10 5 5 9-10"/></svg></span><div><strong>One record. No silent edits.</strong><p>Source fields remain the same across every view.</p></div></div>
             </div>
-            <div class="review-pane">
+            <div class="review-pane" data-country="es">
               <div class="pane-label mono"><span>02 / CONTEXTUAL INTERPRETATION</span><span id="reviewCode">ES / REVIEW 01</span></div>
-              <div class="jurisdiction-switch" role="group" aria-label="Choose jurisdiction">
+              <div class="review-route" aria-hidden="true"><span class="review-route-label">REVIEW ROUTE</span><span class="review-route-rail"><span class="review-route-progress" id="reviewRouteProgress"></span><span class="review-route-dot"></span><span class="review-route-dot"></span><span class="review-route-dot"></span></span><span class="review-route-city" id="reviewRouteCity">SPAIN</span></div>
+               <div class="jurisdiction-switch" role="group" aria-label="Choose jurisdiction">
                 <button type="button" class="country is-selected" data-country="es" aria-pressed="true"><span class="flag-es" aria-hidden="true"></span> Spain <span class="mono">ES</span></button>
                 <button type="button" class="country" data-country="de" aria-pressed="false"><span class="flag-de" aria-hidden="true"></span> Germany <span class="mono">DE</span></button>
                 <button type="button" class="country" data-country="fr" aria-pressed="false"><span class="flag-fr" aria-hidden="true"></span> France <span class="mono">FR</span></button>
@@ -143,40 +159,40 @@
                   <div class="review-cell"><span class="mono">KEY CHECK</span><strong id="checkText">Business use, valid invoice, and VAT entitlement</strong></div>
                   <div class="review-cell review-cell-warning"><span class="mono">NOT DETERMINED</span><strong id="missingText">Supplier details and actual business use</strong></div>
                 </div>
-                <div class="review-explainer"><span class="asterisk" aria-hidden="true">✳</span><p id="interpretationNote">Deductibility depends on the business purpose and documentation. Input VAT has its own conditions; no VAT rate or refund is inferred from this sample.</p></div>
+                <div class="review-explainer"><span class="asterisk" aria-hidden="true"><span class="vector-spark" aria-hidden="true"></span></span><p id="interpretationNote">Deductibility depends on the business purpose and documentation. Input VAT has its own conditions; no VAT rate or refund is inferred from this sample.</p></div>
               </div>
-              <div class="console-actions"><button type="button" id="trailToggle" class="trail-toggle" aria-expanded="false" aria-controls="evidenceTrail">View evidence trail <span aria-hidden="true">↗</span></button><button type="button" id="exportButton" class="export-button">Export sample review <span aria-hidden="true">↓</span></button></div>
-              <div class="evidence-trail" id="evidenceTrail" hidden><div class="mono">DECISION PROVENANCE</div><ol><li><strong>Source:</strong> synthetic invoice FE-0048, unchanged</li><li><strong>Fact:</strong> €340 shown on the sample document; VAT unknown</li><li><strong>Context:</strong> <span id="trailContext">Spain / autónomo</span></li><li><strong>Reference:</strong> <a id="sourceLink" href="https://sede.agenciatributaria.gob.es/Sede/iva/que-iva-soportado-puedo-deducir/que-puedo-deducir.html" target="_blank" rel="noopener noreferrer">Read official guidance ↗</a></li><li><strong>Outcome:</strong> flagged for qualified human review, not automatically filed</li></ol></div>
+              <div class="console-actions"><button type="button" id="trailToggle" class="trail-toggle" aria-expanded="false" aria-controls="evidenceTrail">View evidence trail <span aria-hidden="true"><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span></button><button type="button" id="exportButton" class="export-button">Export sample review <span aria-hidden="true"><svg class="vector-icon vector-arrow-down" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M10 3v14m-6-6 6 6 6-6"/></svg></span></button></div>
+              <div class="evidence-trail" id="evidenceTrail" hidden><div class="mono">DECISION PROVENANCE</div><ol><li><strong>Source:</strong> synthetic invoice FE-0048, unchanged</li><li><strong>Fact:</strong> €340 shown on the sample document; VAT unknown</li><li><strong>Context:</strong> <span id="trailContext">Spain / autónomo</span></li><li><strong>Reference:</strong> <a id="sourceLink" href="https://sede.agenciatributaria.gob.es/Sede/iva/que-iva-soportado-puedo-deducir/que-puedo-deducir.html" target="_blank" rel="noopener noreferrer">Read official guidance <svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></a></li><li><strong>Outcome:</strong> flagged for qualified human review, not automatically filed</li></ol></div>
             </div>
           </div>
           <div class="console-bottom mono"><span>THE SOURCE IS A FACT. THE TAX TREATMENT IS A QUESTION.</span><span>NO UPLOADS · NO ACCOUNTS · NO BACKEND</span></div>
         </div>
-        <div class="demo-caption"><span class="mono">THE IMPORTANT DISTINCTION ↗</span><p>We don't pretend that an invoice magically acquires a new tax rate when it travels. Your establishment, transaction, VAT status and income-tax regime determine which rules are relevant. This prototype makes uncertainty visible.</p></div>
+        <div class="demo-caption"><span class="mono">THE IMPORTANT DISTINCTION <svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span><p>We don't pretend that an invoice magically acquires a new tax rate when it travels. Your establishment, transaction, VAT status and income-tax regime determine which rules are relevant. This prototype makes uncertainty visible.</p></div>
       </div>
     </section>
 
     <section class="workflow section-pad" id="workflow" aria-labelledby="workflow-title">
-      <div class="shell"><div class="workflow-heading"><div class="section-overline mono">03 / THE SYSTEM</div><h2 id="workflow-title">Less detective work.<br><em>More defensible work.</em></h2></div>
-        <div class="steps">
-          <article class="step"><div class="step-head mono"><span>01 / CAPTURE</span><span>↘</span></div><div class="step-art capture-art" aria-hidden="true"><div class="source-token st-one">PDF <span>✓</span></div><div class="source-token st-two">INVOICE <span>↗</span></div><div class="source-token st-three">EMAIL <span>↘</span></div><span class="capture-center">＋</span></div><h3>Gather the scattered.</h3><p>A single record for documents, their origin, and the facts extracted from them.</p><span class="step-meta mono">SOURCE → RECORD</span></article>
-          <article class="step"><div class="step-head mono"><span>02 / INTERPRET</span><span>↘</span></div><div class="step-art interpret-art" aria-hidden="true"><div class="decision-line"><span>FACT</span><i></i><span>RULE</span><i></i><span>REVIEW</span></div><div class="mini-decision"><span>AMOUNT</span><b>€340</b><small>REVIEW REQUIRED ↗</small></div></div><h3>Separate facts from guesses.</h3><p>Trace classifications, missing evidence, applicable context, and review decisions.</p><span class="step-meta mono">RECORD → REASONING</span></article>
-          <article class="step"><div class="step-head mono"><span>03 / HAND OFF</span><span>↗</span></div><div class="step-art export-art" aria-hidden="true"><div class="export-sheet"><span>ACCOUNTANT PACK</span><div></div><div></div><div></div><strong>↗</strong></div><div class="export-seal">TRACE<br>KEPT</div></div><h3>Hand over the why.</h3><p>A reviewable evidence pack with sources and unresolved questions—not a magically filed return.</p><span class="step-meta mono">REASONING → REVIEW</span></article>
+      <div class="shell"><div class="workflow-heading" data-reveal><div class="section-overline mono">03 / THE SYSTEM</div><h2 id="workflow-title">Less detective work.<br><em>More defensible work.</em></h2></div>
+        <div class="steps" data-reveal-group>
+          <article class="step" data-reveal><div class="step-head mono"><span>01 / CAPTURE</span><span><svg class="vector-icon vector-arrow-downright" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="m4 4 12 12m-9 0h9V7"/></svg></span></div><div class="step-art capture-art" aria-hidden="true"><div class="source-token st-one">PDF <span><svg class="vector-icon vector-check" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="m3 10 5 5 9-10"/></svg></span></div><div class="source-token st-two">INVOICE <span><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span></div><div class="source-token st-three">EMAIL <span><svg class="vector-icon vector-arrow-downright" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="m4 4 12 12m-9 0h9V7"/></svg></span></div><span class="capture-center"><span class="vector-plus" aria-hidden="true"></span></span></div><h3>Gather the scattered.</h3><p>A single record for documents, their origin, and the facts extracted from them.</p><span class="step-meta mono">SOURCE / RECORD</span></article>
+          <article class="step" data-reveal><div class="step-head mono"><span>02 / INTERPRET</span><span><svg class="vector-icon vector-arrow-downright" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="m4 4 12 12m-9 0h9V7"/></svg></span></div><div class="step-art interpret-art" aria-hidden="true"><div class="decision-line"><span>FACT</span><i></i><span>RULE</span><i></i><span>REVIEW</span></div><div class="mini-decision"><span>AMOUNT</span><b>€340</b><small>REVIEW REQUIRED <svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></small></div></div><h3>Separate facts from guesses.</h3><p>Trace classifications, missing evidence, applicable context, and review decisions.</p><span class="step-meta mono">RECORD / REASONING</span></article>
+          <article class="step" data-reveal><div class="step-head mono"><span>03 / HAND OFF</span><span><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span></div><div class="step-art export-art" aria-hidden="true"><div class="export-sheet"><span>ACCOUNTANT PACK</span><div></div><div></div><div></div><strong><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></strong></div><div class="export-seal">TRACE<br>KEPT</div></div><h3>Hand over the why.</h3><p>A reviewable evidence pack with sources and unresolved questions—not a magically filed return.</p><span class="step-meta mono">REASONING / REVIEW</span></article>
         </div>
       </div>
     </section>
 
-    <section class="manifesto" aria-labelledby="manifesto-title"><div class="shell manifesto-inner"><div class="section-overline mono">04 / THE PRINCIPLE</div><h2 id="manifesto-title">A confident wrong answer<br>is worse than an <em>honest question.</em></h2><div class="manifesto-bottom"><span class="manifesto-mark" aria-hidden="true">✳</span><p>Evidence-first by design. Human-reviewed by default. Country-aware without pretending tax law is one-size-fits-all.</p></div></div></section>
+    <section class="manifesto" aria-labelledby="manifesto-title"><div class="shell manifesto-inner"><div class="section-overline mono">04 / THE PRINCIPLE</div><h2 id="manifesto-title">A confident wrong answer<br>is worse than an <em>honest question.</em></h2><div class="manifesto-bottom"><span class="manifesto-mark" aria-hidden="true"><span class="vector-spark" aria-hidden="true"></span></span><p>Evidence-first by design. Human-reviewed by default. Country-aware without pretending tax law is one-size-fits-all.</p></div></div></section>
 
-    <section class="faq section-pad" aria-labelledby="faq-title"><div class="shell faq-grid"><div><div class="section-overline mono">05 / THE FINE PRINT</div><h2 id="faq-title">Good questions<br><em>deserve answers.</em></h2></div><div class="faq-questions">
-      <details><summary>Does this calculate or file my taxes? <span aria-hidden="true">＋</span></summary><p>No. This is an interactive concept demonstrating evidence capture and review. It does not process actual financial records or prepare legally valid filings.</p></details>
-      <details><summary>Can one receipt be deducted in three countries? <span aria-hidden="true">＋</span></summary><p>Not automatically. The three views illustrate different review contexts, not three simultaneous deductions. Actual treatment depends on the taxpayer, transaction, jurisdiction, and tax regime.</p></details>
-      <details><summary>Can I upload private documents here? <span aria-hidden="true">＋</span></summary><p>No. The demo uses a synthetic invoice entirely in your browser. There is no document upload, storage, AI analysis, or connected accounting service on this website.</p></details>
-      <details><summary>What is the product's current stage? <span aria-hidden="true">＋</span></summary><p>Research and interactive concept. The next milestone is validating the evidence-review workflow with freelancers and qualified accountants before building a production tax rules engine.</p></details>
+    <section class="faq section-pad" aria-labelledby="faq-title"><div class="shell faq-grid"><div><div class="section-overline mono">05 / THE FINE PRINT</div><h2 id="faq-title">Good questions<br><em>deserve answers.</em></h2></div><div class="faq-questions" data-reveal>
+      <details><summary>Does this calculate or file my taxes? <span aria-hidden="true"><span class="vector-plus" aria-hidden="true"></span></span></summary><p>No. This is an interactive concept demonstrating evidence capture and review. It does not process actual financial records or prepare legally valid filings.</p></details>
+      <details><summary>Can one receipt be deducted in three countries? <span aria-hidden="true"><span class="vector-plus" aria-hidden="true"></span></span></summary><p>Not automatically. The three views illustrate different review contexts, not three simultaneous deductions. Actual treatment depends on the taxpayer, transaction, jurisdiction, and tax regime.</p></details>
+      <details><summary>Can I upload private documents here? <span aria-hidden="true"><span class="vector-plus" aria-hidden="true"></span></span></summary><p>No. The demo uses a synthetic invoice entirely in your browser. There is no document upload, storage, AI analysis, or connected accounting service on this website.</p></details>
+      <details><summary>What is the product's current stage? <span aria-hidden="true"><span class="vector-plus" aria-hidden="true"></span></span></summary><p>Research and interactive concept. The next milestone is validating the evidence-review workflow with freelancers and qualified accountants before building a production tax rules engine.</p></details>
     </div></div></section>
 
-    <section class="final-cta" id="contact" aria-labelledby="cta-title"><div class="shell final-cta-inner"><div class="section-overline mono">YOU'VE SEEN THE IDEA / NOW TEST THE PREMISE</div><h2 id="cta-title">Less paperwork.<br><em>More proof.</em></h2><p>Explore the interactive review, download a transparent sample, and see what still needs validation before this becomes a real product.</p><a class="button button-light" href="#demo">Back to the prototype <span aria-hidden="true">↗</span></a><div class="cta-asterisk" aria-hidden="true">✳</div></div></section>
+    <section class="final-cta" id="contact" aria-labelledby="cta-title"><div class="shell final-cta-inner" data-reveal><div class="section-overline mono">YOU'VE SEEN THE IDEA / NOW TEST THE PREMISE</div><h2 id="cta-title">Less paperwork.<br><em>More proof.</em></h2><p>Explore the interactive review, download a transparent sample, and see what still needs validation before this becomes a real product.</p><a class="button button-light" href="#demo">Back to the prototype <span aria-hidden="true"><svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></span></a><div class="cta-asterisk" aria-hidden="true"><span class="vector-spark" aria-hidden="true"></span></div></div></section>
   </main>
-  <footer class="site-footer"><div class="shell footer-inner"><a class="footer-wordmark" href="#top">freelance<span>.</span>evidence os</a><p>Independent product concept · 2026<br>Not tax, legal, or accounting advice.</p><div><a href="https://github.com/dokarpov" target="_blank" rel="noopener noreferrer">Creator on GitHub ↗</a><a href="#top">Back to top ↑</a></div></div></footer>
+  <footer class="site-footer"><div class="shell footer-inner"><a class="footer-wordmark" href="#top">freelance<span>.</span>evidence os</a><p>Independent product concept · 2026<br>Not tax, legal, or accounting advice.</p><div><a href="https://github.com/dokarpov" target="_blank" rel="noopener noreferrer">Creator on GitHub <svg class="vector-icon vector-arrow-up" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg></a><a href="#top">Back to top <svg class="vector-icon vector-arrow-upward" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M10 17V3m-6 6 6-6 6 6"/></svg></a></div></div></footer>
 <script src="script.js" defer></script>
 </body>
 </html>

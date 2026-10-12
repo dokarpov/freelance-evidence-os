@@ -1,65 +1,34 @@
 # Freelance Evidence OS
 
-**Paperwork doesn’t respect borders. Your evidence shouldn’t disappear between them.**
+**Paperwork doesn't respect borders. Proof should travel with it.**
 
-A responsive, interactive concept for a document-first workspace that connects freelance source documents, country-specific review questions and a transparent evidence trail.
+[**Live experience**](https://dokarpov.github.io/freelance-evidence-os/) · [Interactive demo](https://dokarpov.github.io/freelance-evidence-os/#demo) · [Creator](https://github.com/dokarpov)
 
-**[Explore the live concept](https://dokarpov.github.io/freelance-evidence-os/)** · [Creator](https://github.com/dokarpov)
+An animated, interactive product concept for keeping freelance documents, country-specific questions and human review traceable.
 
-## Why it exists
+## What to explore
 
-Freelancers receive invoices and supporting documents through multiple channels. Before a qualified accountant can review a cross-border case, someone must establish **what the source actually says**, **what context is missing**, and **which interpretation requires confirmation**.
+- A kinetic document journey: evidence in flight, country-agnostic source preserved.
+- Spain / Germany / France review contexts with animated route transitions.
+- French micro-BNC / real-regime comparison.
+- Decision provenance and a downloadable synthetic JSON review.
+- Responsive editorial interface with vector details, keyboard controls, and reduced-motion support.
 
-This is a concept of that missing evidence layer—not a tax-filing or tax-calculation service.
+## Product boundary
 
-## Try the prototype
+This is a **concept and synthetic demo**, not a functioning tax system. No receipt upload, account, database, tax computation, filing, or compliant storage is provided. The sample never invents a VAT deduction or treats one expense as simultaneously deductible in three countries.
 
-1. Open the [interactive demo](https://dokarpov.github.io/freelance-evidence-os/#demo).
-2. Switch between Spain, Germany and France.
-3. Within France, compare **micro-BNC** and **régime réel** income-tax review scenarios.
-4. Open the provenance trail and download a **synthetic JSON evidence review**.
+## Technical notes
 
-A real source document does not acquire a new VAT rate just because a user changes the country. The prototype purposely highlights uncertainty rather than inventing a tax result.
+Static HTML, CSS, JavaScript. No JS framework, runtime dependency, animation library or build step. Styles use two typefaces (Manrope and Instrument Serif), vector-only marks, CSS keyframe choreography, IntersectionObserver reveal, and pointer motion only for fine pointers.
 
-## What is real
+- `index.html`: narrative, accessible controls and SEO
+- `styles.css`: responsive layout, design tokens, bespoke animation
+- `script.js`: review scenarios and downloadable synthetic evidence
+- `tests/site_check.py`: lightweight structural tests
 
-- Responsive editorial landing page and interactive evidence-review simulation
-- Scenario switching with accessible button states
-- Visible unresolved fields and source references
-- Locally generated sample JSON export
-- No backend, API keys, sign-in or customer data
+To run locally: `python3 -m http.server 8000`
 
-**What is not claimed:** valid tax advice, live classification, actual receipt ingestion, an integrated accountant workflow, GDPR certification, or verified demand/revenue.
+[Live site](https://dokarpov.github.io/freelance-evidence-os/) · [GitHub Pages setup](https://github.com/dokarpov/freelance-evidence-os/settings/pages)
 
-## Run locally
-
-Open `index.html`, or run `python3 -m http.server 8000` in this directory.
-
-The site has no build step. Root-relative external dependencies are avoided, so it can run on GitHub Pages.
-
-## Deploy to GitHub Pages
-
-In **Settings → Pages**, choose **Deploy from a branch → main → /(root)** and save. The target URL is:
-
-https://dokarpov.github.io/freelance-evidence-os/
-
-If Pages is not enabled, that URL will return 404 until deployment completes.
-
-## Structure
-
-- `index.html` — content, accessible demo markup and SEO
-- `styles.css` — responsive typography, layouts, motion and visual system
-- `script.js` — synthetic review states, provenance and JSON export
-- `favicon.svg`, `og-cover.svg`, `site.webmanifest` — brand and metadata
-- `tests/site_check.py` — lightweight structural regression checks
-
-## Tax references
-
-Official reference reading (not a substitute for qualified advice):
-
-- [EU cross-border VAT](https://europa.eu/youreurope/business/finance-and-tax/vat/cross-border-vat/index_en.htm)
-- [AEAT: deductible input VAT](https://sede.agenciatributaria.gob.es/Sede/iva/que-iva-soportado-puedo-deducir/que-puedo-deducir.html)
-- [BMF: Umsatzsteuer application](https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerarten/Umsatzsteuer/Umsatzsteuer_Anwendungserlass/umsatzsteuer_anwendungserlass.html)
-- [DGFiP: micro-entrepreneur actual expenses](https://www.impots.gouv.fr/professionnel/questions/je-suis-micro-entrepreneur-puis-je-deduire-des-charges)
-
-© 2026 · Independent concept. No real client data is included.
+_2026 · Independent concept. No real user financial data._
