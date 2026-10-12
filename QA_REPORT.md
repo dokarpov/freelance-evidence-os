@@ -1,33 +1,32 @@
-# Responsive and design QA — 2026-10-12
+# Rilatu quality audit — 12 October 2026
 
-## Source-level defects identified
-- Prototype uses text as small as 7–12px even in controls and interpretation details.
-- 700px breakpoint forces a desktop-like two-column invoice/review surface into a narrow tablet.
-- Only one-time reveal and ambient motion; little real scroll-contingent motion.
-- Different CTA/hover transitions make the interface feel inconsistent.
-- Tiny phones need a deliberate text/content rhythm rather than broad shrinking.
+## Why the former demo was replaced
+The original €340 invoice moving through Spain/Germany/France was difficult to understand as a Freelancer Evidence OS product and implied a tax comparison before the core problem was visible.
 
-## Remediation committed
-- Locked type, spacing, breakpoints, components and motion tokens in the existing palette.
-- Mobile 320–699, tablet 700–1079, desktop 1080+; tablet document viewer remains stacked.
-- Increased body, prototype field and actionable type sizes; minimum 44px targets.
-- Coordinated hover behavior and scroll-linked document route / method / statement / closing motions.
-- Semantic-group stagger and full reduced-motion escape; original synthetic scenarios remain untouched.
-- Added automated multi-viewport interaction and layout tests in `tests/responsive.spec.js`.
+**New demonstration:** one agreement, one billed month and one matching bank record; click any source, select Income / Rental / Residency, inspect the exact missing evidence, open the provenance trail, and optionally export synthetic JSON. The source data never changes when the purpose changes.
 
-## Validation protocol
-`python3 tests/site_check.py` — structural checks. CI runs Playwright Chromium for 320/375/390/768/1024/1440 widths to check viewport overflow, hero text cropping, interactive content, country/regime switching, trail, export and reduced motion. A full-page PNG at each width is uploaded as a workflow artifact for manual visual comparison.
+## Interaction and presentation
+- Shared document anatomy, typography and motion tokens remain in the existing Archivo/paper/charcoal/vermilion design system.
+- First-scroll Connect → Reuse → Explain editorial story; staggered reveals with reduced-motion fallback.
+- On record hover: restrained translation, better contrast and visible selected-record state; on click: inspect its factual meaning.
+- Purpose selector: synchronized accessible pressed state, title, known facts, requirements, next steps and indicator.
+- Purpose-change animation and subtle active-source pulse; text remains readable and controls remain operable during motion.
+- No misleading automatic eligibility, tax or authenticity claims. The status explicitly reads **Linked, not certified**.
 
-**Verification status:** updates and regression suite are checked into the GitHub working tree. This document does **not** claim that a real-device screenshot comparison or a full cross-browser visual review has passed. Review the latest GitHub Actions output and confirm on Safari/iOS before marking visual QA complete.
+## Previously reported underline bug
+The source CSS used an indicator that was 1/3 of its three-tab container but translated it by 300% of its *own* width per index, causing Germany's indicator to escape the selector. Fixed to 100% per index; mobile selector gaps removed. This correction also applies to the new purpose tabs.
 
+A live-browser spot-check of the **intermediate former tax demo** verified the underline stays aligned through Spain/Germany/France and French regime switching at desktop size. That browser check **does not validate** the subsequently rewritten linked-evidence demo.
 
-## Blocking regression: country underline (2026-10-12)
-- User-provided 1360×696 screenshot: Germany is the active jurisdiction, France is hovered, and the coral underline escapes to the far right of the country selector.
-- **Root cause (confirmed in CSS):** indicator is one-third of selector width, yet its horizontal translation multiplied the country index by 300% of the indicator width. This made Germany (index 1) move a whole selector width, outside the control. Correct translation is 100% of the indicator's own width per index.
-- **Fix:** selector underline translation now uses 100% per step; mobile tab gaps removed for exact thirds; reduced-motion turns off the underline transition. No visual-system rebrand.
-- **Regression coverage committed:** country/panel/ARIA/underline geometry at 320, 375, 390, 768, 1024, 1360, 1440 and 1920px; France hover while Germany selected; repeated / rapid switches; resize, scroll, keyboard, reload, France regime and reduced motion. Test suite is checked in, **but passing CI results are not yet independently confirmed**.
-- **Live-browser spot check:** Published page visually passed the Germany→France hover case, France selection, and several switching sequences on a desktop-sized viewport. Mobile viewport and per-pixel measurements were not available in that live browser, and should not be treated as tested.
-- **Release gate:** require the committed Playwright matrix to pass on CI and inspect screenshots on phone/tablet and Safari/iOS before claiming comprehensive cross-device QA.
+## Test coverage committed
+`tests/responsive.spec.js` covers 320, 375, 390, 768, 1024, 1360, 1440 and 1920px; overflow, minimum control sizes, source invariance, purpose-state geometry, record inspection, trail, rapid interactions, resize, keyboard, reload, export and reduced motion.
 
-## Change control
-System documented in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md), timings and scene contract in [MOTION.md](MOTION.md). Future feature work should not silently change the identity or components.
+`tests/site_check.py` checks source structure, documented design/motion tokens, scenario markup and synthetic data restrictions.
+
+**Verification status:** source changes and tests have been pushed to the GitHub main branch. The new end-to-end Chromium suite has **not been independently run to completion in this session**. No claim is made that all mobile and cross-browser viewports pass. The full matrix, Safari/iOS and screenshots are release gates.
+
+## Logo
+The selected **logo #3** source/vector has not been recovered from the available repository or conversation working directory. The old header/fav SVG remains, and cannot truthfully be presented as the approved final vector. Replacement is pending receipt or recovery of that exact asset; do not improvise a new identity.
+
+## Regression policy
+Any change to purpose controls, indicator, record components, motion or typography must pass the full viewport/interaction suite and a visual review at 375, 768, 1360 and 1920px. A CSS-only patch that suppresses visible overflow without correcting alignment is not acceptable.
