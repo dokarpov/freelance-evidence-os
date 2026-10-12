@@ -154,3 +154,23 @@ test('method action stays on one line at 320px without overflow',async({browser}
   expect(b.right).toBeLessThanOrEqual(b.viewport+1);
  }finally{await context.close()}
 });
+
+test('reduced motion leaves a visible selection stripe only on the active source',async({browser})=>{
+ const {page,context}=await pageAt(browser,375,'reduce');
+ try{
+  for(const active of ['contract','invoice','payment']){
+   await page.locator('[data-record="'+active+'"]').click();
+   const states=await page.locator('[data-record]').evaluateAll(nodes=>
+    nodes.map(el=>({
+     key:el.dataset.record,
+     pressed:el.getAttribute('aria-pressed')==='true',
+     stripe:new DOMMatrixReadOnly(getComputedStyle(el,'::before').transform).d
+    }))
+   );
+   for(const state of states){
+    expect(state.pressed).toBe(state.key===active);
+    expect(state.stripe,state.key+' stripe visibility').toBeCloseTo(state.key===active?1:0,3);
+   }
+  }
+ }finally{await context.close()}
+});
