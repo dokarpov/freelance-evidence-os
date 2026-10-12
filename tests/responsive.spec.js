@@ -9,6 +9,7 @@ for(const width of widths){
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(origin,{waitUntil:'domcontentloaded'});
    await expect(page.locator('.hero h1')).toBeVisible();
+   await page.screenshot({path:'test-results/rilatu-'+width+'.png',fullPage:true,animations:'disabled'});
    const result=await page.evaluate(()=>{
      const w=innerWidth;
      const targets=['.site-header','.hero h1','.hero-actions','.workspace','.source-page','.review-panel','.countries','.review-buttons','.closing h2'];
