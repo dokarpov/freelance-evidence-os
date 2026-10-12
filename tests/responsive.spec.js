@@ -137,3 +137,20 @@ test('reduced motion keeps explanatory sections visible',async({browser})=>{
   }
  }finally{await context.close()}
 });
+
+test('method action stays on one line at 320px without overflow',async({browser})=>{
+ const {page,context}=await pageAt(browser,320);
+ try{
+  const action=page.locator('.method .display span');
+  await action.scrollIntoViewIfNeeded();
+  await expect(action).toHaveText('Hand over.');
+  const b=await action.evaluate(node=>{
+   const r=node.getBoundingClientRect();
+   return {fragments:node.getClientRects().length,left:r.left,right:r.right,width:r.width,viewport:innerWidth};
+  });
+  expect(b.fragments).toBe(1);
+  expect(b.width).toBeGreaterThan(40);
+  expect(b.left).toBeGreaterThanOrEqual(0);
+  expect(b.right).toBeLessThanOrEqual(b.viewport+1);
+ }finally{await context.close()}
+});
