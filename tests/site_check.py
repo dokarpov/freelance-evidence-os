@@ -5,12 +5,12 @@ p=Path(__file__).resolve().parents[1]
 h=(p/'index.html').read_text()
 css=(p/'styles.css').read_text()
 js=(p/'script.js').read_text()
-assert all((p/n).exists() for n in ['index.html','styles.css','script.js','favicon.svg','og-cover.svg','site.webmanifest'])
+assert all((p/n).exists() for n in ['index.html','styles.css','script.js','rilatu-logo.svg','favicon.svg','og-cover.svg','site.webmanifest'])
 ids=re.findall(r'\bid="([^"]+)"',h)
 assert len(ids)==len(set(ids)), 'Duplicate IDs'
 for attr in ['data-country="income"','data-country="rental"','data-country="residency"','data-record="contract"','data-record="invoice"','data-record="payment"','id="trailToggle"','id="exportButton"']:
     assert attr in h, attr
-assert 'Rilatu' in h and 'https://dokarpov.github.io/rilatu/' in h
+assert 'Rilatu' in h and 'src="rilatu-logo.svg"' in h
 assert 'Archivo' in css and 'Instrument Serif' not in css and 'Manrope' not in css and 'Fraunces' not in css
 assert not any(s in h for s in ['✳','✓','＋','●','🛫','📄'])
 assert 'prefers-reduced-motion' in css and 'IntersectionObserver' in js
@@ -39,3 +39,10 @@ assert 'LINKED EVIDENCE v1.2' in css
 assert 'requires-independent-review' in js and 'independently_verified:false' in js
 assert 'country\u2014tax' not in h
 print('PASS: connected-source reviewer journey, simulated rather than certified outputs')
+
+assert 'github.com/dokarpov/rilatu' not in h, 'do not publicize private source repository'
+assert '<svg class="mark"' not in h, 'old placeholder mark must stay retired'
+logo=(p/'rilatu-logo.svg').read_text()
+assert 'fill-rule="evenodd"' in logo and 'viewBox="0 0 760 216"' in logo, 'approved wordmark must use vector outlines'
+assert 'scripts/build_site.py' and (p/'scripts/build_site.py').exists()
+print('PASS: approved vector wordmark, no public repository link, private-to-public build script')
