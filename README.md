@@ -18,11 +18,13 @@ The approved **rilatu.** logo is stored as path-based [SVG wordmark](rilatu-logo
 
 ## Publication and privacy
 
-**Repository: private. Public website: currently offline.** An unauthenticated GitHub Actions HTTP check returned **404** for the former GitHub Pages address after visibility changed. A passing application test does not mean that a website is published.
+**Public demonstration:** [Rilatu on GitHub Pages](https://dokarpov.github.io/rilatu/) is reachable without signing in as of **17 October 2026**. This repository is **public** and contains the synthetic presentation site, design materials and UI tests. The separate `rilatu-product` repository remains private.
 
-To host the website while keeping this repository private, connect the private repository to **Netlify** (configuration in [netlify.toml](netlify.toml)), or to Cloudflare Pages using `python3 scripts/build_site.py` and output directory `dist`. The build copies **only allowlisted public assets**, excluding tests, internal Markdown, repository history and workflows. Set `PUBLIC_SITE_URL` to your new HTTPS URL for correct sharing metadata.
+The public demo is not a document-upload service, independent income verification or legal decision. It performs no authenticated uploads or customer-data processing.
 
-Any published frontend HTML/CSS/JavaScript remains publicly inspectable in visitors' browsers. A private GitHub repository protects the repository and history, not the shipped frontend. Do not publish a second public code repository.
+GitHub Pages and the public repository have different exposure boundaries: shipped HTML, CSS and JavaScript are inspectable; public Git history and source files are also accessible. Don't commit real client material or secrets. If an actual secret is exposed, revoke or rotate it; a later deletion cannot erase copies, forks or caches.
+
+For deployment and validation status, see [site QA](QA_REPORT.md). Passing tests are not evidence of real-world verification or customer adoption.
 
 ## Development and quality
 
